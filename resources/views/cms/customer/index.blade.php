@@ -92,7 +92,7 @@
                 "searchPlaceholder": "Search",
                 "search": "",
             },
-            "order": [[ 0, "asc" ]],
+            "order": [[ 1, "asc" ]],
         });
 
         table.on('click', 'tbody td', function(item) {
