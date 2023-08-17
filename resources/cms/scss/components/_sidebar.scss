@@ -1,0 +1,163 @@
+#sidebar {
+    &.active {
+        .sidebar-wrapper {
+            left: 0;
+        }
+    }
+    &:not(.active) {
+        .sidebar-wrapper {
+            left: -300px;
+        }
+        & ~ #main {
+            margin-left: 0;
+        }
+    }
+}
+.sidebar-wrapper {
+    width: 175px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    overflow-y: auto;
+    background-color: #000000;
+    bottom: 0;
+    transition: left .5s ease-out;
+    .sidebar-header {
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        font-size: 2rem;
+        font-weight: bold;
+        img {
+            height: 1.2rem;
+        }
+    }
+    .sidebar-toggler.x {
+        position: absolute;
+        right: 0;
+        top: .5rem;
+        display:none;
+    }
+
+    .menu {
+        padding-left: 0;
+        font-weight: 500;
+        .sidebar-title {
+            padding: 0 1rem;
+            margin: 1.5rem 0 1rem;
+            font-size: 1rem;
+            list-style: none;
+            font-weight: 500;
+            color: #25396f;
+        }
+        
+        .sidebar-link {
+            display: block;
+            padding-right: 1rem;
+            padding-left: 1rem;
+            height: 35px;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 18px;
+            display: flex;
+            align-items: center;
+            transition: all .5s;
+            text-decoration: none;
+            color:#fff;
+            svg,i {
+                color:#fff;
+            }
+            span {
+                margin-left: 1rem;
+            }
+            &:hover {
+                background-color: rgb(240, 241, 245);
+            }
+        }
+        .sidebar-item {
+            list-style: none;
+            margin-top: .5rem;
+            margin-bottom: .5rem;
+            position: relative;
+            &.has-sub {
+                .sidebar-link:after {
+                    content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9" style="fill:none;stroke:gray;stroke-width:1"></polyline></svg>');
+                    position: absolute;
+                    color: #ccc;
+                    right: 15px;
+                    top: 12px;
+                    display:block;
+                }
+            }
+            &.active {
+                .sidebar-link {
+                    background-color: $primary;
+                    box-shadow: rgb(0 0 0 / 20%) 0px 4px 12px;
+                    width: 100%;
+                    span {
+                        color: #fff;
+                    }
+                    svg,i {
+                        fill: white;
+                        color:white;
+                    }
+
+                    &.has-sub:after {
+                        content: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9" style="fill:none;stroke:#fff;stroke-width:1"></polyline></svg>');
+                    }
+                }
+            }
+        }
+        .submenu {
+            list-style: none;
+            display: none;
+            // max-height: 0;
+            transition: max-height 2s cubic-bezier(0, 0.55, 0.45, 1);
+            overflow: hidden;
+            &.active {
+                max-height: 999px;
+                display: block;
+            }
+            .submenu-item {
+                &.active {
+                    position:relative;
+                    & > a {
+                        color: $primary;
+                        font-weight: 500;
+                    }
+                }
+                a {
+                    padding-top: 0.7rem;
+                    padding-right: 2rem;
+                    padding-bottom: 0.7rem;
+                    padding-left: 1rem;
+                    display: block;
+                    color: #FFFFFF;
+                    font-style: normal;
+                    font-size: 12px;
+                    font-weight: 500;
+                    line-height: 18px;
+                    transition: all .3s;
+                    &:hover {
+                        margin-left: .3rem;
+                    }
+                }
+            }
+            
+        }
+    }
+}
+@media screen and (max-width: 1199px) {
+    .sidebar-wrapper {
+        position:absolute;
+        left: -300px;
+        .sidebar-toggler.x  {
+            display:block;
+        }
+    }
+}
+@media screen and (min-width: 1200px) {
+    
+}

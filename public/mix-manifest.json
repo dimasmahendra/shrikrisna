@@ -1,0 +1,11 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/cms/css/pages/email.css": "/cms/css/pages/email.css",
+    "/cms/css/pages/error.css": "/cms/css/pages/error.css",
+    "/cms/css/pages/auth.css": "/cms/css/pages/auth.css",
+    "/cms/css/app.css": "/cms/css/app.css",
+    "/cms/css/widgets/todo.css": "/cms/css/widgets/todo.css",
+    "/cms/css/widgets/chat.css": "/cms/css/widgets/chat.css",
+    "/cms/css/pages/chat.css": "/cms/css/pages/chat.css"
+}

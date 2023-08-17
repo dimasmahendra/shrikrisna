@@ -1,0 +1,13 @@
+# docker-compose.yml
+
+version: "3.7"
+services:
+  kayon_cms:
+    container_name: kayon_cms
+    restart: unless-stopped
+    image: registry.gitlab.com/citra-kayon/backend-cms:stable
+    volumes:
+      - kayon-storage:/var/www/storage
+    network_mode: "host"
+volumes:
+  kayon-storage:

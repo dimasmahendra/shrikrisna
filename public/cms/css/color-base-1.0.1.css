@@ -1,0 +1,102 @@
+:root {
+  --PRIMARY10: #fff1eb;
+  --PRIMARY20: #fed6c3;
+  --PRIMARY30: #febb9b;
+  --PRIMARY40: #fda073;
+  --PRIMARY50: #fc854b;
+  --PRIMARY60: #fc7737;
+  --PRIMARY70: #e36b32;
+  --PRIMARY80: #b05327;
+  --PRIMARY90: #7e3c1c;
+  --PRIMARY100: #4c2410;
+
+  --SECONDARY10: #ececec;
+  --SECONDARY20: #c6c6c6;
+  --SECONDARY30: #a0a0a1;
+  --SECONDARY40: #7a797b;
+  --SECONDARY50: #545355;
+  --SECONDARY60: #414042;
+  --SECONDARY70: #3b3a3b;
+  --SECONDARY80: #2e2d2e;
+  --SECONDARY90: #212021;
+  --SECONDARY100: #131314;
+
+  --TERTIARY10: #fef9eb;
+  --TERTIARY20: #fdecc2;
+  --TERTIARY30: #fce09a;
+  --TERTIARY40: #fad471;
+  --TERTIARY50: #f9c748;
+  --TERTIARY60: #f8c134;
+  --TERTIARY70: #dfae2f;
+  --TERTIARY80: #ae8724;
+  --TERTIARY90: #7c611a;
+  --TERTIARY100: #4a3a10;
+
+  --NEUTRAL10: #f2f2f2;
+  --NEUTRAL20: #d8d8d8;
+  --NEUTRAL30: #bebebe;
+  --NEUTRAL40: #a4a4a4;
+  --NEUTRAL50: #8a8a8a;
+  --NEUTRAL60: #7d7d7d;
+  --NEUTRAL70: #717171;
+  --NEUTRAL80: #585858;
+  --NEUTRAL90: #3f3f3f;
+  --NEUTRAL100: #252525;
+
+  --RED10: #ffe6e6;
+  --RED20: #ffb3b3;
+  --RED30: #ff8080;
+  --RED40: #ff4d4d;
+  --RED50: #ff1a1a;
+  --RED60: #ff0000;
+  --RED70: #e60000;
+  --RED80: #b30000;
+  --RED90: #800000;
+  --RED100: #4c0000;
+
+  --YELLOW10: #ffffe6;
+  --YELLOW20: #ffffb3;
+  --YELLOW30: #ffff80;
+  --YELLOW40: #ffff4d;
+  --YELLOW50: #ffff1a;
+  --YELLOW60: #ffff00;
+  --YELLOW70: #e6e600;
+  --YELLOW80: #b3b300;
+  --YELLOW90: #808000;
+  --YELLOW100: #4c4c00;
+
+  --GREEN10: #e6f2e6;
+  --GREEN20: #b3d9b3;
+  --GREEN30: #80c080;
+  --GREEN40: #4da64d;
+  --GREEN50: #1a8d1a;
+  --GREEN60: #008000;
+  --GREEN70: #007300;
+  --GREEN80: #005a00;
+  --GREEN90: #004000;
+  --GREEN100: #002600;
+
+  --BLUE10: #e6e6ff;
+  --BLUE20: #b3b3ff;
+  --BLUE30: #8080ff;
+  --BLUE40: #4d4dff;
+  --BLUE50: #1a1aff;
+  --BLUE60: #0000ff;
+  --BLUE70: #0000e6;
+  --BLUE80: #0000b3;
+  --BLUE90: #000080;
+  --BLUE100: #00004c;
+
+  --PURPLE10: #f3e6fd;
+  --PURPLE20: #dab3f8;
+  --PURPLE30: #c280f3;
+  --PURPLE40: #a94dee;
+  --PURPLE50: #901ae9;
+  --PURPLE60: #8400e6;
+  --PURPLE70: #7700cf;
+  --PURPLE80: #5c00a1;
+  --PURPLE90: #420073;
+  --PURPLE100: #280045;
+
+  --WHITE10: #ffffff;
+}
