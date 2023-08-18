@@ -9,7 +9,7 @@ build_and_publish:
   stage: build_and_publish
   tags:
     - docker
-    - cerah
+    - tailor
   before_script:
     - echo "$GITLAB_PWD" | sudo docker login -u "$GITLAB_UNAME" --password-stdin registry.gitlab.com
   script:
@@ -22,7 +22,7 @@ pull_and_run:
   stage: pull_and_run
   tags:
     - docker
-    - cerah
+    - tailor
   before_script:
     - echo "$GITLAB_PWD" | sudo docker login -u "$GITLAB_UNAME" --password-stdin registry.gitlab.com
   script:
