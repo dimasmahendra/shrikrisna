@@ -74,7 +74,7 @@
 <script src="/cms/vendors/bootstrap-datatable/js/dataTables.rowGroup.min.js"></script>
 <script>
     $(document).ready(function() {
-        var editUrl = "{{ route('customer.edit', ':id') }}"
+        var editUrl = "{{ route('customer.details', ':id') }}"
         var table = $("#filterTable").DataTable({
             "ordering": true,
             "bPaginate": false,
@@ -92,7 +92,7 @@
                 "searchPlaceholder": "Search",
                 "search": "",
             },
-            "order": [[ 0, "asc" ]],
+            "order": [[ 1, "asc" ]],
         });
 
         table.on('click', 'tbody td', function(item) {

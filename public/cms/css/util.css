@@ -3023,6 +3023,14 @@
 	height: 99px;
 }
 
+.h-98persen {
+	height: 98%;
+}
+
+.h-100persen {
+	height: 100%;
+}
+
 .h-100px {
 	height: 100px;
 }
@@ -3091,4 +3099,8 @@
 /* BORDER */
 .border0-5 {
 	border: 1px solid red;
+}
+
+.border1 {
+	border-bottom: 1px solid #E5E5E5;
 }

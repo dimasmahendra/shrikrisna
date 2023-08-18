@@ -40,7 +40,7 @@ body {
     font-weight: 500;
     font-style: normal;
     line-height: 18px;
-    color: #172029;
+    color: #4A4646;
     background-color: #F1F1F1;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -51,7 +51,7 @@ label {
     font-weight: 500;
     font-size: 14px;
     line-height: 24px;
-    color: #75634D;
+    color: #4A4646;
 }
 
 .me-6 {

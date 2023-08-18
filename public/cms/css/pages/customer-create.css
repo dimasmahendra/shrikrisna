@@ -3,13 +3,6 @@ a {
     text-decoration: none;
 }
 
-@media (min-width: 1441px) {
-    .board-item {
-        flex: 0 0 auto;
-        width: 26%;
-    }
-}
-
 .section-header {
     width: 100%;
     height: 55px;
