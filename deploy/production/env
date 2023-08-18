@@ -1,19 +1,20 @@
-APP_NAME="Citra Kayon"
-APP_ENV="production"
+APP_NAME="Website cerah"
+APP_ENV="local"
 APP_KEY="base64:w6dUK4ep4obpdGhpUFwVyZZYqndhkP5Tqj5RA5rSe7U="
-APP_DEBUG="false"
-APP_URL="https://cms.citrakayon.co.id"
-ASSET_URL="https://cms.citrakayon.co.id"
+APP_DEBUG="true"
+APP_URL="https://cms.cerah.or.id"
+ASSET_URL="https://cms.cerah.or.id"
+FE_URL="https://cms.cerah.or.id"
 
 LOG_CHANNEL="stack"
 LOG_LEVEL="debug"
 
 DB_CONNECTION="pgsql"
-DB_HOST="localhost"
-DB_PORT="5432"
-DB_DATABASE="web_citra_kayon"
-DB_USERNAME="citra_kayon"
-DB_PASSWORD="c1tr4KAYON@123"
+DB_HOST="cerah-main-website-db-postgresql-do-user-14195703-0.b.db.ondigitalocean.com"
+DB_PORT="25060"
+DB_DATABASE="cerah_website"
+DB_USERNAME="doadmin"
+DB_PASSWORD="AVNS_oBczz9Sg6qq34UzfmX-"
 
 BROADCAST_DRIVER="log"
 CACHE_DRIVER="file"
@@ -27,14 +28,14 @@ REDIS_HOST="127.0.0.1"
 REDIS_PASSWORD="null"
 REDIS_PORT="6379"
 
-MAIL_MAILER="smtp"
-MAIL_HOST="mailhog"
-MAIL_PORT="1025"
-MAIL_USERNAME="null"
-MAIL_PASSWORD="null"
-MAIL_ENCRYPTION="null"
-MAIL_FROM_ADDRESS="null"
-MAIL_FROM_NAME=""
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.zoho.com
+MAIL_PORT=587
+MAIL_USERNAME="development@mecteknologi.com"
+MAIL_PASSWORD="M3ctek.dev"
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="development@mecteknologi.com"
+MAIL_FROM_NAME="Website System"
 
 AWS_ACCESS_KEY_ID=""
 AWS_SECRET_ACCESS_KEY=""

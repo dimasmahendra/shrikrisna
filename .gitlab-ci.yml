@@ -1,61 +1,32 @@
 stages:
-  - dev_build_and_publish
-  - dev_pull_and_run
-  - staging_build_and_publish
-  - production_build_and_publish
+  - build_and_publish
+  - pull_and_run
 
-dev_build_and_publish:
-  only:
-    - develop
-  stage: dev_build_and_publish
-  tags:
-    - docker
-    - kayon
-  before_script:
-    - sudo docker login -u "$GITLAB_UNAME" -p "$GITLAB_PWD" registry.gitlab.com
-  script:
-    - sudo docker build -t registry.gitlab.com/citra-kayon/backend-cms:develop --build-arg branch=develop .
-    - sudo docker push registry.gitlab.com/citra-kayon/backend-cms:develop
-
-staging_build_and_publish:
+build_and_publish:
   only:
     - staging
-  stage: staging_build_and_publish
+    - production
+  stage: build_and_publish
   tags:
     - docker
-    - kayon
+    - cerah
   before_script:
-    - sudo docker login -u "$GITLAB_UNAME" -p "$GITLAB_PWD" registry.gitlab.com
+    - echo "$GITLAB_PWD" | sudo docker login -u "$GITLAB_UNAME" --password-stdin registry.gitlab.com
   script:
-    - sudo docker build -t registry.gitlab.com/citra-kayon/backend-cms:staging --build-arg branch=staging .
-    - sudo docker push registry.gitlab.com/citra-kayon/backend-cms:staging
+    - sudo docker build -t registry.gitlab.com/mectek/penjahit:$CI_COMMIT_BRANCH --build-arg branch=$CI_COMMIT_BRANCH .
+    - sudo docker push registry.gitlab.com/mectek/penjahit:$CI_COMMIT_BRANCH
 
-dev_pull_and_run:
+pull_and_run:
   only:
-    - develop
-  stage: dev_pull_and_run
+    - staging
+  stage: pull_and_run
   tags:
     - docker
-    - kayon
+    - cerah
   before_script:
-    - sudo docker login -u "$GITLAB_UNAME" -p "$GITLAB_PWD" registry.gitlab.com
+    - echo "$GITLAB_PWD" | sudo docker login -u "$GITLAB_UNAME" --password-stdin registry.gitlab.com
   script:
-    - cd deploy/develop
+    - cd deploy/$CI_COMMIT_BRANCH
     - sudo docker-compose pull
     - sudo docker-compose up -d
     - sudo docker image prune -f
-
-production_build_and_publish:
-  only:
-    - production
-  stage: production_build_and_publish
-  tags:
-    - docker
-    - kayon
-  before_script:
-    - sudo docker login -u "$GITLAB_UNAME" -p "$GITLAB_PWD" registry.gitlab.com
-  script:
-    - sudo docker build -t registry.gitlab.com/citra-kayon/backend-cms:"$CI_COMMIT_SHORT_SHA" --build-arg branch=production .
-    - sudo docker tag -t registry.gitlab.com/citra-kayon/backend-cms:"$CI_COMMIT_SHORT_SHA" registry.gitlab.com/citra-kayon/backend-cms:stable
-    - sudo docker push registry.gitlab.com/citra-kayon/backend-cms:"$CI_COMMIT_SHORT_SHA"
-    - sudo docker push registry.gitlab.com/citra-kayon/backend-cms:stable

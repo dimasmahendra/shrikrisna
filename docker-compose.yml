@@ -5,7 +5,7 @@ services:
   kayon_cms:
     container_name: kayon_cms
     restart: unless-stopped
-    image: registry.gitlab.com/citra-kayon/backend-cms:staging
+    image: registry.gitlab.com/mectek/penjahit/backend-cms:staging
     ports:
       - "15501:8000"
     volumes:
