@@ -8,7 +8,6 @@ build_and_publish:
     - production
   stage: build_and_publish
   tags:
-    - docker
     - tailor
   before_script:
     - echo "$GITLAB_PWD" | sudo docker login -u "$GITLAB_UNAME" --password-stdin registry.gitlab.com
@@ -21,7 +20,6 @@ pull_and_run:
     - staging
   stage: pull_and_run
   tags:
-    - docker
     - tailor
   before_script:
     - echo "$GITLAB_PWD" | sudo docker login -u "$GITLAB_UNAME" --password-stdin registry.gitlab.com
