@@ -58,6 +58,14 @@ class CustomerController extends Controller
         }
     }
 
+    public function details($id) 
+    {
+        $model = Customer::where('id', $id)->first();
+        return view('cms.customer.details', [
+            "data" => $model
+        ]);
+    }
+
     public function edit($id) 
     {
         $model = Customer::where('id', $id)->first();

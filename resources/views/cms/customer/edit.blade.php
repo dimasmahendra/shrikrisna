@@ -15,7 +15,7 @@
         <div class="section-header">
             <div class="w-53 section-subitem-start">
                 <div class="text-item-start">
-                    <a href="{{ route('customer.index') }}">Cancel</a>
+                    <a href="{{ route('customer.details', [$data->id]) }}">Cancel</a>
                 </div>
             </div>
             <div class="w-135 p-l-10 p-r-10">

@@ -34,6 +34,7 @@ Route::middleware(["auth:web"])->group(function () {
             Route::get('/create', [App\Http\Controllers\Cms\CustomerController::class, 'create'])->name('customer.create');
             Route::post('/store', [App\Http\Controllers\Cms\CustomerController::class, 'store'])->name('customer.store');
             Route::get('/edit/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'edit'])->name('customer.edit');
+            Route::get('/details/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'details'])->name('customer.details');
             Route::post('/update/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'update'])->name('customer.update');
             Route::get('/destroy/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'destroy'])->name('customer.destroy');
         });
