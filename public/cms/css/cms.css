@@ -946,3 +946,11 @@ input:-webkit-autofill {
 #pagination > ul li.out-of-range a {
     border: unset;
 }
+
+.no-formating {
+    pointer-events: none;
+}
+
+strong.no-formating { 
+    text-decoration: none;
+}

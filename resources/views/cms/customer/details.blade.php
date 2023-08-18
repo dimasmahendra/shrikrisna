@@ -32,7 +32,7 @@
             <div class="section-image m-b-6">
                 <img src="{{ $data->image_url }}" alt="profile_user" class="h-180 w-180 image-user">
             </div>
-            <strong class="fs-16 m-t-10 text-SECONDARY60">{{ $data->nomor_ktp }}</strong>
+            <strong class="fs-16 m-t-10 text-SECONDARY60 no-formating">{{ $data->nomor_ktp }}</strong>
             <strong class="fs-16 m-t-10 text-SECONDARY60">{{ $data->name }}</strong>
         </div>
     </div>
