@@ -32,7 +32,7 @@
             <div class="section-image m-b-6">
                 <img src="{{ $data->image_url }}" alt="profile_user" class="h-180 w-180 image-user">
             </div>
-            <strong class="fs-16 m-t-10 text-SECONDARY60">{{ $data->nomor_ktp }}</strong>
+            <strong class="fs-16 m-t-10 text-SECONDARY60 no-formating">{{ $data->nomor_ktp }}</strong>
             <strong class="fs-16 m-t-10 text-SECONDARY60">{{ $data->name }}</strong>
         </div>
     </div>
@@ -160,27 +160,27 @@
         },
         breakpoints: {
             640: {
-                slidesPerView: 4,
-                spaceBetween: 10,
-            },
-            768: {
-                slidesPerView: 5,
-                spaceBetween: 10,
-            },
-            1024: {
                 slidesPerView: 6,
                 spaceBetween: 10,
             },
-            1280: {
+            768: {
                 slidesPerView: 7,
                 spaceBetween: 10,
             },
-            1360: {
+            1024: {
                 slidesPerView: 8,
                 spaceBetween: 10,
             },
-            1920: {
+            1280: {
                 slidesPerView: 9,
+                spaceBetween: 10,
+            },
+            1360: {
+                slidesPerView: 10,
+                spaceBetween: 10,
+            },
+            1920: {
+                slidesPerView: 11,
                 spaceBetween: 10,
             },
         },
