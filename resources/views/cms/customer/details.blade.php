@@ -159,24 +159,32 @@
             prevEl: '.swiper-button-prev',
         },
         breakpoints: {
+            500: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+            },
+            590: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+            },
             640: {
-                slidesPerView: 6,
+                slidesPerView: 5,
                 spaceBetween: 10,
             },
             768: {
-                slidesPerView: 7,
+                slidesPerView: 6,
                 spaceBetween: 10,
             },
             1024: {
-                slidesPerView: 8,
+                slidesPerView: 7,
                 spaceBetween: 10,
             },
             1280: {
-                slidesPerView: 9,
+                slidesPerView: 8,
                 spaceBetween: 10,
             },
             1360: {
-                slidesPerView: 10,
+                slidesPerView: 9,
                 spaceBetween: 10,
             },
             1920: {

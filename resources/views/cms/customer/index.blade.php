@@ -11,11 +11,15 @@
 @section('content')
 <div class="card">
     <div class="section-header">
-        <div class="w-125"></div>
-        <div class="w-125 p-l-10 p-r-10">
+        <div class="section-subitem">
+            <div class="avatar avatar-mdx me-3 d-md-none-custom">
+                <img src="{{ Auth::user()->gambar_url }}" alt="" class="object-fit-cover">                               
+            </div>
+        </div>
+        <div class="p-l-10 p-r-10">
             <div class="text-item">Customer</div>
         </div>
-        <div class="w-125 section-subitem">
+        <div class="section-subitem">
             <div class="text-item-end">
                 <a href="{{ route('customer.create') }}">Add</a>
             </div>
@@ -36,8 +40,8 @@
                             <tr data-id="{{ $item->id }}">
                                 <td class="d-none">{{ mb_substr(ucfirst($item->name), 0, 1); }}</td>
                                 <td>
-                                    <p class="m-b-5">{{ $item->name }}</p>
-                                    <p class="m-b-5 text-SECONDARY60 fs-12">{{ $item->nomor_ktp }}</p>
+                                    <div class="m-b-5">{{ $item->name }}</div>
+                                    <div class="m-b-5 text-SECONDARY60 fs-12">{{ $item->nomor_ktp }}</div>
                                     <p class="m-b-5 text-PRIMARY60 fs-12">{{ $item->phone_number }}</p>
                                 </td>
                             </tr>
@@ -70,6 +74,12 @@
 
         table.dataTable {
             margin-bottom: 0px !important;
+        }
+
+        @media (min-width: 1199px) {
+            .d-md-none-custom {
+                display: none !important;
+            }
         }
     </style>
 @endpush
