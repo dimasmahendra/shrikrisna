@@ -13,15 +13,15 @@
     <form action="{{ route('customer.store') }}" method="POST" enctype="multipart/form-data" id="formcreate">
         {{ csrf_field() }}
         <div class="section-header">
-            <div class="w-53 section-subitem-start">
+            <div class="section-subitem-start">
                 <div class="text-item-start">
                     <a href="{{ route('customer.index') }}">Cancel</a>
                 </div>
             </div>
-            <div class="w-135 p-l-10 p-r-10">
+            <div class="p-l-10 p-r-10">
                 <div class="text-item">New Customer</div>
             </div>
-            <div class="w-53 section-subitem-end">
+            <div class="section-subitem-end">
                 <div class="text-item-end">
                     <button type="submit" class="btn btn-outline-primary fs-16 p-r-unset">Done</button>
                 </div>
@@ -84,6 +84,11 @@
 @push('css-plugins')
 <link href="/cms/css/pages/customer-create.css?v={{ $version }}" rel="stylesheet">
 <link href="/cms/vendors/dropify/dist/css/dropify.css?v={{ $version }}" rel="stylesheet">
+<style>
+    .dropify-wrapper .dropify-preview {
+        background-color: #9399A7 !important;
+    }
+</style>
 @endpush
 
 @push('js-plugins')

@@ -100,11 +100,11 @@ label {
 }
 
 .table {
-    color: #000000;
+    color: #4A4646;
     font-style: normal;
     font-weight: normal !important;
-    font-size: 13px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: normal;
 }
 
 .table>thead {
@@ -277,6 +277,10 @@ img.logo-image {
 
 .text-PRIMARY60 {
     color: #006EE9;
+}
+
+.text-SECONDARY60 {
+    color: #4A4646 !important;
 }
 
 .text-black {
@@ -887,7 +891,7 @@ input:-webkit-autofill {
 }
 
 .dropify-wrapper .dropify-preview{
-    background-color: #F1F1F1 !important;
+    background-color: #fff !important;
 }
 
 .dropify-wrapper .dropify-preview .dropify-render img {

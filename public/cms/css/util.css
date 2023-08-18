@@ -3034,6 +3034,14 @@
 .h-100px {
 	height: 100px;
 }
+
+.h-165 {
+	height: 165px;
+}
+
+.h-180 {
+	height: 180px;
+}
 /* HEIGHT */
 
 /* WIDTH */
@@ -3078,6 +3086,14 @@
 	width: 125px;
 }
 
+.w-128 {
+	width: 128px;
+}
+
+.w-133 {
+	width: 133px;
+}
+
 .w-135 {
 	width: 135px;
 }
@@ -3088,6 +3104,14 @@
 
 .w-160 {
 	width: 160px;
+}
+
+.w-165 {
+	width: 165px;
+}
+
+.w-180 {
+	width: 180px;
 }
 
 .w-200 {

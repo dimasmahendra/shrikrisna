@@ -37,8 +37,8 @@
                                 <td class="d-none">{{ mb_substr(ucfirst($item->name), 0, 1); }}</td>
                                 <td>
                                     <p class="m-b-5">{{ $item->name }}</p>
-                                    <p class="m-b-5">{{ $item->nomor_ktp }}</p>
-                                    <p class="m-b-5 text-PRIMARY60">{{ $item->phone_number }}</p>
+                                    <p class="m-b-5 text-SECONDARY60 fs-12">{{ $item->nomor_ktp }}</p>
+                                    <p class="m-b-5 text-PRIMARY60 fs-12">{{ $item->phone_number }}</p>
                                 </td>
                             </tr>
                         @endforeach
@@ -67,6 +67,10 @@
             background-color: #F1F1F1;
             cursor: pointer;
         }
+
+        table.dataTable {
+            margin-bottom: 0px !important;
+        }
     </style>
 @endpush
 
@@ -74,7 +78,7 @@
 <script src="/cms/vendors/bootstrap-datatable/js/dataTables.rowGroup.min.js"></script>
 <script>
     $(document).ready(function() {
-        var editUrl = "{{ route('customer.details', ':id') }}"
+        var editUrl = "{{ route('customer.details', ':id') }}";
         var table = $("#filterTable").DataTable({
             "ordering": true,
             "bPaginate": false,
@@ -94,6 +98,8 @@
             },
             "order": [[ 1, "asc" ]],
         });
+
+        $('div.dataTables_filter input', table.table().container()).focus();
 
         table.on('click', 'tbody td', function(item) {
             var id = $(this.parentNode).data('id');

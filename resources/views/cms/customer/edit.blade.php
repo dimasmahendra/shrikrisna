@@ -13,15 +13,15 @@
     <form action="{{ route('customer.update', [$data->id]) }}" method="POST" enctype="multipart/form-data" id="formcreate">
         {{ csrf_field() }}
         <div class="section-header">
-            <div class="w-53 section-subitem-start">
+            <div class="section-subitem-start">
                 <div class="text-item-start">
                     <a href="{{ route('customer.details', [$data->id]) }}">Cancel</a>
                 </div>
             </div>
-            <div class="w-135 p-l-10 p-r-10">
+            <div class="p-l-10 p-r-10">
                 <div class="text-item">Edit Customer</div>
             </div>
-            <div class="w-53 section-subitem-end">
+            <div class="section-subitem-end">
                 <div class="text-item-end">
                     <button type="submit" class="btn btn-outline-primary fs-16 p-r-unset">Done</button>
                 </div>
