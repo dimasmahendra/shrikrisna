@@ -28,13 +28,13 @@ RUN apt-get update && apt-get install -y libpq-dev git \
 RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-install mbstring gd exif pcntl bcmath gd zip
 
-
-
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY . .
 COPY ./deploy/$branch/env .env
+
+COPY ./php.ini.local /usr/local/etc/php/php.ini
 
 RUN composer update
 

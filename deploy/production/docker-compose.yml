@@ -2,12 +2,11 @@
 
 version: "3.7"
 services:
-  kayon_cms:
-    container_name: kayon_cms
+  tailor_website:
+    container_name: tailor_website
     restart: unless-stopped
-    image: registry.gitlab.com/citra-kayon/backend-cms:stable
+    image: registry.gitlab.com/mectek/penjahit:production
+    ports:
+      - "23081:8000"
     volumes:
-      - kayon-storage:/var/www/storage
-    network_mode: "host"
-volumes:
-  kayon-storage:
+      - /var/www/tailor/storage:/var/www/storage
