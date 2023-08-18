@@ -9,4 +9,4 @@ services:
     ports:
       - "23081:8000"
     volumes:
-      - /var/www/cerah_main_website/cms/storage:/var/www/storage
+      - /var/www/tailor/storage:/var/www/storage
