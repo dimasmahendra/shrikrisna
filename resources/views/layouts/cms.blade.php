@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @stack('meta-custom')
     
     <title>{{isset($title) ? $title : ""}} | Shrikrisna</title>
     <link rel="shortcut icon" href="{{ $faviconcompany }}" type="image/x-icon">

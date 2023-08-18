@@ -139,6 +139,10 @@
 </div>
 @endsection
 
+@push('meta-custom')
+<meta name="format-detection" content="telephone=no">
+@endpush
+
 @push('css-plugins')
 <link href="/cms/css/pages/customer-details.css?v={{ $version }}" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
