@@ -12,7 +12,7 @@ LOG_LEVEL="debug"
 DB_CONNECTION="pgsql"
 DB_HOST="db-postgresql-sgp1-konsultasi-do-user-8013450-0.b.db.ondigitalocean.com"
 DB_PORT="25060"
-DB_DATABASE="cerah_dev"
+DB_DATABASE="sktailor"
 DB_USERNAME="doadmin"
 DB_PASSWORD="gvsz4hdr0u1gm1pm"
 
