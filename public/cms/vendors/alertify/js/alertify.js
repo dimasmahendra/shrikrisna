@@ -2,7 +2,8 @@
     "use strict";
 
     function t() {
-        var holderCustom = '<div class="modal-footer">{{buttons}}</div>';
+        var tokenCsrf = $('meta[name="csrf-token"]').attr('content');
+        var holderCustom = '<div class="modal-footer" style="border-top: 1px solid #BFBFBF; justify-content: center; padding: 1rem;">{{buttons}}</div>';
         var t = {
             parent: document.body,
             version: "1.0.11",
@@ -20,11 +21,19 @@
             defaultDelay: 5e3,
             logContainerClass: "alertify-logs",
             logContainerDefaultClass: "alertify-logs",
+            defaultbuildType: "delete",
+            defaultdialogUrlApprove: "",
             dialogs: {
                 buttons: {
                     holder: holderCustom,
-                    ok: "<button class='ok btn btn-very-danger' tabindex='1'>{{ok}}</button>",
-                    cancel: "<button class='cancel btn btn-outline-danger' tabindex='2'>{{cancel}}</button>"
+                    ok: "<button class='ok btn btn-NEUTRAL60 w-190 h-45 fw-600' tabindex='1'>{{ok}}</button>",
+                    cancel: "<button class='cancel btn btn-PRIMARY60 w-190 h-45 fw-600' tabindex='2'>{{cancel}}</button>",
+                    ok_approval: "<form action='{{url_approve}}' method='POST'>" +
+                                    "<input type='hidden' name='_token' value='" + tokenCsrf + "'>" +
+                                    "<input type='hidden' name='type' value='1'>" +
+                                    "<button type='submit' class='ok btn btn-PRIMARY60 w-190 h-45 fw-600' tabindex='1'>{{ok}}</button>" +
+                                "</form>",
+                    cancel_approval: "<button class='cancel btn btn-NEUTRAL60 w-190 h-45 fw-600' tabindex='2'>{{cancel}}</button>",
                 },
                 input: "<input type='text'>",
                 message: "<p class='msg'>{{message}}</p>",
@@ -33,31 +42,62 @@
             defaultDialogs: {
                 buttons: {
                     holder: holderCustom,
-                    ok: "<button class='ok btn btn-very-danger' tabindex='1'>{{ok}}</button>",
-                    cancel: "<button class='cancel btn btn-outline-danger' tabindex='2'>{{cancel}}</button>"
+                    ok: "<button class='ok btn btn-NEUTRAL60 w-190 h-45 fw-600' tabindex='1'>{{ok}}</button>",
+                    cancel: "<button class='cancel btn btn-PRIMARY60 w-190 h-45 fw-600' tabindex='2'>{{cancel}}</button>",
+                    ok_approval: "<form action='{{url_approve}}' method='POST'>" +
+                                    "<input type='hidden' name='_token' value='" + tokenCsrf + "'>" +
+                                    "<input type='hidden' name='type' value='1'>" +
+                                    "<button type='submit' class='ok btn btn-PRIMARY60 w-190 h-45 fw-600' tabindex='1'>{{ok}}</button>" +
+                                "</form>",
+                    cancel_approval: "<button class='cancel btn btn-NEUTRAL60 w-190 h-45 fw-600' tabindex='2'>{{cancel}}</button>",
                 },
                 input: "<input type='text'>",
                 message: "<p class='msg'>{{message}}</p>",
                 log: "<div class='{{class}}'>{{message}}</div>"
             },
             build: function (t) {
-                var e = this.dialogs.buttons.ok,
-                    // o = "<div class='dialog'><div>" + this.dialogs.message.replace("{{message}}", t.message);
-                    o = '<div class="modal-dialog modal-dialog-centered" role="document">' + 
-                            '<div class="modal-content">' +
-                                '<div class="modal-header" style="background-color: #B74000">' +
-                                    '<h5 class="modal-title" id="exampleModalLabel" style="color: #FFFFFF">Delete</h5>' +
-                                    '<button type="button" class="close-alertify" data-dismiss="modal" aria-label="Close" tabindex="2">' +
-                                        '<span aria-hidden="true">&times;</span>' +
-                                    '</button>' +
-                                '</div>' +
-                                '<div class="modal-body">' +
-                                    this.dialogs.message.replace("{{message}}", t.message)
-                                '</div>';
+                if (this.defaultbuildType == "approval") {                  
 
-                return "confirm" !== t.type && "prompt" !== t.type || (e = this.dialogs.buttons.cancel + this.dialogs.buttons.ok), 
-                    "prompt" === t.type && (o += this.dialogs.input), 
-                    o = (o + this.dialogs.buttons.holder + "</div></div>").replace("{{buttons}}", e).replace("{{ok}}", this.okLabel).replace("{{cancel}}", this.cancelLabel)
+                    var e = this.dialogs.buttons.ok,
+                        // o = "<div class='dialog'><div>" + this.dialogs.message.replace("{{message}}", t.message);
+                        o = '<div class="modal-dialog modal-dialog-centered" role="document">' +
+                            '<div class="modal-content rounded-4">' +
+                            '<div class="modal-body" style="padding: 2rem;">' +
+                            '<div class="modal-header" style="border-bottom: 1px solid #BFBFBF;">' +
+                            '<h5 class="modal-title" id="exampleModalLabel">Approve</h5>' +
+                            '<button type="button" class="close-alertify" data-dismiss="modal" aria-label="Close" tabindex="2">' +
+                            '<span aria-hidden="true">&times;</span>' +
+                            '</button>' +
+                            '</div>' +
+                            this.dialogs.message.replace("{{message}}", t.message)
+                        '</div>';
+                    
+                    o += "<input type='hidden' name='_token' value='" + tokenCsrf + "'>";
+
+                    return "confirm" !== t.type && "prompt" !== t.type || (e = this.dialogs.buttons.cancel_approval + this.dialogs.buttons.ok_approval), 
+                        "prompt" === t.type && (o += this.dialogs.input), 
+                        o = (o + this.dialogs.buttons.holder + "</div></div>").replace("{{buttons}}", e).replace("{{ok}}", this.okLabel).replace("{{cancel}}", this.cancelLabel)
+                        .replace("{{url_approve}}", this.defaultdialogUrlApprove);
+                    
+                } else {
+                    var e = this.dialogs.buttons.ok,
+                        // o = "<div class='dialog'><div>" + this.dialogs.message.replace("{{message}}", t.message);
+                        o = '<div class="modal-dialog modal-dialog-centered" role="document">' +
+                        '<div class="modal-content rounded-4">' +
+                        '<div class="modal-body" style="padding: 2rem;">' +
+                        '<div class="modal-header" style="border-bottom: 1px solid #BFBFBF;">' +
+                        '<h5 class="modal-title" id="exampleModalLabel">Delete Data</h5>' +
+                        '<button type="button" class="close-alertify" data-dismiss="modal" aria-label="Close" tabindex="2">' +
+                        '<span aria-hidden="true">&times;</span>' +
+                        '</button>' +
+                        '</div>' +
+                        this.dialogs.message.replace("{{message}}", t.message)
+                    '</div>';
+
+                    return "confirm" !== t.type && "prompt" !== t.type || (e = this.dialogs.buttons.ok + this.dialogs.buttons.cancel),
+                        "prompt" === t.type && (o += this.dialogs.input), 
+                        o = (o + this.dialogs.buttons.holder + "</div></div>").replace("{{buttons}}", e).replace("{{ok}}", this.okLabel).replace("{{cancel}}", this.cancelLabel);
+                }
             },
             setCloseLogOnClick: function (t) {
                 this.closeLogOnClick = !!t
@@ -133,7 +173,9 @@
                     b = n.querySelector(".close-alertify"),
                     l = n.querySelector("input"),
                     s = n.querySelector("label");
-                l && ("string" == typeof this.promptPlaceholder && (s ? s.textContent = this.promptPlaceholder : l.placeholder = this.promptPlaceholder), "string" == typeof this.promptValue && (l.value = this.promptValue));
+                l && ("string" == typeof this.promptPlaceholder && (s ? s.textContent = this.promptPlaceholder : l.placeholder = this.promptPlaceholder), 
+                "string" == typeof this.promptValue && (l.value = this.promptValue));
+
                 var r;
                 return "function" == typeof Promise ? r = new Promise(e) : e(), this.parent.appendChild(n), setTimeout(function () {
                     n.classList.remove("hide"), l && t.type && "prompt" === t.type ? (l.select(), l.focus()) : i && i.focus()
@@ -220,6 +262,12 @@
             },
             okBtn: function (e) {
                 return t.okBtn(e), this
+            },
+            buildType: function (e) {
+                return t.defaultbuildType = e, this
+            },
+            dialogUrlApprove: function (e) {
+                return t.defaultdialogUrlApprove = e, this
             },
             delay: function (e) {
                 return t.setDelay(e), this

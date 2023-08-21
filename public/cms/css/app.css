@@ -614,7 +614,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 24px;
-    color: #75634D;
+    color: #262626;
 }
 
 .form-group small {
@@ -999,7 +999,7 @@
 }
 
 #sidebar.active .sidebar-wrapper {
-    left: 0;
+    left: 0 !important;
 }
 
 #sidebar:not(.active) .sidebar-wrapper {
@@ -1015,11 +1015,11 @@
     height: 100vh;
     position: fixed;
     top: 0;
-    z-index: 0;
+    z-index: 1;
     overflow: auto;
     background-color: #fff;
     bottom: 0;
-    transition: left 0.7s ease-out;
+    transition: left 0.4s ease-out;
     box-shadow: 0px -1px 8px 0px rgba(96, 97, 112, 0.12), 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -1204,7 +1204,7 @@
     padding-top: unset;
     padding-bottom: unset;
     background-color: #fff;
-    padding-right: 25px;
+    padding-right: 10px;
 }
 
 .navbar .navbar-brand img {
@@ -1257,11 +1257,6 @@
 
     .sidebar-wrapper .sidebar-toggler.x {
         display: block;
-    }
-
-    .navbar {
-        position: absolute;
-        top: -300px;
     }
 }
 
@@ -1539,6 +1534,10 @@
     #main #main-content {
         padding-left: 0px !important;
     }
+
+    .burger-btn {
+        display: block;
+    }
 }
 
 #main.layout-navbar {
@@ -1706,5 +1705,5 @@ a {
 }
 
 .form-select {
-    border: 1px solid #685844;
+    border: 1px solid #E5E5E5;
 }

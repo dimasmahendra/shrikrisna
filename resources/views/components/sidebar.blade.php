@@ -15,7 +15,7 @@
                         <span>Customer</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ (strpos($page, 'banner') !== false) ? 'active' : '' }} ">
+                <li class="sidebar-item {{ (strpos($page, 'users') !== false) ? 'active' : '' }} ">
                     <a href="{{ route('rbac.users.index') }}" class='sidebar-link p-t-20 p-b-20'>
                         <i class="icon-user fs-20"></i>
                         <span>User Management</span>

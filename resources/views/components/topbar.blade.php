@@ -1,6 +1,9 @@
 <header>
     <nav class="navbar navbar-expand">
         <div class="container-fluid">
+            <a href="#" class="burger-btn">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
             <div class="bg-white d-flex">
                 <div class="p-l-40 p-t-25 p-b-15">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">

@@ -10,73 +10,59 @@
 
 @section('content')
 <div class="card">
-    <div class="row">
-        <div class="col-md-3 gy-3">
-            <form action="{{ route('rbac.users.index') }}" method="get">
-                <div class="input-group">
-                    <input class="form-control border-end-0" type="search" value="{{ (request()->query("search") != "") ? request()->query("search") : '' }}" id="search-input" name="search" placeholder="Search">
-                    <span class="input-group-append">
-                        <button class="btn btn-outline-secondary bg-white border-start-1 border-bottom-1 h-40" type="submit">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-9 gy-3 d-flex justify-content-end">
+    <div class="d-flex m-t-30 section-btn">
+        <div class="col-md-6 d-flex">
             @include('components.filter', ['route' => route('rbac.users.index')])
-            @if ($auth_permission['rbac.role.create'])
-                <button class="btn btn-secondary m-l-10 float-end h-40 w-125 open-modal" type="button">Add Data</button>
-            @endif
+        </div>
+        <div class="col-md-6 d-flex">
+            <button class="btn btn-PRIMARY60 m-r-20 h-45 w-150 open-modal fw-600 m-l-auto" type="button">Add Data</button>
         </div>
     </div>
     <div class="card-body-list">
         @if (count($users) > 0)
-            <div class="table-responsive">
-                <table class="table" id="filterTable" style="width:100%">
+            <div class="table-responsive p-l-20">
+                <table class="table" id="filterTable" style="width:98%">
                     <thead>
                         <tr>
-                            <th class="text-left">User Name</th>
-                            <th class="text-left">Email</th>
-                            <th class="text-left">Status</th>
-                            @if ($auth_permission['rbac.role.edit'] || $auth_permission['rbac.role.destroy'])
-                                <th>Action</th>
-                            @endif
+                            <th class="text-left fw-600" style="display: none;">ID</th>
+                            <th class="text-left fw-600">Name</th>
+                            <th class="text-left fw-600">Email</th>
+                            <th class="text-left fw-600">Role</th>
+                            <th class="text-left fw-600">Status</th>
+                            <th class="fw-600" width="40%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $key => $item)
                             <tr>
-                                <td width="30%">{{ $item->name }}</td>
-                                <td width="30%">{{ $item->email }}</td>
-                                <td width="10%">
-                                    @if ($item->status == 'active')
+                                <td style="display: none;">{{ $item->id }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->role->role_name }}</td>
+                                <td>
+                                    @if ($item->status == 1)
                                         <span class="text-success">Active</span>
                                     @else
                                         <span class="text-danger">Not Active</span>
                                     @endif
                                 </td>
-                                @if ($auth_permission['rbac.role.edit'] || $auth_permission['rbac.role.destroy'])
-                                    <td class="text-center">
-                                        @if ($auth_permission['rbac.role.edit'])
-                                            <button type="button" class="btn btn-primary btn-width me-2 master-edit" 
-                                                data-master="{{ json_encode([
-                                                'id' => $item->id, 
-                                                'username' => $item->name,
-                                                'email' => $item->email,
-                                                'role_id' => $item->role_id,
-                                                'status' => $item->status ]) }}">Update</button>
-                                        @endif
-                                        @if ($auth_permission['rbac.role.destroy'])
-                                            @if ($item->id != 1)
-                                                <button type="button" class="btn btn-danger btn-width button-destroy"
-                                                    data-url="{{ route('rbac.users.destroy',[$item->id]) }}">
-                                                    Delete
-                                                </button>
-                                            @endif
-                                        @endif
-                                    </td>
-                                @endif
+                                <td class="text-center row gap-2 justify-content-center">
+                                    <button class="btn btn-ORANGE60 me-2 w-125 h-40 modal-reset-password p-unset fw-600" type="button" data-master="{{ json_encode([
+                                        'id' => $item->id]) }}">Reset Password</button>
+                                    <button type="button" class="btn btn-PRIMARY60 me-2 w-125 h-40 master-edit fw-600" 
+                                        data-master="{{ json_encode([
+                                        'id' => $item->id, 
+                                        'username' => $item->name,
+                                        'email' => $item->email,
+                                        'id_role' => $item->id_role,
+                                        'status' => $item->status ]) }}">Update</button>
+                                    @if ($item->id != 1)
+                                        <button type="button" class="btn btn-RED60 w-125 h-40 button-destroy fw-600"
+                                            data-url="{{ route('rbac.users.destroy',[$item->id]) }}">
+                                            Delete
+                                        </button>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -99,15 +85,63 @@
 @include('cms.rbac.users.add', $roles)
 <div class="modal fade" id="edititem" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-        <div class="modal-content"></div>
+        <div class="modal-content p-3 b-r-20"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalresetpassword" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content p-3 b-r-20"></div>
     </div>
 </div>
 @endsection
+
+@push('css-plugins')
+<style>
+    .section-btn {
+        justify-content: space-between;
+    }
+
+    @media screen and (max-width: 1199px) {
+        .p-l-40 {
+            padding-left: 15px; 
+        }
+        img.logo-image {
+            margin-left: 15px;
+            margin-right: 50px;
+        }
+
+        .navbar-user-name {
+            display: none !important;
+        }
+
+        .navbar-icon {
+            margin: unset !important;
+            display: inline-flex;
+        }
+    }
+</style>
+@endpush
 
 @push('js-plugins')
 <script>
 
     let baseUrl = "{{ route('rbac.users.index') }}";
+    var modules = "User Management";
+    var activities = "View User";
+
+    $(document).ready(function () {
+        $("#filterTable").dataTable({
+            "ordering": true,
+            "bPaginate": false,
+            "searching": false,
+            "lengthChange": false,
+            "language": {
+                "info": "",
+            },
+            "order": [[0, 'asc']],
+        });
+    });
 
     $(document).on('change', '#status-filter', function (ev) {
         ev.preventDefault();
@@ -133,7 +167,7 @@
                 email : {
                     required: true,
                 },
-                role_id : {
+                id_role : {
                     required: true,
                 },
                 password : {
@@ -152,7 +186,7 @@
                 email: {
                     required: "Email is Required",
                 },
-                role_id: {
+                id_role: {
                     required: "Role is Required",
                 },
                 password: {
@@ -166,22 +200,7 @@
             },
             submitHandler: function (form) {
                 let myForm = $('#add-item')[0];  
-                let data = new FormData(myForm);
-
-                $.ajax({
-                    url: '/admin/rbac/users/store',
-                    data: data,
-                    processData: false,
-                    contentType: false,
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function (data) {
-                        // console.log(data);
-                        location.reload();
-                    }
-                });
+                myForm.submit();
             }
         });
     });
@@ -198,8 +217,24 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (data) {
-                console.log(data);
                 $("#edititem").modal("show").find(".modal-content").html(data);
+            }
+        });
+    });
+
+    $(document).on('click', '.modal-reset-password', function (ev) {
+        var datamaster = $(this).data('master');
+        $.ajax({
+            url: '/admin/rbac/users/edit/reset-password',
+            data: {
+                'datamaster': datamaster
+            },
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+                $("#modalresetpassword").modal("show").find(".modal-content").html(data);
             }
         });
     });

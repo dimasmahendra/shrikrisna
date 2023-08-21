@@ -138,7 +138,7 @@ $(document).on('click', '.button-destroy', function (ev) {
     alertify
         .okBtn("Delete")
         .cancelBtn("Cancel")
-        .confirm("Are you sure to delete this data?", function (ev) {
+        .confirm("Are you sure you want to delete this data?", function (ev) {
             ev.preventDefault();
             deleteData(url);
         }, function (ev) {
@@ -155,8 +155,15 @@ function deleteData(data) {
         },
     })
     .done(function (response) {
-        console.log(response);
-        if (response) {
+        if (response.status) {
+            Toastify({
+                text: response.message,
+                duration: 3000,
+                close:true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#dc3545",
+            }).showToast();
             location.reload();
         } else {
             Toastify({
@@ -164,7 +171,7 @@ function deleteData(data) {
                 duration: 3000,
                 close:true,
                 gravity:"top",
-                position: "right",
+                position: "center",
                 backgroundColor: "#dc3545",
             }).showToast();
         }
@@ -172,7 +179,7 @@ function deleteData(data) {
     .fail(function (jqXHR, response) {
         const obj = JSON.parse(jqXHR.responseText)
         Toastify({
-            text: obj.error,
+            text: obj.message,
             duration: 3000,
             close: true,
             gravity: "top",
@@ -180,7 +187,7 @@ function deleteData(data) {
             backgroundColor: "#dc3545",
         }).showToast();
     })
-} 
+}
 
 if ($("#dark").length > 0) {
     if (document_base_url == '') {

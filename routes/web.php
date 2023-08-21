@@ -45,15 +45,9 @@ Route::middleware(["auth:web"])->group(function () {
             Route::post('/users/store', [App\Http\Controllers\Rbac\UserManagementController::class, 'store'])->name('rbac.users.store');
             Route::post('/users/edit', [App\Http\Controllers\Rbac\UserManagementController::class, 'edit'])->name('rbac.users.edit');
             Route::post('/users/update/{id}', [App\Http\Controllers\Rbac\UserManagementController::class, 'update'])->name('rbac.users.update');
+            Route::post('/users/edit/reset-password', [App\Http\Controllers\Rbac\UserManagementController::class, 'resetPasswordedit'])->name('rbac.users.reset-password');
+            Route::post('/users/edit/reset-password/{id}', [App\Http\Controllers\Rbac\UserManagementController::class, 'resetPassword'])->name('rbac.users.edit.reset-password');
             Route::get('/users/destroy/{id}', [App\Http\Controllers\Rbac\UserManagementController::class, 'destroy'])->name('rbac.users.destroy');
-
-            // Role
-            Route::get('/role', [App\Http\Controllers\Rbac\RoleManagementController::class, 'index'])->name('rbac.role.index');
-            Route::get('/role/create', [App\Http\Controllers\Rbac\RoleManagementController::class, 'create'])->name('rbac.role.create');
-            Route::post('/role/store', [App\Http\Controllers\Rbac\RoleManagementController::class, 'store'])->name('rbac.role.store');
-            Route::get('/role/edit/{id}', [App\Http\Controllers\Rbac\RoleManagementController::class, 'edit'])->name('rbac.role.edit');
-            Route::post('/role/update/{id}', [App\Http\Controllers\Rbac\RoleManagementController::class, 'update'])->name('rbac.role.update');
-            Route::get('/role/destroy/{id}', [App\Http\Controllers\Rbac\RoleManagementController::class, 'destroy'])->name('rbac.role.destroy');
         });
     });
 });

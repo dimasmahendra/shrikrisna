@@ -145,11 +145,11 @@
 
 @push('css-plugins')
 <link href="/cms/css/pages/customer-details.css?v={{ $version }}" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/cms/vendors/swiper/swiper-bundle.min.css" />
 @endpush
 
 @push('js-plugins')
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="/cms/vendors/swiper/swiper-bundle.min.js"></script>
 <script>
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 3,
