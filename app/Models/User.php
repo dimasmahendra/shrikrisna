@@ -67,4 +67,9 @@ class User extends Authenticatable
             }
         }
     }
+
+    public function role()
+    {
+        return $this->hasOne(AuthRole::class, 'id', 'id_role');
+    }
 }

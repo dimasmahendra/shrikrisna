@@ -660,6 +660,24 @@ table#filterTable tr.marked {
     border: 1px solid #B74000;
 }
 
+.btn-PRIMARY60 {
+    background-color: #006EE9;
+    color: #FFFFFF;
+    border: 1px solid #006EE9;
+}
+
+.btn-ORANGE60 {
+    background-color: #EF6B00;
+    color: #FFFFFF;
+    border: 1px solid #EF6B00;
+}
+
+.btn-RED60 {
+    background-color: #E82622;
+    color: #FFFFFF;
+    border: 1px solid #E82622;
+}
+
 .btn-very-warning {
     background-color: #953400;
     color: #FFFFFF;

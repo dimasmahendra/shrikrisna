@@ -23,6 +23,23 @@
     <link rel="stylesheet" href="/cms/css/cms.css?v={{ $version }}">
     <link rel="stylesheet" href="/fontello/css/fontello.css?v={{ $version }}">
     @stack('css-plugins')
+    @php
+        $page = URL::current();
+    @endphp
+    @if (strpos($page, 'users') == false)
+        <style>
+            @media screen and (max-width: 1199px) {
+                .navbar {
+                    position: absolute;
+                    top: -300px;
+                }
+
+                .sidebar-wrapper {
+                    display: none;
+                }
+            }
+        </style>
+    @endif
 </head>
 
 <body>
@@ -53,6 +70,7 @@
     <script src="/cms/vendors/jquery-validate/jquery-validate.min.js"></script>
     @stack('js-plugins')
     <script src="/cms/js/change-password.js"></script>
+    <script src="/cms/js/cms.js?v={{ $version }}"></script>
     @if(Session::has('message'))
         <script>
             Toastify({
