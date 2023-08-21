@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content p-3 b-r-20">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Add Data</h5>
+                <h5 class="modal-title text-NEUTRAL100 fw-600" id="exampleModalLongTitle">Add Data</h5>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="add-item" action="{{ route('rbac.users.store') }}" method="POST">
@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <div class="pb-2">
                         <div class="col-md-4">
-                            <label class="text-label pb-2"><span class="text-danger">*</span> Name</label>
+                            <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Name</label>
                         </div>
                         <div class="form-group">
                             <input type="text" id="username" class="form-control" name="username" placeholder="Input Name" value="">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="pb-2">
                         <div class="col-md-4">
-                            <label class="text-label pb-2"><span class="text-danger">*</span> Email</label>
+                            <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Email</label>
                         </div>
                         <div class="form-group">
                             <input type="email" id="email" class="form-control" name="email" placeholder="Input Email" value="">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="pb-2">
                         <div class="col-md-4">
-                            <label class="text-label pb-2"><span class="text-danger">*</span> Role</label>
+                            <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Role</label>
                         </div>
                         <div class="form-group">
                             <select class="form-select" id="id_role" name="id_role">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="pb-2">
                         <div class="col-md-4">
-                            <label class="text-label pb-2"><span class="text-danger">*</span> Password</label>
+                            <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Password</label>
                         </div>
                         <div class="form-group icon-div">
                             <span class="btn-show-pass">
@@ -50,7 +50,7 @@
                     </div>
                     <div class="pb-2">
                         <div class="col-md-6">
-                            <label class="text-label pb-2"><span class="text-danger">*</span> Confirmation Password</label>
+                            <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Confirmation Password</label>
                         </div>
                         <div class="form-group icon-div">
                             <span class="btn-show-pass-2">
@@ -60,18 +60,8 @@
                         </div>
                     </div>
                     <div class="pb-2">
-                        <li class="d-inline-block me-2 mb-1">
-                            <div class="form-check">
-                                <div class="checkbox">
-                                    <input type="checkbox" id="checkbox1" class="form-check-input" name="is_reset" checked>
-                                    <label for="checkbox1">Ask for a password change at the next sign-in</label>
-                                </div>
-                            </div>
-                        </li>
-                    </div>
-                    <div class="pb-2">
                         <div class="col-md-4">
-                            <label class="text-label pb-2"><span class="text-danger">*</span> Status</label>
+                            <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Status</label>
                         </div>
                         <div class="form-group">
                             <div class="form-check form-check-inline">
@@ -86,7 +76,7 @@
                     </div>
                 </div>
                 <div class="modal-footer custom-hr">
-                    <button type="submit" class="btn text-white bg-PRIMARY-50 w-400 h-60px fs-20">Submit</button>
+                    <button type="submit" class="btn btn-PRIMARY60 w-450 h-60 fs-20">Submit</button>
                 </div>
             </form>
         </div>

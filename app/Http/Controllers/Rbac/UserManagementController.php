@@ -39,7 +39,7 @@ class UserManagementController extends Controller
     public function store(Request $request)
     {
         if ($request->password != $request->confirmpassword) {
-            return redirect(route('rbac.users.index'))->with('error','Error');
+            return redirect(route('rbac.users.index'))->with('error','Password is not match.');
         }
 
         $model = new User;
@@ -48,10 +48,9 @@ class UserManagementController extends Controller
         $model->email = $request->email;
         $model->password = Hash::make($request->password);
         $model->photo = "no-image.svg";
-        $model->is_reset = ($request->is_reset == "on") ? 0 : 1;
+        $model->is_reset = 0;
         $model->verify_at = Carbon::createFromFormat('Y-m-d H:i:s', date("Y-m-d H:i:s", strtotime($request->start_date)))->timezone(Config::get('app.timezone'))->format('Y-m-d H:i:sO');
         $model->status = ($request->status == "active") ? 1 : 0;
-        $model->created_by = Auth::user()->id;
         $model->save();
 
         return redirect(route('rbac.users.index'))->with("message", "Saved");
@@ -91,7 +90,6 @@ class UserManagementController extends Controller
 
         $model = User::where('id', $id)->first();
         $model->password = Hash::make($request->password);
-        $model->is_verify = ($request->is_verifed == "on") ? 0 : 1;
         $model->save();
 
         return redirect(route('rbac.users.index'))->with("message", "Updated");
@@ -99,16 +97,8 @@ class UserManagementController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        try {
-            User::where([
-                'id' => $id
-            ])
-            ->update(['status' => 2]);
-            
+        try {            
             $model = User::find($id);
-
-            UserActivity::store($request, "User Management", "Delete User - " . $model->email);
-
             $model->forceDelete();
 
             return response()->json([

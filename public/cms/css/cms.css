@@ -248,7 +248,15 @@ small {
 
 .alertify {
     z-index: 10;
-    background-color: rgb(73 62 48 / 75%);
+    background-color: rgb(38 38 38 / 50%);
+}
+
+p.msg {
+    font-size: 16px;
+    margin-top: 33px;
+    margin-bottom: 33px;
+    color: #262626;
+    font-weight: 600;
 }
 
 .logo {
@@ -281,6 +289,10 @@ img.logo-image {
 
 .text-SECONDARY60 {
     color: #4A4646 !important;
+}
+
+.text-NEUTRAL100 {
+    color: #262626 !important;
 }
 
 .text-black {
@@ -625,7 +637,7 @@ table#filterTable tr.marked {
 
 .form-check-input:checked {
     background-color: #FFFFFF;
-    border: 1px solid #75634D;
+    border: 1px solid #E5E5E5;
 }
 
 .text-data-not-found {
@@ -654,6 +666,10 @@ table#filterTable tr.marked {
     bottom: 16px;
 }
 
+.btn:hover {
+    color: #fff;
+}
+
 .btn-very-danger {
     background-color: #B74000;
     color: #FFFFFF;
@@ -676,6 +692,12 @@ table#filterTable tr.marked {
     background-color: #E82622;
     color: #FFFFFF;
     border: 1px solid #E82622;
+}
+
+.btn-NEUTRAL60 {
+    background-color: #BFBFBF;
+    color: #FFFFFF;
+    border: 1px solid #BFBFBF;
 }
 
 .btn-very-warning {
@@ -736,7 +758,7 @@ table#filterTable tr.marked {
 }
 
 .custom-hr {
-    border-top: 2px solid #000000;
+    border-top: 1px solid #BFBFBF;
     justify-content: center;
     margin-right: 20px;
     margin-left: 20px;
@@ -804,11 +826,11 @@ label.was-validated {
 .btn-show-pass-mainpassword,
 .btn-show-pass-confirmpassword {
     font-size: 20px;
-    color: #53632A;
+    color: #11232B;
     align-items: center;
     position: absolute;
     height: 100%;
-    top: 10px;
+    top: 13px;
     right: 9px;
     width: 30px;
     cursor: pointer;
@@ -844,8 +866,13 @@ label.was-validated {
     font-size: 12px;
 }
 
-.form-control, .form-textarea, .text-nude  {
-    color: #4A4646;
+.form-control, .form-textarea, .text-nude, .form-select  {
+    color: #262626;
+}
+
+.form-control:focus, .form-select:focus {
+    color: #262626;
+    border-color: #E5E5E5;
 }
 
 input:-webkit-autofill {
@@ -853,7 +880,7 @@ input:-webkit-autofill {
 }
 
 .fade {
-    background-color: rgb(73 62 48 / 75%);
+    background-color: rgb(38 38 38 / 50%);
 }
 
 .text-super-primary {

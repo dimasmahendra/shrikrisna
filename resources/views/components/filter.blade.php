@@ -1,10 +1,10 @@
 @php
     if (request()->query("filter") == "active") {
-        $dropdownText = "Publish";
+        $dropdownText = "Active";
     } elseif (request()->query("filter") == "nonactive") {
-        $dropdownText = "Not Publish";
+        $dropdownText = "Not Active";
     } else {
-        $dropdownText = "Status";
+        $dropdownText = "All Status";
     }
 @endphp
 <div class="dropdown">
@@ -13,6 +13,7 @@
         {{ $dropdownText }}
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item {{ $dropdownText == 'All Status' ? 'active' : '' }}" href="{{ $route }}">All Status</a>
         <a class="dropdown-item text-success" href="{{ $route }}?filter=active">Active</a>
         <a class="dropdown-item text-danger" href="{{ $route }}?filter=nonactive">Not Active</a>
     </div>

@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h5 class="modal-title">Reset Password</h5>
+    <h5 class="modal-title text-NEUTRAL100 fw-600">Reset Password</h5>
     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 </div>
 <form id="formmodalresetpassword" action="{{ route('rbac.users.edit.reset-password', [$model['id']]) }}" method="POST">
@@ -7,7 +7,7 @@
     <div class="modal-body">
         <div class="pb-2">
             <div class="col-md-4">
-                <label class="text-label pb-2"><span class="text-danger">*</span> Password</label>
+                <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Password</label>
             </div>
             <div class="form-group icon-div">
                 <span class="btn-show-pass-2">
@@ -18,7 +18,7 @@
         </div>
         <div class="pb-2">
             <div class="col-md-6">
-                <label class="text-label pb-2"><span class="text-danger">*</span> Confirmation Password</label>
+                <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Confirmation Password</label>
             </div>
             <div class="form-group icon-div">
                 <span class="btn-show-pass-2">
@@ -27,19 +27,9 @@
                 <input type="password" id="confirmpassword" class="form-control" name="confirmpassword">
             </div>
         </div>
-        <div class="pb-2">
-            <li class="d-inline-block me-2 mb-1">
-                <div class="form-check">
-                    <div class="checkbox">
-                        <input type="checkbox" id="checkbox1" class="form-check-input" name="is_reset" checked>
-                        <label for="checkbox1">Ask for a password change at the next sign-in</label>
-                    </div>
-                </div>
-            </li>
-        </div>
     </div>
     <div class="modal-footer custom-hr">
-        <button type="submit" class="btn text-white bg-PRIMARY-50 w-400 h-60px fs-20">Submit</button>
+        <button type="submit" class="btn btn-PRIMARY60 w-450 h-60 fs-20">Submit</button>
     </div>
 </form>
 

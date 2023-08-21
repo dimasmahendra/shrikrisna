@@ -614,7 +614,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 24px;
-    color: #75634D;
+    color: #262626;
 }
 
 .form-group small {
@@ -1705,5 +1705,5 @@ a {
 }
 
 .form-select {
-    border: 1px solid #685844;
+    border: 1px solid #E5E5E5;
 }
