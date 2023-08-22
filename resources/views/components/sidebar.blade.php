@@ -21,8 +21,8 @@
                         <span>User Management</span>
                     </a>
                 </li>
-                <li class="sidebar-item {{ (strpos($page, 'banner') !== false) ? 'active' : '' }} ">
-                    <a href="{{ route('rbac.users.index') }}" class='sidebar-link p-t-20 p-b-20'>
+                <li class="sidebar-item {{ (strpos($page, 'category') !== false) ? 'active' : '' }} ">
+                    <a href="{{ route('category.index') }}" class='sidebar-link p-t-20 p-b-20'>
                         <i class="icon-gear fs-20"></i>
                         <span>Category</span>
                     </a>

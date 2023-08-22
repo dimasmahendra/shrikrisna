@@ -14,11 +14,7 @@ class UserManagementController extends Controller
 {
     public function index(Request $request)
     {
-        $model = User::orderBy('id')->where('status', '<>', 2);
-        if ($request->has('search')) {
-            $model->where('name','ILIKE','%'.$request->input('search').'%')
-                    ->orWhere('email','ILIKE','%'.$request->input('search').'%');
-        }
+        $model = User::orderBy('id');
         if ($request->has('filter')) {
             if (in_array( $request->input('filter'), ["active", "nonactive"])) {
                 $status = ($request->input('filter') == "active") ? 1 : 0;
