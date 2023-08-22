@@ -640,10 +640,10 @@ table#filterTable tr.marked {
 }
 
 .text-data-not-found {
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 40px;
-    color: #75634D;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: normal;
+    color: #262626;
 }
 
 .item-center {

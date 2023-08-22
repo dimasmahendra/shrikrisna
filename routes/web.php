@@ -39,6 +39,15 @@ Route::middleware(["auth:web"])->group(function () {
             Route::get('/destroy/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'destroy'])->name('customer.destroy');
         });
 
+        // Category
+        Route::prefix("category")->group(function () {
+            Route::get('', [App\Http\Controllers\Cms\CategoryController::class, 'index'])->name('category.index');
+            Route::post('/store', [App\Http\Controllers\Cms\CategoryController::class, 'store'])->name('category.store');
+            Route::post('/edit', [App\Http\Controllers\Cms\CategoryController::class, 'edit'])->name('category.edit');
+            Route::post('/update/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'update'])->name('category.update');
+            Route::get('/destroy/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'destroy'])->name('category.destroy');
+        });
+
         Route::prefix("rbac")->group(function () {
             // User Management
             Route::get('/users', [App\Http\Controllers\Rbac\UserManagementController::class, 'index'])->name('rbac.users.index');
