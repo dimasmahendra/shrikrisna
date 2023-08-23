@@ -42,14 +42,18 @@
                                         <span class="text-danger">Not Active</span>
                                     @endif
                                 </td>
-                                <td class="text-center row gap-2 justify-content-center">
-                                    <button type="button" class="btn btn-PRIMARY60 me-2 w-125 h-40 master-edit fw-600" 
+                                <td class="text-center">
+                                    <a href="{{ route('category.details', [$item->id]) }}">
+                                        <button type="button" class="btn btn-ORANGE60 me-2 m-b-5 w-125 h-40 fw-600">Details</button>
+                                    </a>
+                                    <button type="button" class="btn btn-PRIMARY60 me-2 m-b-5 w-125 h-40 master-edit fw-600" 
                                         data-master="{{ json_encode([
                                         'id' => $item->id, 
                                         'name' => $item->name,
-                                        'status' => $item->status ]) }}">Update</button>
+                                        'status' => $item->status ]) }}">Update
+                                    </button>
                                     @if ($item->id != 1)
-                                        <button type="button" class="btn btn-RED60 w-125 h-40 button-destroy fw-600"
+                                        <button type="button" class="btn btn-RED60 me-2 m-b-5 w-125 h-40 button-destroy fw-600"
                                             data-url="{{ route('category.destroy',[$item->id]) }}">
                                             Delete
                                         </button>

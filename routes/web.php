@@ -46,6 +46,8 @@ Route::middleware(["auth:web"])->group(function () {
             Route::post('/edit', [App\Http\Controllers\Cms\CategoryController::class, 'edit'])->name('category.edit');
             Route::post('/update/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'update'])->name('category.update');
             Route::get('/destroy/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'destroy'])->name('category.destroy');
+
+            Route::get('/details/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'details'])->name('category.details');
         });
 
         Route::prefix("rbac")->group(function () {

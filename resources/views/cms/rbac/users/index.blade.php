@@ -57,7 +57,7 @@
                                         'id_role' => $item->id_role,
                                         'status' => $item->status ]) }}">Update</button>
                                     @if ($item->id != 1)
-                                        <button type="button" class="btn btn-RED60 w-125 h-40 button-destroy fw-600"
+                                        <button type="button" class="btn btn-RED60 w-125 h-40 me-2 button-destroy fw-600"
                                             data-url="{{ route('rbac.users.destroy',[$item->id]) }}">
                                             Delete
                                         </button>
