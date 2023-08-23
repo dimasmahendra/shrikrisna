@@ -48,6 +48,14 @@ Route::middleware(["auth:web"])->group(function () {
             Route::get('/destroy/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'destroy'])->name('category.destroy');
 
             Route::get('/details/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'details'])->name('category.details');
+            Route::get('/view/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'view'])->name('category.view');
+            Route::post('/details/store/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'detailsStore'])->name('category.details.store');
+            Route::post('/details/edit', [App\Http\Controllers\Cms\CategoryController::class, 'detailsEdit'])->name('category.details.edit');
+            Route::post('/details/update/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'detailsUpdate'])->name('category.details.update');
+            Route::get('/details/destroy/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'detailsDestroy'])->name('category.details.destroy');
+
+            Route::get('/details/cancel/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'detailsCancel'])->name('category.details.cancel');
+            Route::get('/details/submit/{id}', [App\Http\Controllers\Cms\CategoryController::class, 'detailsSubmit'])->name('category.details.submit');
         });
 
         Route::prefix("rbac")->group(function () {

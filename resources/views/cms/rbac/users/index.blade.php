@@ -29,7 +29,7 @@
                             <th class="text-left fw-600">Email</th>
                             <th class="text-left fw-600">Role</th>
                             <th class="text-left fw-600">Status</th>
-                            <th class="fw-600" width="40%">Action</th>
+                            <th class="no-sort fw-600" width="40%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,6 +140,10 @@
                 "info": "",
             },
             "order": [[0, 'asc']],
+            "columnDefs": [{
+                targets: 'no-sort',
+                orderable: false
+            }],
         });
     });
 
