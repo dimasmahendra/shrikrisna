@@ -26,7 +26,7 @@
     @php
         $page = URL::current();
     @endphp
-    @if (strpos($page, 'users') == false || strpos($page, 'category') == false)
+    @if (strpos($page, 'users') == false && strpos($page, 'category') == false)
         <style>
             @media screen and (max-width: 1199px) {
                 .navbar {

@@ -29,7 +29,7 @@
                             <th class="text-left fw-600">Email</th>
                             <th class="text-left fw-600">Role</th>
                             <th class="text-left fw-600">Status</th>
-                            <th class="fw-600" width="40%">Action</th>
+                            <th class="no-sort fw-600" width="40%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +57,7 @@
                                         'id_role' => $item->id_role,
                                         'status' => $item->status ]) }}">Update</button>
                                     @if ($item->id != 1)
-                                        <button type="button" class="btn btn-RED60 w-125 h-40 button-destroy fw-600"
+                                        <button type="button" class="btn btn-RED60 w-125 h-40 me-2 button-destroy fw-600"
                                             data-url="{{ route('rbac.users.destroy',[$item->id]) }}">
                                             Delete
                                         </button>
@@ -140,6 +140,10 @@
                 "info": "",
             },
             "order": [[0, 'asc']],
+            "columnDefs": [{
+                targets: 'no-sort',
+                orderable: false
+            }],
         });
     });
 

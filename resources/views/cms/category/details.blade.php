@@ -1,6 +1,6 @@
 @php
-    $title = "Category";
-    $breadcrumbs[] = ["label" => "Category", "url" => "#"];
+    $title = "Detail Category Type";
+    $breadcrumbs[] = ["label" => "Details Category", "url" => "#"];
 @endphp
 
 @extends('layouts.cms', [
@@ -10,50 +10,50 @@
 
 @section('content')
 <div class="card">
-    <div class="d-flex m-t-30 section-btn">
-        <div class="col-md-6 d-flex">
-            @include('components.filter', ['route' => route('category.index')])
+    <div class="card-header">
+        <h4 class="card-title fs-20 fw-600 m-b-10">{{ $title }}</h4>
+        <div class="col-md-4">
+            <label class="text-PRIMARY100 p-b-4 fw-600 fs-14">Type Name</label>
         </div>
+        <div class="fs-16">
+            {{ ucwords($data->name) }}
+        </div>
+    </div>
+    <div class="d-flex section-btn">
+        <div class="col-md-6 d-flex"></div>
         <div class="col-md-6 d-flex">
-            <button class="btn btn-PRIMARY60 m-r-20 h-45 w-150 open-modal fw-600 m-l-auto" type="button">Add Data</button>
+            <button class="btn btn-PRIMARY60 m-r-20 h-45 w-150 open-modal fw-600 m-l-auto" type="button" id="button-add-data">Add Data</button>
         </div>
     </div>
     <div class="card-body-list">
-        @if (count($data) > 0)
+        @if (count($details) > 0)
             <div class="table-responsive p-l-20">
                 <table class="table" id="filterTable" style="width:98%">
                     <thead>
                         <tr>
-                            <th class="text-left fw-600" style="display: none;">ID</th>
-                            <th class="text-left fw-600">Name</th>
-                            <th class="text-left fw-600">Status</th>
+                            <th class="text-left fw-600">Order</th>
+                            <th class="text-left fw-600">Description</th>
+                            <th class="text-left fw-600">Total Rows</th>
                             <th class="no-sort fw-600" width="40%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data as $key => $item)
+                        @foreach ($details as $key => $item)
                             <tr>
-                                <td style="display: none;">{{ $item->id }}</td>
-                                <td>{{ $item->name }}</td>
-                                <td>
-                                    @if ($item->status == "active")
-                                        <span class="text-success">Active</span>
-                                    @else
-                                        <span class="text-danger">Not Active</span>
-                                    @endif
-                                </td>
+                                <td>{{ $item->order }}</td>
+                                <td>{{ $item->description }}</td>
+                                <td>{{ $item->total_rows }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('category.view', [$item->id]) }}">
-                                        <button type="button" class="btn btn-ORANGE60 me-2 m-b-5 w-125 h-40 fw-600">Details</button>
-                                    </a>
                                     <button type="button" class="btn btn-PRIMARY60 me-2 m-b-5 w-125 h-40 master-edit fw-600" 
                                         data-master="{{ json_encode([
                                         'id' => $item->id, 
-                                        'name' => $item->name,
+                                        'order' => $item->order,
+                                        'description' => $item->description,
+                                        'total_rows' => $item->total_rows,
                                         'status' => $item->status ]) }}">Update
                                     </button>
                                     <button type="button" class="btn btn-RED60 me-2 m-b-5 w-125 h-40 button-destroy fw-600"
-                                        data-url="{{ route('category.destroy',[$item->id]) }}">
+                                        data-url="{{ route('category.details.destroy',[$item->id]) }}">
                                         Delete
                                     </button>
                                 </td>
@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="col-md-12 mt-40 mb-60 text-right animate-box" data-animate-effect="fadeInUp">
                     <!-- Pagination -->
-                    {{ $data->links('components.paginator') }}
+                    {{ $details->links('components.paginator') }}
                 </div>
             </div>
         @else
@@ -75,8 +75,18 @@
             </div>
         @endif
     </div>
+    <div class="p-t-20 p-b-20 custom-hr">
+        <div id="button-actions">
+            <a href="{{ route('category.details.cancel', [$data->id]) }}">
+                <button type="button" class="btn btn-NEUTRAL60 w-150 h-45 m-r-15 fw-600">Cancel</button>
+            </a>
+            <a href="{{ route('category.details.submit', [$data->id]) }}">
+                <button type="button" class="btn btn-PRIMARY60 w-150 h-45 m-r-15 fw-600">Submit</button>
+            </a>
+        </div>
+    </div>
 </div>
-@include('cms.category.add')
+@include('cms.category.details.add')
 <div class="modal fade" id="edititem" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content p-3 b-r-20"></div>
@@ -118,9 +128,10 @@
 @endpush
 
 @push('js-plugins')
+<script src="/cms/vendors/maskmoney/maskmoney.js"></script>
 <script>
 
-    let baseUrl = "{{ route('category.index') }}";
+    let baseUrl = "{{ route('category.details', [$data->id]) }}";
 
     $(document).ready(function () {
         $("#filterTable").dataTable({
@@ -139,30 +150,41 @@
         });
     });
 
-    $(document).on('change', '#status-filter', function (ev) {
-        ev.preventDefault();
-        if ($(this).val() == "") {
-            window.location = "{{ route('category.index') }}";
-        } else {
-            window.location = "{{ route('category.index') }}?filter=" + $(this).val();
-        }
-    });
-
     $(document).on('click', '.open-modal', function (ev) {
         ev.preventDefault();
         $('#additem').modal('show');
+    });
+
+    $(".currency").maskMoney({
+        thousands: ".",
+        decimal:',',
+        precision: 0,
+        affixesStay: false,
+        allowZero: true
     });
 
     $(document).ready(function () {
         $("#add-item").validate({
             errorClass: 'was-validated',
             rules : {
-                name : {
+                order : {
+                    required: true,
+                },
+                description : {
+                    required: true,
+                },
+                total_rows : {
                     required: true,
                 },
             },
             messages: {
-                name: {
+                order: {
+                    required: "This field is Required",
+                },
+                description: {
+                    required: "This field is Required",
+                },
+                total_rows: {
                     required: "This field is Required",
                 },
             },
@@ -176,7 +198,7 @@
     $(document).on('click', '.master-edit', function (ev) {
         var datamaster = $(this).data('master');
         $.ajax({
-            url: '/admin/category/edit',
+            url: '/admin/category/details/edit',
             data: {
                 'datamaster': datamaster
             },
