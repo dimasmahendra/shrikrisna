@@ -684,8 +684,8 @@
 .form-group[class*=has-icon-] .form-control-icon {
     position: absolute;
     transform: translateY(-50%);
-    padding-top: 4px;
-    padding-right: 0.6rem;
+    /* padding-top: 4px; */
+    padding-right: 0.7rem;
     padding-bottom: 3rem;
     padding-left: 0.6rem;
 }
