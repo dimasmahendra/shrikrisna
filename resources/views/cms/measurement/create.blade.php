@@ -29,15 +29,15 @@
     </div>
     <div class="container-measure">
         <div class="section-image-user">
-            <div class="m-t-15">
-                <strong class="fs-16 text-SECONDARY60 no-formating">{{ $data->nomor_ktp }}</strong>
+            <div>
+                <strong class="fs-16 text-SECONDARY60 center2">{{ $data->nomor_ktp }}</strong>
             </div>
             <div class="m-t-10">
-                <strong class="fs-16 text-SECONDARY60">{{ $data->name }}</strong>
+                <strong class="fs-16 text-SECONDARY60 center2">{{ $data->name }}</strong>
             </div>
             <div class="m-t-25">
                 <div class="form-group">
-                    <select class="form-select w-374" id="id_category" name="id_category">
+                    <select class="form-select" id="id_category" name="id_category">
                         @foreach ($category as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                         @endforeach 
@@ -46,7 +46,7 @@
             </div>
             <div class="m-t-15">
                 <div class="form-group position-relative has-icon-right">
-                    <input type="text" id="measurement_date" class="form-control w-374" name="measurement_date" 
+                    <input type="text" id="measurement_date" class="form-control" name="measurement_date" 
                     placeholder="Select Date" value="">
                     <div class="form-control-icon">
                         <i class="icon-calendar fs-25"></i>
