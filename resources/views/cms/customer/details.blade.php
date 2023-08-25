@@ -21,7 +21,7 @@
         </div>
         <div class="w-53 section-subitem-end">
             <div class="text-item-end">
-                <a href="{{ route('customer.edit', [$data->id]) }}" class="open-modal-my-profile">
+                <a href="{{ route('customer.edit', [$data->id]) }}">
                     <button type="button" class="btn btn-outline-primary fs-16 p-r-unset">Edit</button>
                 </a>
             </div>
@@ -133,6 +133,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-12">
+                <a href="{{ route('category.measurement.create', [$data->id]) }}">
+                    <button type="button" class="btn btn-PRIMARY60 h-60 fs-16 fw-600 w-100persen">Add Measurement</button>
+                </a>                
             </div>
         </div>
     </div>

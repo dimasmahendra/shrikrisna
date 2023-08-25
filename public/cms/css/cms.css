@@ -286,6 +286,10 @@ img.logo-image {
     color: #006EE9;
 }
 
+.text-PRIMARY90 {
+    color: #002B4C;
+}
+
 .text-SECONDARY60 {
     color: #4A4646 !important;
 }
@@ -856,7 +860,7 @@ label.was-validated {
 
 .datepicker table tr td.active, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover, .datepicker table tr td.active:hover {
     background-image: unset !important;
-    background-color: #53632A !important;
+    background-color: #006EE9 !important;
 }
 
 .text-off {
@@ -997,4 +1001,8 @@ input:-webkit-autofill {
 
 strong.no-formating { 
     text-decoration: none;
+}
+
+.form-group[class*=has-icon-].has-icon-right .form-control-icon {
+    right: 0;
 }

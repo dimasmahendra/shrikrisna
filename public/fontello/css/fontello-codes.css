@@ -1,4 +1,5 @@
 
+.icon-calendar:before { content: '\e800'; } /* '' */
 .icon-customer:before { content: '\e803'; } /* '' */
 .icon-gear:before { content: '\e804'; } /* '' */
 .icon-home:before { content: '\e805'; } /* '' */

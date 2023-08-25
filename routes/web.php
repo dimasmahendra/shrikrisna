@@ -37,6 +37,10 @@ Route::middleware(["auth:web"])->group(function () {
             Route::get('/details/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'details'])->name('customer.details');
             Route::post('/update/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'update'])->name('customer.update');
             Route::get('/destroy/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'destroy'])->name('customer.destroy');
+
+            Route::prefix("measurement")->group(function () {
+                Route::get('/create/{id}', [App\Http\Controllers\Cms\MeasurementController::class, 'create'])->name('category.measurement.create');
+            });
         });
 
         // Category
