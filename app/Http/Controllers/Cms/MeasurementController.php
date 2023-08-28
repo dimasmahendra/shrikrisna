@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers\Cms;
 
+use Config;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Customer;
 use App\Models\Category;
+use App\Models\FileMeasurement;
+use App\Models\Measurement;
+use App\Models\CustomerMeasurement;
 
 class MeasurementController extends Controller
 {
@@ -22,9 +28,53 @@ class MeasurementController extends Controller
     {
         $model = Customer::where('id', $id)->first();
         $category = Category::has('details')->active()->get();
+        $storage = FileMeasurement::where('id_customer', $id)->whereNull('id_measurement')->get();
         return view('cms.measurement.create', [
             "data" => $model,
             "category" => $category,
+            "storage" => $storage,
         ]);
+    }
+
+    public function store(Request $request, $id) 
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $model = new Measurement;
+            $model->id_customer = $id;
+            $model->id_master_category = $request->id_category;
+            $model->measurement_date = Carbon::createFromFormat('Y-m-d', date("Y-m-d", strtotime($request->measurement_date)))
+                                        ->timezone(Config::get('app.timezone'))->format('Y-m-d');
+            $model->status = 1;
+            $model->save();
+
+            foreach ($request->details as $key => $item) {
+                foreach ($item['value'] as $i => $value) {
+                    $detail = new CustomerMeasurement;
+                    $detail->id_measurement = $model->id;
+                    $detail->id_master_category_details = $key;
+                    $detail->value = $value;
+                    $detail->option = $item['option'][$i];
+                    $detail->save();
+                }
+            }
+
+            if ($request->storageid != null) {
+                foreach ($request->storageid as $k => $id_storage) {
+                    FileMeasurement::where('id', $id_storage)->
+                            where('id_customer', $id)->update(['id_measurement' => $model->id]);
+                }
+            }
+
+            DB::commit();
+
+            return redirect(route('customer.details', [$id]))->with("message", "Saved");
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th->getMessage());
+        }
     }
 }

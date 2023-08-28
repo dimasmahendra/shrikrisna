@@ -248,8 +248,8 @@
 
 .btn i,
 .btn svg {
-    width: 16px;
-    height: 16px;
+    width: 25px;
+    height: 25px;
 }
 
 .btn.icon {
@@ -257,8 +257,8 @@
 }
 
 .btn.icon svg {
-    width: 16px;
-    height: 16px;
+    width: 25px;
+    height: 25px;
 }
 
 .btn.icon.icon-left svg {

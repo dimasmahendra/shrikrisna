@@ -1,3 +1,6 @@
+@php
+    // dd($data->details);
+@endphp
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -14,12 +17,13 @@
                     @endif
                     <td class="p-td-unset">
                         <div class="col">
-                            <input type="text" class="form-control" name="nomor_ktp" value="">
+                            <input type="text" class="form-control" id="details[{{ $item->id }}][value]" 
+                            name="details[{{ $item->id }}][value][]" value="">
                         </div>
                     </td>
                     <td class="p-td-unset">
                         <div class="col">
-                            <input type="text" class="form-control" name="nomor_ktp" value="">
+                            <input type="text" class="form-control" id="details[{{ $item->id }}][option]" name="details[{{ $item->id }}][option][]" value="">
                         </div>
                     </td>
                 </tr>

@@ -624,12 +624,21 @@ table#filterTable tr.marked {
     margin-left: 30px;
 }
 
-.bg-army {
-    background: #75634D;
+.bg-SECONDARY60 {
+    background: #F1F1F1;
 }
 
 .bg-green-transparent {
     background: rgba(255, 255, 255, 0.75);
+}
+
+.bg-brownis {
+    color: #FFFFFF;
+    background: #75634D;
+    box-shadow: 0px -1px 0px rgba(198, 198, 198, 0.4), 0px 1px 0px rgba(198, 198, 198, 0.4);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
 }
 
 .rounded-4 {
@@ -701,6 +710,18 @@ table#filterTable tr.marked {
     background-color: #BFBFBF;
     color: #FFFFFF;
     border: 1px solid #BFBFBF;
+}
+
+.btn-SECONDARY60 {
+    background-color: #F1F1F1;
+    color: #FFFFFF;
+    border: 1px solid #F1F1F1;
+}
+
+.btn-WHITE100 {
+    background-color: #FFF;
+    color: #000000;
+    border: 1px solid #FFF;
 }
 
 .btn-very-warning {
@@ -780,15 +801,6 @@ label.is-invalid {
 }
 label.was-validated {
     color: #dc3545;
-}
-
-.bg-brownis {
-    color: #FFFFFF;
-    background: #75634D;
-    box-shadow: 0px -1px 0px rgba(198, 198, 198, 0.4), 0px 1px 0px rgba(198, 198, 198, 0.4);
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
 }
 
 .custom-switch {
