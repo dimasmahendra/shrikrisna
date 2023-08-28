@@ -20,7 +20,15 @@ class FileMeasurement extends Model
         if (empty($this->path)) {
             return url('cms/images/samples/no-image.svg');
         } else {
-            return Storage::url($this->path);
+            if ($this->path == 'no-image.svg') {
+                return url('cms/images/samples/no-image.svg');
+            } else {
+                if(file_exists(storage_path('/app/public/') . $this->path)){
+                    return Storage::url($this->path);
+                } else {
+                    return url('cms/images/samples/no-image.svg');
+                }
+            }
         }
     }
 
