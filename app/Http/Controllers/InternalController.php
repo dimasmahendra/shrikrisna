@@ -5,27 +5,36 @@ namespace App\Http\Controllers;
 use App\Helpers\ImageHelper;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-use App\Models\Storages;
+use App\Models\FileMeasurement;
 
 class InternalController extends Controller
 {
     public function uploadImage(Request $request)
     {
-        if($request->hasFile('image') && !empty($request->folder))
+        if($request->hasFile('file') && !empty($request->folder))
         {
-            $images = $request->file('image');
-            $path = ImageHelper::uploadFile($images, $request->folder);
-            $urlImage = env('APP_URL') . Storage::url($path);
+            list($directory, $id_customer) = explode("/", $request->folder);
+            $file = $request->file('file');
+            $path = ImageHelper::uploadFile($file, $request->folder);
+            $urlFile = env('APP_URL') . Storage::url($path);
 
             if ($request->savestorage == "true") {
-                $lastinsertedid = Storages::storedToDb($path, $request->folder);
+                $increment = (FileMeasurement::where('id_customer', $id_customer)->max('order') == null) ? 0 : FileMeasurement::where('id_customer', $id_customer)->max('order');
+
+                $model = new FileMeasurement;
+                $model->id_customer = $id_customer;
+                $model->path = $path;
+                $model->order = $increment + 1;
+                $model->status = 1;
+                $model->save();
+
                 return response()->json([
-                    'url' => $urlImage,
-                    'last_insert_id' => $lastinsertedid,
+                    'url' => $urlFile,
+                    'last_insert_id' => $model->id,
                 ], 200);
             } else {
                 return response()->json([
-                    'url' => $urlImage
+                    'url' => $urlFile
                 ], 200);
             }
         }
@@ -33,9 +42,9 @@ class InternalController extends Controller
 
     public function deleteImage($id)
     {
-        $storages = Storages::find($id);
+        $storages = FileMeasurement::find($id);
         ImageHelper::removeFilesFromDirectories($storages->path);
-        $storages->delete();
+        $storages->forceDelete();
         return response()->json([
             'id' => $id,
         ], 200);

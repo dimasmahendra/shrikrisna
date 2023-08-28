@@ -6,11 +6,11 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Measurement extends Model
 {
     use HasFactory;
 
-    protected $table = "master_category";
+    protected $table = "measurement";
 
     protected function serializeDate(DateTimeInterface $date)
     {
@@ -19,11 +19,11 @@ class Category extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('status', '=', 'active');
+        return $query->where('status', '=', 1);
     }
 
-    public function details()
+    public function category()
     {
-        return $this->hasMany(CategoryDetails::class, 'id_master_category', 'id')->orderBy('order', 'ASC');
+        return $this->hasOne(Category::class, 'id', 'id_master_category');
     }
 }

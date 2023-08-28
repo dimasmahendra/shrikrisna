@@ -62,6 +62,10 @@ class CategoryController extends Controller
             $model = Category::find($id);
             $model->forceDelete();
 
+            CategoryDetails::where([
+                ['id_master_category', '=', $id]
+            ])->forceDelete();
+
             return response()->json([
                 'status' => true,
                 'message' => 'Data Deleted',
