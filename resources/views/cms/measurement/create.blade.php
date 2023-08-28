@@ -55,67 +55,9 @@
             </div>
         </div>
         <div class="card m-t-25">
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="text-PRIMARY90 fw-600 col-6">Description</th>
-                            <th class="text-PRIMARY90 fw-600 col-6" colspan="2">Value</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan='3' class="center">Panjang Bahu</td>
-                            <td class="p-td-unset">
-                                <div class="col">
-                                    <input type="text" class="form-control" name="nomor_ktp" value="">
-                                </div>
-                            </td>
-                            <td class="p-td-unset">
-                                <div class="col">
-                                    <input type="text" class="form-control" name="nomor_ktp" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-td-unset">
-                                <div class="col">
-                                    <input type="text" class="form-control" name="nomor_ktp" value="">
-                                </div>
-                            </td>
-                            <td class="p-td-unset">
-                                <div class="col">
-                                    <input type="text" class="form-control" name="nomor_ktp" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-td-unset">
-                                <div class="col">
-                                    <input type="text" class="form-control" name="nomor_ktp" value="">
-                                </div>
-                            </td>
-                            <td class="p-td-unset">
-                                <div class="col">
-                                    <input type="text" class="form-control" name="nomor_ktp" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td rowspan='1' class="center">Panjang Lengan</td>
-                            <td class="p-td-unset">
-                                <div class="col">
-                                    <input type="text" class="form-control" name="nomor_ktp" value="">
-                                </div>
-                            </td>
-                            <td class="p-td-unset">
-                                <div class="col">
-                                    <input type="text" class="form-control" name="nomor_ktp" value="">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <img class="loader-container" id="loader-container" src="{{ url('cms/images/samples/item-loader.svg') }}" 
+            style="display: none; margin: auto; display: block;" />
+            <div class="table-responsive" id="layout-measurement">
             </div>
         </div>
     </div>
@@ -140,6 +82,34 @@
         autoclose: true,
         todayHighlight: true,
     }).datepicker("setDate",'now');
+
+    $(document).ready(function() {
+        $("#layout-measurement").empty();
+        initLayout();
+    });
+
+    $(document).on('change', '#id_category', function (ev) {
+        $("#layout-measurement").empty();
+        initLayout();
+    });
+
+    function initLayout() {
+        var datamaster = $("#id_category").val();
+        $.ajax({
+            url: '/admin/customer/measurement/category/' + datamaster,
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function() {
+                $("#loader-container").show();
+            },
+            success: function (data) {
+                $("#loader-container").hide();
+                $("#layout-measurement").html(data);
+            }
+        });
+    }
 
 </script>
 @endpush

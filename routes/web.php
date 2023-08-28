@@ -39,6 +39,7 @@ Route::middleware(["auth:web"])->group(function () {
             Route::get('/destroy/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'destroy'])->name('customer.destroy');
 
             Route::prefix("measurement")->group(function () {
+                Route::get('/category/{id}', [App\Http\Controllers\Cms\MeasurementController::class, 'category'])->name('category.measurement.category');
                 Route::get('/create/{id}', [App\Http\Controllers\Cms\MeasurementController::class, 'create'])->name('category.measurement.create');
             });
         });

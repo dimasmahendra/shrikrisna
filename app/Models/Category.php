@@ -21,4 +21,9 @@ class Category extends Model
     {
         return $query->where('status', '=', 'active');
     }
+
+    public function details()
+    {
+        return $this->hasMany(CategoryDetails::class, 'id_master_category', 'id')->orderBy('order', 'ASC');
+    }
 }
