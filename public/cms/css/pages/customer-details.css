@@ -107,3 +107,7 @@ a {
     gap: 10px;
     display: inline-flex
 }
+
+.section-btn {
+    justify-content: space-between;
+}

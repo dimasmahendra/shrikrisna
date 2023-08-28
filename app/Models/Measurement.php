@@ -21,4 +21,9 @@ class Measurement extends Model
     {
         return $query->where('status', '=', 1);
     }
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'id_master_category');
+    }
 }

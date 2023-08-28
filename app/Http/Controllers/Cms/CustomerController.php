@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Cms;
 
 use App\Models\Customer;
 use App\Helpers\ImageHelper;
+use App\Models\Measurement;
+use App\Models\FileMeasurement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -61,8 +63,12 @@ class CustomerController extends Controller
     public function details($id) 
     {
         $model = Customer::where('id', $id)->first();
+        $measurement = Measurement::where('id_customer', $id)->get();
+        $gallery = FileMeasurement::where('id_customer', $id)->get();
         return view('cms.customer.details', [
-            "data" => $model
+            "data" => $model,
+            "measurement" => $measurement,
+            "gallery" => $gallery,
         ]);
     }
 
