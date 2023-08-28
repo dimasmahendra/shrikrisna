@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
-use App\Models\Storages;
+use App\Models\CategoryDetails;
+use App\Models\FileMeasurement;
 use App\Models\User;
-use App\Models\AuthPermission;
 use App\Helpers\ImageHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -88,6 +88,14 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
+        CategoryDetails::where("is_temporary", 1)->delete();
+
+        $storage = FileMeasurement::whereNull('id_measurement')->get();
+        foreach ($storage as $key => $value) {
+            ImageHelper::removeFilesFromDirectories($value->path);
+            $value->delete();
+        }
+
         return redirect()->route("customer.index");
     }
 }
