@@ -63,8 +63,8 @@ class CustomerController extends Controller
     public function details($id) 
     {
         $model = Customer::where('id', $id)->first();
-        $measurement = Measurement::where('id_customer', $id)->get();
-        $gallery = FileMeasurement::where('id_customer', $id)->get();
+        $measurement = Measurement::where('id_customer', $id)->orderBy('measurement_date', 'DESC')->get();
+        $gallery = FileMeasurement::where('id_customer', $id)->orderBy('created_at', 'DESC')->get();
         return view('cms.customer.details', [
             "data" => $model,
             "measurement" => $measurement,
