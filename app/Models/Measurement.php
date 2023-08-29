@@ -26,4 +26,19 @@ class Measurement extends Model
     {
         return $this->hasOne(Category::class, 'id', 'id_master_category');
     }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'id', 'id_customer');
+    }
+
+    public function items()
+    {
+        return $this->hasMany(CustomerMeasurement::class, 'id_measurement', 'id');
+    }
+
+    public function storages()
+    {
+        return $this->hasMany(FileMeasurement::class, 'id_measurement', 'id');
+    }
 }

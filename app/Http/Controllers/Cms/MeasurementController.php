@@ -77,4 +77,12 @@ class MeasurementController extends Controller
             dd($th->getMessage());
         }
     }
+
+    public function details($id) 
+    {
+        $model = Measurement::where('id', $id)->first();
+        return view('cms.measurement.details', [
+            "data" => $model
+        ]);
+    }
 }

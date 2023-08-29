@@ -23,9 +23,7 @@
             </div>
             <div class="w-53 section-subitem-end">
                 <div class="text-item-end">
-                    <a href="#">
-                        <button type="submit" class="btn btn-outline-primary fs-16 p-r-unset">Done</button>
-                    </a>
+                    <button type="submit" class="btn btn-outline-primary fs-14 p-r-unset">Done</button>
                 </div>
             </div>
         </div>
@@ -63,7 +61,7 @@
                 </div>
             </div>
             <div class="card bg-SECONDARY60">
-                @include('components.uppy', $storage)
+                @include('components.uppy', ['storage' => $storage, 'button_show' => true])
             </div>
         </div>
     </form>

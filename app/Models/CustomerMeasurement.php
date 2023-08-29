@@ -16,4 +16,9 @@ class CustomerMeasurement extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function categorydetail()
+    {
+        return $this->hasOne(CategoryDetails::class, 'id', 'id_master_category_details');
+    }
 }

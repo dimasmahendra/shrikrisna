@@ -13,7 +13,10 @@
     <div class="section-header">
         <div class="w-53 section-subitem-start">
             <div class="text-item-start">
-                <a href="{{ route('customer.index') }}">Cancel</a>
+                <div class="text-item-start d-flex">
+                    <i class="icon-vector fs-20 text-PRIMARY60"></i>
+                    <a class="text-PRIMARY60" href="{{ route('customer.index') }}">Lists</a>
+                </div>
             </div>
         </div>
         <div class="w-135 p-l-10 p-r-10">
@@ -116,9 +119,11 @@
                         </div>
                         @foreach ($measurement as $item)
                             <div class="border1 m-t-15">
-                                <div class="fs-12 m-b-5 d-flex section-btn">
-                                    <p class="text-PRIMARY60">{{ ($item->category != null) ? ucwords($item->category->name) : "-" }}</p>
-                                    <p class="text-date">{{ date("d F Y", strtotime($item->measurement_date)) }}</p>
+                                <div class="fs-12 m-b-10">
+                                    <a href="{{ route('category.measurement.details', [$item->id]) }}" class="d-flex section-btn">
+                                        <p class="text-PRIMARY60 m-b-0">{{ ($item->category != null) ? ucwords($item->category->name) : "-" }}</p>
+                                        <p class="text-SECONDARY60 m-b-0">{{ date("d F Y", strtotime($item->measurement_date)) }}</p>
+                                    </a>
                                 </div>
                             </div>
                         @endforeach
