@@ -1,6 +1,6 @@
 @php
-    $title = "New Measurement";
-    $breadcrumbs[] = ["label" => "New Measurement", "url" => "#"];
+    $title = "Details Measurement";
+    $breadcrumbs[] = ["label" => "Details Measurement", "url" => "#"];
 @endphp
 
 @extends('layouts.cms', [
