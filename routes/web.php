@@ -42,6 +42,7 @@ Route::middleware(["auth:web"])->group(function () {
                 Route::get('/category/{id}', [App\Http\Controllers\Cms\MeasurementController::class, 'category'])->name('category.measurement.category');
                 Route::get('/create/{id}', [App\Http\Controllers\Cms\MeasurementController::class, 'create'])->name('category.measurement.create');
                 Route::post('/store/{id}', [App\Http\Controllers\Cms\MeasurementController::class, 'store'])->name('category.measurement.store');
+                Route::get('/details/{id}', [App\Http\Controllers\Cms\MeasurementController::class, 'details'])->name('category.measurement.details');
             });
         });
 

@@ -1,6 +1,7 @@
 
 .icon-calendar:before { content: '\e800'; } /* '' */
 .icon-trash:before { content: '\e801'; } /* '' */
+.icon-vector:before { content: '\e802'; } /* '' */
 .icon-customer:before { content: '\e803'; } /* '' */
 .icon-gear:before { content: '\e804'; } /* '' */
 .icon-home:before { content: '\e805'; } /* '' */
