@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row align-items-center justify-content-center">
         <div class="col-md-8 p-r-35 p-l-35">
-            <img src="{{ url('auth/img/logo-auth.png'); }}" class="logo-auth" alt="Login Logo">
+            <img src="{{ url('auth/img/logo-auth.svg'); }}" class="logo-auth" alt="Login Logo">
             <img src="{{ url('auth/img/img-login.png'); }}" class="logo" alt="Login Logo">
             <p class="m-b-35 font-subtitle">Login to your account</p>
             <form action="{{ route('login') }}" method="post">
