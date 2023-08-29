@@ -1,6 +1,6 @@
 @php
-    $title = "New Measurement";
-    $breadcrumbs[] = ["label" => "New Measurement", "url" => "#"];
+    $title = "Details Measurement";
+    $breadcrumbs[] = ["label" => "Details Measurement", "url" => "#"];
 @endphp
 
 @extends('layouts.cms', [
@@ -28,20 +28,20 @@
     </div>
     <div class="container-measure">
         <div class="section-image-user">
-            <div>
+            <div class="m-t-15">
                 <strong class="fs-16 text-SECONDARY60 center2">{{ $data->customer->nomor_ktp }}</strong>
             </div>
-            <div class="m-t-10">
+            <div class="m-t-15">
                 <strong class="fs-16 text-SECONDARY60 center2">{{ $data->customer->name }}</strong>
             </div>
-            <div class="m-t-10">
+            <div class="m-t-15">
                 <strong class="fs-16 text-SECONDARY60 center2">{{ $data->category->name }}</strong>
             </div>
-            <div class="m-t-10">
-                <strong class="fs-16 text-SECONDARY60 center2">{{ $data->measurement_date }}</strong>
+            <div class="m-t-15">
+                <strong class="fs-16 text-SECONDARY60 center2">{{ date("d F Y", strtotime($data->measurement_date)) }}</strong>
             </div>
         </div>
-        <div class="card m-t-10">
+        <div class="card m-t-30">
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
