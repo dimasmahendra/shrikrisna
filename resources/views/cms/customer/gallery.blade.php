@@ -20,30 +20,33 @@
             <div class="text-item">Gallery</div>
         </div>
         <div class="w-53 section-subitem-end">
-            <div class="text-item-end">
-                <button type="button" class="btn btn-outline-primary fs-14 p-r-unset">Upload</button>
+            <div class="text-item-end" style="cursor: pointer;">
+                <div class="wrap-upload-button fs-15" id="button-upload-image-uppy">
+                    Upload
+                    <input type="file" accept="image/*" id="gallery_file_input">
+                </div>
             </div>
         </div>
     </div>
     <div class="container-measure">
-        @if (count($gallery) > 0)
-            <div class="gallery-container d-flex align-items-center justify-content-center">
-                <div id="gallery-container" class="row p-l-2 p-r-2">
+        <div class="gallery-container d-flex align-items-center justify-content-center">
+            <div id="gallery-container" class="row p-l-2 p-r-2">
+                @if (count($gallery) > 0)
                     @foreach ($gallery as $item)
                         <a data-lg-size="1400-1400" class="d-flex gallery-item col-md-4 p-l-2 p-r-2 p-b-4"
                             data-src="{{ $item->url_path }}"
-                            data-sub-html="<p> {{ $item->measurement->measurement_date }} - {{ $item->customer->name }} - {{ $item->measurement->category->name }}</p>">
+                            data-sub-html="<p> {{ $item->created_at }} - {{ $item->customer->name }}</p>">
                             <img class="img-fluid" src="{{ $item->url_path }}" />
                         </a>
                     @endforeach
-                </div>
+                @else
+                    <div class="text-center text-data-not-found" style="margin-top: 150px;">
+                        <img src="{{ '/cms/images/logo/data-not-found.png' }}" alt="Data Not Found" class="mx-auto d-block h-99 w-121 m-b-5">
+                        No Data Found
+                    </div>
+                @endif
             </div>
-        @else
-            <div class="text-center text-data-not-found" style="margin-top: 150px;">
-                <img src="{{ '/cms/images/logo/data-not-found.png' }}" alt="Data Not Found" class="mx-auto d-block h-99 w-121 m-b-5">
-                No Data Found
-            </div>
-        @endif
+        </div>
     </div>
 </div>
 @endsection
@@ -54,24 +57,71 @@
 
 @push('css-plugins')
 <link href="/cms/css/pages/customer-gallery.css?v={{ $version }}" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lg-thumbnail.css">
+<link href="/cms/vendors/lightgallery/lightgallery.min.css?v={{ $version }}" rel="stylesheet">
+<link href="/cms/vendors/lightgallery/lg-thumbnail.css?v={{ $version }}" rel="stylesheet">
 @endpush
 
 @push('js-plugins')
-<script src="https://cdn.jsdelivr.net/npm/lightgallery/lightgallery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
+<script src="/cms/vendors/lightgallery/lightgallery.min.js"></script>
+<script src="/cms/vendors/lightgallery/lg-thumbnail.min.js"></script>
 <script>
-    const lg = lightGallery(document.getElementById("gallery-container"), {
-        plugins: [lgThumbnail],
-        enableDrag: true,
-        enableSwipe: true,
-        mobileSettings: {
-            controls: false,
-            showCloseIcon: true,
-            download: true,
-            rotate: true
-        }
+
+    function createLightGallery()
+    {
+        const lg = lightGallery(document.getElementById("gallery-container"), {
+            plugins: [lgThumbnail],
+            enableDrag: true,
+            enableSwipe: true,
+            mobileSettings: {
+                controls: false,
+                showCloseIcon: true,
+                download: true,
+                rotate: true
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        createLightGallery();
+    });
+
+    $(document).on('change', '#gallery_file_input', function() {
+        var file = this.files[0];
+
+        if (file.size < 2000000) {
+            var data = new FormData();
+            data.append("file", file);
+            data.append("folder", "customer-measurement/{{ $data->id }}");
+            data.append("savestorage", true);
+            
+            $.ajax({
+                url: '/admin/customer/gallery/upload',
+                data: data,
+                contentType: false,
+                processData: false,
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    const parentElement = document.getElementById('gallery-container');
+                    parentElement.insertAdjacentHTML('afterbegin', data);
+                    createLightGallery();
+                },
+                error: function (resp) {
+                    console.log(resp);
+                }
+            });
+        } else {
+            Toastify({
+                text: "Maximum size 2MB",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: "#dc3545",
+            }).showToast();
+        }               
     });
 </script>
 @endpush
