@@ -38,6 +38,8 @@ Route::middleware(["auth:web"])->group(function () {
             Route::post('/update/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'update'])->name('customer.update');
             Route::get('/destroy/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'destroy'])->name('customer.destroy');
 
+            Route::get('/gallery/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'gallery'])->name('customer.gallery');
+
             Route::prefix("measurement")->group(function () {
                 Route::get('/category/{id}', [App\Http\Controllers\Cms\MeasurementController::class, 'category'])->name('category.measurement.category');
                 Route::get('/create/{id}', [App\Http\Controllers\Cms\MeasurementController::class, 'create'])->name('category.measurement.create');
