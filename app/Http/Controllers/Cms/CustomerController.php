@@ -114,4 +114,14 @@ class CustomerController extends Controller
             dd($th->getMessage());
         }
     }
+
+    public function gallery($id)
+    {
+        $model = Customer::where('id', $id)->first();
+        $gallery = FileMeasurement::where('id_customer', $id)->orderBy('created_at', 'DESC')->get();
+        return view('cms.customer.gallery', [
+            "data" => $model,
+            "gallery" => $gallery,
+        ]);
+    }
 }

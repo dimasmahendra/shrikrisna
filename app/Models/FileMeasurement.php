@@ -36,4 +36,14 @@ class FileMeasurement extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function customer()
+    {
+        return $this->hasOne(Customer::class, 'id', 'id_customer');
+    }
+
+    public function measurement()
+    {
+        return $this->hasOne(Measurement::class, 'id', 'id_measurement');
+    }
 }
