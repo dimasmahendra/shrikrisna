@@ -90,7 +90,7 @@ class LoginController extends Controller
     {
         CategoryDetails::where("is_temporary", 1)->delete();
 
-        $storage = FileMeasurement::whereNull('id_measurement')->get();
+        $storage = FileMeasurement::whereNull('id_measurement')->where('status', 1)->get();
         foreach ($storage as $key => $value) {
             ImageHelper::removeFilesFromDirectories($value->path);
             $value->delete();

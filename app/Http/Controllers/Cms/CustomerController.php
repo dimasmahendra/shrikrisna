@@ -142,7 +142,7 @@ class CustomerController extends Controller
                 $model->id_customer = $id_customer;
                 $model->path = $path;
                 $model->order = $increment + 1;
-                $model->status = 1;
+                $model->status = 2;
                 $model->save();
 
                 return view('cms.customer.layout-gallery', [

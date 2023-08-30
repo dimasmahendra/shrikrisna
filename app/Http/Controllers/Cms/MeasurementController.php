@@ -28,11 +28,10 @@ class MeasurementController extends Controller
     {
         $model = Customer::where('id', $id)->first();
         $category = Category::has('details')->active()->get();
-        $storage = FileMeasurement::where('id_customer', $id)->whereNull('id_measurement')->get();
         return view('cms.measurement.create', [
             "data" => $model,
             "category" => $category,
-            "storage" => $storage,
+            "storage" => array(),
         ]);
     }
 
