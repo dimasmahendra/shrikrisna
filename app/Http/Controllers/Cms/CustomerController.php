@@ -7,6 +7,7 @@ use App\Helpers\ImageHelper;
 use App\Models\Measurement;
 use App\Models\FileMeasurement;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -123,5 +124,35 @@ class CustomerController extends Controller
             "data" => $model,
             "gallery" => $gallery,
         ]);
+    }
+
+    public function uploadgallery(Request $request)
+    {
+        if($request->hasFile('file') && !empty($request->folder))
+        {
+            list($directory, $id_customer) = explode("/", $request->folder);
+            $file = $request->file('file');
+            $path = ImageHelper::uploadFile($file, $request->folder);
+            $urlFile = env('APP_URL') . Storage::url($path);
+
+            if ($request->savestorage == "true") {
+                $increment = (FileMeasurement::where('id_customer', $id_customer)->max('order') == null) ? 0 : FileMeasurement::where('id_customer', $id_customer)->max('order');
+
+                $model = new FileMeasurement;
+                $model->id_customer = $id_customer;
+                $model->path = $path;
+                $model->order = $increment + 1;
+                $model->status = 1;
+                $model->save();
+
+                return view('cms.customer.layout-gallery', [
+                    "item" => $model            
+                ]);
+            } else {
+                return response()->json([
+                    'url' => $urlFile
+                ], 200);
+            }
+        }
     }
 }
