@@ -1,11 +1,11 @@
 @font-face {
-    font-family: Inter-Regular;
-    src: url('../../fonts/inter/Inter-Regular.otf');
+    font-family: Poppins-Regular;
+    src: url('../../fonts/Poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
-    font-family: Inter-SemiBold;
-    src: url('../../fonts/inter/Inter-SemiBold.otf');
+    font-family: Poppins-Bold;
+    src: url('../../fonts/Poppins/Poppins-Bold.ttf');
 }
 
 .h1,
@@ -35,7 +35,7 @@ th {
 }
 
 body {
-    font-family: Inter-Regular, sans-serif;
+    font-family: Poppins-Regular, sans-serif;
     font-size: 15px;
     font-weight: 500;
     font-style: normal;
@@ -722,6 +722,18 @@ table#filterTable tr.marked {
     background-color: #FFF;
     color: #000000;
     border: 1px solid #FFF;
+}
+
+.btn-outline-NEUTRAL100 {
+    background-color: #FFF;
+    color: #525359;
+    border: 1px solid #545558;
+}
+
+.btn-outline-NEUTRAL100:hover {
+    background-color: #FFF;
+    color: #525359;
+    border: 1px solid #545558;
 }
 
 .btn-very-warning {

@@ -15,7 +15,7 @@
         <div class="section-header">
             <div class="section-subitem-start">
                 <div class="text-item-start">
-                    <a href="{{ route('customer.index') }}">Cancel</a>
+                    <a href="{{ route('customer.index') }}" class="fs-14">Cancel</a>
                 </div>
             </div>
             <div class="p-l-10 p-r-10">
@@ -23,7 +23,7 @@
             </div>
             <div class="section-subitem-end">
                 <div class="text-item-end">
-                    <button type="submit" class="btn btn-outline-primary fs-16 p-r-unset">Done</button>
+                    <button type="submit" class="btn btn-outline-primary fs-14 p-r-unset">Done</button>
                 </div>
             </div>
         </div>

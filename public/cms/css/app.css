@@ -716,8 +716,8 @@
 }
 
 .form-check .form-check-input.form-check-primary {
-    background-color: #BA0202;
-    border-color: #BA0202;
+    background-color: #288EE1;
+    border-color: #288EE1;
 }
 
 .form-check .form-check-input.form-check-primary:not(:checked) {
@@ -1090,7 +1090,7 @@
 }
 
 .sidebar-wrapper .menu .sidebar-link span {
-    margin-left: 1rem;
+    margin-left: 10px;
 }
 
 .sidebar-wrapper .menu .sidebar-link:hover {
