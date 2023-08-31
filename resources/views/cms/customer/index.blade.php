@@ -12,7 +12,7 @@
 <div class="card">
     <div class="section-header">
         <div class="section-subitem">
-            <div class="avatar avatar-mdx me-3 d-md-none-custom">
+            <div class="avatar avatar-mdx d-md-none-custom">
                 <img src="{{ Auth::user()->gambar_url }}" alt="" class="object-fit-cover">                               
             </div>
         </div>

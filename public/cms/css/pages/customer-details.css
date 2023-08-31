@@ -111,3 +111,22 @@ a {
 .section-btn {
     justify-content: space-between;
 }
+
+.form-check-input {
+    width: 17px;
+    height: 17px;
+    margin-top: unset;
+}
+
+.form-check-input[type=checkbox] {
+    border-radius: 2px;
+}
+
+.modal .modal-footer {
+    padding-bottom: 5px;
+}
+
+.btn i, .btn svg {
+    width: unset;
+    height: unset;
+}
