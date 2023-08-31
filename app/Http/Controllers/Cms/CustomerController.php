@@ -65,7 +65,7 @@ class CustomerController extends Controller
     {
         $model = Customer::where('id', $id)->first();
         $measurement = Measurement::where('id_customer', $id)->orderBy('measurement_date', 'DESC')->get();
-        $gallery = FileMeasurement::where('id_customer', $id)->orderBy('created_at', 'DESC')->get();
+        $gallery = FileMeasurement::where('id_customer', $id)->where('status', 2)->orderBy('created_at', 'DESC')->get();
         return view('cms.customer.details', [
             "data" => $model,
             "measurement" => $measurement,
@@ -119,7 +119,7 @@ class CustomerController extends Controller
     public function gallery($id)
     {
         $model = Customer::where('id', $id)->first();
-        $gallery = FileMeasurement::where('id_customer', $id)->orderBy('created_at', 'DESC')->get();
+        $gallery = FileMeasurement::where('id_customer', $id)->where('status', 2)->orderBy('created_at', 'DESC')->get();
         return view('cms.customer.gallery', [
             "data" => $model,
             "gallery" => $gallery,
