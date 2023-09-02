@@ -18,6 +18,7 @@
             width: 100%;
             margin-right: 0px;
             margin-left: 0px;
+            padding: 10px;
         }
 
         .col-md-6 {
@@ -30,7 +31,7 @@
         .fs-16 {font-size: 16px !important;}
         .m-t-15 {margin-top: 15px;}
         .m-t-30 {margin-top: 30px;}
-        .m-b-120 {margin-bottom: 90px;}
+        .m-b-120 {margin-bottom: 80px;}
         .fw-600 {
             font-weight: 600 !important;
         }
