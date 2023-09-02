@@ -6,14 +6,14 @@
                 <h5 class="modal-title text-NEUTRAL100 fw-600 fs-15" id="exampleModalLongTitle">Last Measurement</h5>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="add-item" action="{{ route('category.store') }}" method="POST">
+            <form id="add-item" action="{{ route('category.measurement.print', [$data->id]) }}" method="POST">
                 {{ csrf_field() }}
                 <div class="modal-body p-t-5">
                     @foreach ($measurement as $item)
                         <div class="pb-2">
                             <div class="form-check border1 m-t-15">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="form-check-input form-check-primary" name="customCheck_{{ $item->id }}" id="customColorCheck_{{ $item->id }}">
+                                    <input type="checkbox" class="form-check-input form-check-primary" name="ids_measurement[{{ $item->id }}]" id="customColorCheck_{{ $item->id }}">
                                     <label class="form-check-label d-flex section-btn fs-12" for="customColorCheck_{{ $item->id }}">
                                         <p class="text-PRIMARY60 m-b-0">{{ ($item->category != null) ? ucwords($item->category->name) : "-" }}</p>
                                         <p class="text-SECONDARY60 m-b-0">{{ date("d F Y", strtotime($item->measurement_date)) }}</p>
