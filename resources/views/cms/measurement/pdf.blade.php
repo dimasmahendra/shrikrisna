@@ -3,6 +3,10 @@
 <head>
     <title>PDF</title>
     <style type="text/css">
+        @font-face {
+            font-family: Poppins-Regular;            
+            src: url("{{ env('APP_URL') }}/fonts/Poppins/Poppins-Regular.ttf");
+        }
         body {
             font-family: Poppins-Regular, sans-serif;
             font-size: 16px;
@@ -85,13 +89,13 @@
             border: 1px solid #E5E5E5;
         }
         .b-t-unset {
-            border-top: 0px solid #E5E5E5 !important;
+            border-top: 0px solid #ffffff !important;
         }
         .b-r-unset {
-            border-right: 0px solid #E5E5E5 !important;
+            border-right: 0px solid #ffffff !important;
         }
         .b-l-unset {
-            border-left: 0px solid #E5E5E5 !important;
+            border-left: 0px solid #ffffff !important;
         }
     </style>
 </head>
