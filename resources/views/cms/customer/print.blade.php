@@ -1,4 +1,3 @@
-<!-- Modal -->
 <div class="modal fade" id="modalprint" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content p-3 b-r-10">
