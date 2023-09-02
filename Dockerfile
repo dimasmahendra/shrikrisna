@@ -21,6 +21,8 @@ RUN apt-get update && apt-get install -y \
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN ln -s /usr/bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf
+
 RUN apt-get update && apt-get install -y libpq-dev git \
   && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
   && docker-php-ext-install pdo pdo_pgsql pgsql
