@@ -10,13 +10,9 @@
         body {
             font-family: Poppins-Regular, sans-serif;
             font-size: 16px;
-            font-weight: 500;
-            font-style: normal;
-            line-height: 18px;
+            font-weight: 600;
             color: #4A4646;
             background-color: #ffffff;
-            -webkit-text-size-adjust: 100%;
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }        
         .row {
             width: 100%;
@@ -34,7 +30,7 @@
         .fs-16 {font-size: 16px !important;}
         .m-t-15 {margin-top: 15px;}
         .m-t-30 {margin-top: 30px;}
-        .m-b-120 {margin-bottom: 120px;}
+        .m-b-120 {margin-bottom: 90px;}
         .fw-600 {
             font-weight: 600 !important;
         }
@@ -43,10 +39,6 @@
             border: 1px solid #000;
             padding: 1px;
             height: 550px;
-        }
-        .table-responsive {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch
         }
         table {
             caption-side: bottom;
@@ -157,8 +149,8 @@
                     </div>
                 </div>
             </div>
-            @if ($loop->index % 2 == 0)
-                <div class="page"></div>
+            @if ($loop->iteration % 4 == 0)
+                <div style = "display:block; clear:both; page-break-after:always;"></div>
             @endif
         @endforeach
     </div>
