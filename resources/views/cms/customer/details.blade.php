@@ -118,8 +118,8 @@
                     <div>
                         <div class="col-md-12 d-flex section-btn">
                             <label class="text-PRIMARY100 p-b-4 fw-600 fs-14">Last Measurement</label>
-                            <button class="btn btn-outline-NEUTRAL100 align-item-center h-25px w-75px open-modal fw-600 d-flex section-btn p-l-10 p-r-10 p-t-5 p-b-5" type="button">
-                                <i class="icon-printer"></i>
+                            <button class="btn btn-outline-NEUTRAL100 align-item-center fs-13 h-25px w-75px open-modal fw-600 d-flex section-btn p-l-9 p-r-9 p-t-5 p-b-5" type="button">
+                                <i class="icon-printer fs-16"></i>
                                 Print
                             </button>
                         </div>

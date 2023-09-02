@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
+use PDF;
 use Config;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
@@ -83,5 +84,22 @@ class MeasurementController extends Controller
         return view('cms.measurement.details', [
             "data" => $model
         ]);
+    }
+
+    public function print(Request $request, $id) 
+    {
+        // return view('cms.measurement.pdf', [
+        //     "data" => $request->ids_measurement
+        // ]);
+
+        $pdf = PDF::loadView('cms.measurement.pdf', [
+                        "data" => $request->ids_measurement,
+                        "id" => $id
+                    ]);
+        $pdf->setPaper('A4', 'portrait');
+
+
+        // return $pdf->stream();
+        return $pdf->download();
     }
 }

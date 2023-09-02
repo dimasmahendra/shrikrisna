@@ -177,7 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\MailConfigServiceProvider::class,
-
+        Barryvdh\Snappy\ServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
     ],
 
@@ -235,6 +235,8 @@ return [
         'Thumbnail' => Lakshmaji\Thumbnail\Facade\Thumbnail::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
         'Location' => 'Stevebauman\Location\Facades\Location',
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
 ];
