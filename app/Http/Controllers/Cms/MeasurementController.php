@@ -88,6 +88,8 @@ class MeasurementController extends Controller
 
     public function print(Request $request, $id) 
     {
+        ini_set("memory_limit", "-1");
+        
         // return view('cms.measurement.pdf', [
         //     "data" => $request->ids_measurement
         // ]);
