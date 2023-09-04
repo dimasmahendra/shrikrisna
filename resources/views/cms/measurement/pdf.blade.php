@@ -31,7 +31,8 @@
         .fs-16 {font-size: 16px !important;}
         .m-t-15 {margin-top: 15px;}
         .m-t-30 {margin-top: 30px;}
-        .m-b-120 {margin-bottom: 80px;}
+        .m-t-120 {margin-top: 40px;}
+        .m-b-120 {margin-bottom: 60px;}
         .fw-600 {
             font-weight: 600 !important;
         }
@@ -95,11 +96,7 @@
 <body>
     <div class="row">
         @foreach ($data as $key => $value)
-            @if ($loop->last)
-                <div class="col-md-6">
-            @else 
-                <div class="col-md-6 m-b-120">
-            @endif
+            <div class="col-md-6 m-b-120 m-t-120">
                 @php
                     $measure = App\Models\Measurement::where('id', $key)->first();
                 @endphp

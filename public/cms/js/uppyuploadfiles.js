@@ -9,7 +9,6 @@ function uppyUploadFiles(params) {
             debug: true, 
             autoProceed: true,
             restrictions: {
-                maxFileSize: 2097152,
                 minNumberOfFiles: 1,
                 allowedFileTypes: ['image/gif', 'image/png', 'image/jpg', 'image/jpeg', 'image/webp'],
             }

@@ -87,41 +87,29 @@
 
     $(document).on('change', '#gallery_file_input', function() {
         var file = this.files[0];
-
-        if (file.size < 2000000) {
-            var data = new FormData();
-            data.append("file", file);
-            data.append("folder", "customer-measurement/{{ $data->id }}");
-            data.append("savestorage", true);
-            
-            $.ajax({
-                url: '/admin/customer/gallery/upload',
-                data: data,
-                contentType: false,
-                processData: false,
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (data) {
-                    const parentElement = document.getElementById('gallery-container');
-                    parentElement.insertAdjacentHTML('afterbegin', data);
-                    createLightGallery();
-                },
-                error: function (resp) {
-                    console.log(resp);
-                }
-            });
-        } else {
-            Toastify({
-                text: "Maximum size 2MB",
-                duration: 3000,
-                close: true,
-                gravity: "top",
-                position: "center",
-                backgroundColor: "#dc3545",
-            }).showToast();
-        }               
+        var data = new FormData();
+        data.append("file", file);
+        data.append("folder", "customer-measurement/{{ $data->id }}");
+        data.append("savestorage", true);
+        
+        $.ajax({
+            url: '/admin/customer/gallery/upload',
+            data: data,
+            contentType: false,
+            processData: false,
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+                const parentElement = document.getElementById('gallery-container');
+                parentElement.insertAdjacentHTML('afterbegin', data);
+                createLightGallery();
+            },
+            error: function (resp) {
+                console.log(resp);
+            }
+        });             
     });
 </script>
 @endpush
