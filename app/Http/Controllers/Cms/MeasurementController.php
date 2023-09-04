@@ -98,8 +98,7 @@ class MeasurementController extends Controller
                     ]);
         $pdf->setPaper('A4', 'portrait');
 
-
-        return $pdf->stream();
+        // return $pdf->stream();
         return $pdf->download();
     }
 }
