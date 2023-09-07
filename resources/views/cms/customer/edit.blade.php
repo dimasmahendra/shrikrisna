@@ -78,7 +78,7 @@
             </div>
         </div>
     </form>
-    <button type="button" class="btn btn-WHITE100-red h-40 button-destroy w-101persen text-left"
+    <button type="button" class="btn btn-WHITE100-red h-40 button-destroy w-103persen text-left"
         data-url="{{ route('customer.destroy',[$data->id]) }}">
         Delete
     </button>  
