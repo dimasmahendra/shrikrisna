@@ -78,10 +78,14 @@
             </div>
         </div>
     </form>
-    <button type="button" class="btn btn-WHITE100-red h-40 button-destroy w-103persen text-left"
-        data-url="{{ route('customer.destroy',[$data->id]) }}">
-        Delete
-    </button>  
+    <div class="row">
+        <div class="col-md-12 p-r-unset">
+            <button type="button" class="btn btn-WHITE100-red h-40 button-destroy w-100persen text-left"
+                data-url="{{ route('customer.destroy',[$data->id]) }}">
+                Delete
+            </button>
+        </div>
+    </div>
 </div>
 @endsection
 
