@@ -155,4 +155,38 @@ class CustomerController extends Controller
             }
         }
     }
+
+    public function destroy(Request $request, $id)
+    {
+        try {
+            $model = Measurement::where('id_customer', $id)->get();
+            if (count($model) > 0) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data is used',
+                ]);
+            } else {
+                Customer::where([
+                    ['id', '=', $id]
+                ])->delete();
+
+                $storage = FileMeasurement::where('id_customer', $id)->whereNull('id_measurement')->where('status', 2)->get();
+                foreach ($storage as $key => $value) {
+                    ImageHelper::removeFilesFromDirectories($value->path);
+                    $value->delete();
+                }
+
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data Deleted',
+                    'url' => route('customer.index')
+                ]);
+            }
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
 }

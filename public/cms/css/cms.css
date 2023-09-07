@@ -724,6 +724,18 @@ table#filterTable tr.marked {
     border: 1px solid #FFF;
 }
 
+.btn-WHITE100-red {
+    background-color: #FFF;
+    color: red;
+    border: 1px solid #FFF;
+}
+
+.btn-WHITE100-red:hover {
+    background-color: #FFF;
+    color: red;
+    border: 1px solid #FFF;
+}
+
 .btn-outline-NEUTRAL100 {
     background-color: #FFF;
     color: #525359;

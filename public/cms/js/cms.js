@@ -156,15 +156,27 @@ function deleteData(data) {
     })
     .done(function (response) {
         if (response.status) {
-            Toastify({
-                text: response.message,
-                duration: 3000,
-                close:true,
-                gravity: "top",
-                position: "center",
-                backgroundColor: "#dc3545",
-            }).showToast();
-            location.reload();
+            if (response.url != null) {
+                Toastify({
+                    text: response.message,
+                    duration: 3000,
+                    close:true,
+                    gravity: "top",
+                    position: "center",
+                    backgroundColor: "#dc3545",
+                }).showToast();
+                window.location = response.url;
+            } else {
+                Toastify({
+                    text: response.message,
+                    duration: 3000,
+                    close:true,
+                    gravity: "top",
+                    position: "center",
+                    backgroundColor: "#dc3545",
+                }).showToast();
+                location.reload();
+            }
         } else {
             Toastify({
                 text: "Failed",
