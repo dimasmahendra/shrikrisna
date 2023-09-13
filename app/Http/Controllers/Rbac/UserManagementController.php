@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Rbac;
 
+use Auth;
 use Config;
 use Carbon\Carbon;
 use App\Models\User;
@@ -14,6 +15,9 @@ class UserManagementController extends Controller
 {
     public function index(Request $request)
     {
+        if (Auth::user()->id_role != 1) {
+            abort(403);
+        }
         $model = User::orderBy('id');
         if ($request->has('filter')) {
             if (in_array( $request->input('filter'), ["active", "nonactive"])) {
