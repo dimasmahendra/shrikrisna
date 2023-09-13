@@ -24,9 +24,11 @@
         </div>
         <div class="w-53 section-subitem-end">
             <div class="text-item-end">
-                <a href="{{ route('customer.edit', [$data->id]) }}">
-                    <button type="button" class="btn btn-outline-primary fs-16 p-r-unset">Edit</button>
-                </a>
+                @if (Auth::user()->id_role != 2)
+                    <a href="{{ route('customer.edit', [$data->id]) }}">
+                        <button type="button" class="btn btn-outline-primary fs-16 p-r-unset">Edit</button>
+                    </a>
+                @endif
             </div>
         </div>
     </div>

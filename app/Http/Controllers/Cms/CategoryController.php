@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
+use Auth;
 use Config;
 use Carbon\Carbon;
 use App\Models\Category;
@@ -13,6 +14,10 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
+        if (Auth::user()->id_role != 1) {
+            abort(403);
+        }
+
         $model = Category::orderBy('id');
         if ($request->has('filter')) {
             if (in_array( $request->input('filter'), ["active", "nonactive"])) {
@@ -80,6 +85,10 @@ class CategoryController extends Controller
 
     public function view($id) 
     {
+        if (Auth::user()->id_role != 1) {
+            abort(403);
+        }
+
         $model = Category::where('id', $id)->first();
         $details = CategoryDetails::where('id_master_category', $id);
         return view('cms.category.view', [
@@ -90,6 +99,10 @@ class CategoryController extends Controller
 
     public function details($id) 
     {
+        if (Auth::user()->id_role != 1) {
+            abort(403);
+        }
+        
         $model = Category::where('id', $id)->first();
         $details = CategoryDetails::where('id_master_category', $id);
         return view('cms.category.details', [
