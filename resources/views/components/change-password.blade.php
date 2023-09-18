@@ -43,8 +43,8 @@
                     </div>
                 </div>
                 <div class="modal-footer custom-hr">
-                    <button type="button" class="btn btn-outline-dark w-125 h-40" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-brownis w-125 h-40">Submit</button>
+                    <button type="button" class="btn btn-outline-PRIMARY60 w-125 h-40" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-PRIMARY60 w-125 h-40">Submit</button>
                 </div>
             </form>
         </div>

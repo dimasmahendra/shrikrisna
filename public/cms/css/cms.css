@@ -694,6 +694,18 @@ table#filterTable tr.marked {
     border: 1px solid #006EE9;
 }
 
+.btn-outline-PRIMARY60 {
+    background-color: #FFF;
+    color: #006EE9;
+    border: 1px solid #006EE9;
+}
+
+.btn-outline-PRIMARY60:hover {
+    background-color: #FFF;
+    color: #006EE9;
+    border: 1px solid #006EE9;
+}
+
 .btn-ORANGE60 {
     background-color: #EF6B00;
     color: #FFFFFF;
