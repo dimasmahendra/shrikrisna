@@ -116,27 +116,29 @@
                 </div>
             </div>
             <div class="col-md-12 p-b-10">
-                <div class="bg-WHITE p-t-15 p-l-20 p-r-20 p-b-20 h-98persen">
-                    <div>
-                        <div class="col-md-12 d-flex section-btn">
-                            <label class="text-PRIMARY100 p-b-4 fw-600 fs-14">Last Measurement</label>
-                            <button class="btn btn-outline-NEUTRAL100 align-item-center fs-13 h-25px w-75px open-modal fw-600 d-flex section-btn p-l-9 p-r-9 p-t-5 p-b-5" type="button">
-                                <i class="icon-printer fs-16"></i>
-                                Print
-                            </button>
-                        </div>
-                        @foreach ($measurement as $item)
-                            <div class="border1 m-t-15">
-                                <div class="fs-12 m-b-10">
-                                    <a href="{{ route('category.measurement.details', [$item->id]) }}" class="d-flex section-btn">
-                                        <p class="text-PRIMARY60 m-b-0">{{ ($item->category != null) ? ucwords($item->category->name) : "-" }}</p>
-                                        <p class="text-SECONDARY60 m-b-0">{{ date("d F Y", strtotime($item->measurement_date)) }}</p>
-                                    </a>
-                                </div>
+                @if (count($measurement) > 0)
+                    <div class="bg-WHITE p-t-15 p-l-20 p-r-20 p-b-20 h-98persen">
+                        <div>
+                            <div class="col-md-12 d-flex section-btn">
+                                <label class="text-PRIMARY100 p-b-4 fw-600 fs-14">Last Measurement</label>
+                                <button class="btn btn-outline-NEUTRAL100 align-item-center fs-13 h-25px w-75px open-modal fw-600 d-flex section-btn p-l-9 p-r-9 p-t-5 p-b-5" type="button">
+                                    <i class="icon-printer fs-16"></i>
+                                    Print
+                                </button>
                             </div>
-                        @endforeach
+                            @foreach ($measurement as $item)
+                                <div class="border1 m-t-15">
+                                    <div class="fs-12 m-b-10">
+                                        <a href="{{ route('category.measurement.details', [$item->id]) }}" class="d-flex section-btn">
+                                            <p class="text-PRIMARY60 m-b-0">{{ ($item->category != null) ? ucwords($item->category->name) : "-" }}</p>
+                                            <p class="text-SECONDARY60 m-b-0">{{ date("d F Y", strtotime($item->measurement_date)) }}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
             <div class="col-md-12">
                 <a href="{{ route('category.measurement.create', [$data->id]) }}">

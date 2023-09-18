@@ -163,12 +163,27 @@
         allowZero: true
     });
 
+    jQuery.validator.addMethod("notEqual", function(value, element, param) {
+        var result = true;
+        var defaultdata = $(param).val();
+        const obj = JSON.parse(defaultdata);
+
+        $.each(obj, function(i, v) {
+            if (v == value) {
+                result = false;
+                return false;
+            }
+        });
+        return result; // Value harus false
+    });
+
     $(document).ready(function () {
         $("#add-item").validate({
             errorClass: 'was-validated',
             rules : {
                 order : {
                     required: true,
+                    notEqual: "#editusedtopic"
                 },
                 description : {
                     required: true,
@@ -180,6 +195,7 @@
             messages: {
                 order: {
                     required: "This field is Required",
+                    notEqual: "This field must be unique.",
                 },
                 description: {
                     required: "This field is Required",

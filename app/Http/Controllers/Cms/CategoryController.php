@@ -105,9 +105,14 @@ class CategoryController extends Controller
         
         $model = Category::where('id', $id)->first();
         $details = CategoryDetails::where('id_master_category', $id);
+        $lastorder = ($details->max('order') == null) ? 1 : $details->max('order') + 1;
+        $usedorder = array_column($details->get()->toArray(), 'order');
+        
         return view('cms.category.details', [
             "data" => $model,
-            "details" => $details->paginate(10)
+            "details" => $details->paginate(10),
+            "lastorder" => $lastorder,
+            "usedorder" => $usedorder
         ]);
     }
 

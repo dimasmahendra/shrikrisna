@@ -9,12 +9,13 @@
             <form id="add-item" action="{{ route('category.details.store', [$data->id]) }}" method="POST">
                 {{ csrf_field() }}
                 <div class="modal-body">
+                    <input type="hidden" id="editusedtopic" value="{{ json_encode($usedorder) }}">
                     <div class="pb-2">
                         <div class="col-md-4">
                             <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Order</label>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="order" class="form-control currency" name="order" placeholder="Input Order" value="">
+                            <input type="text" id="order" class="form-control currency" name="order" placeholder="Input Order" value="{{ $lastorder }}">
                         </div>
                     </div>
                     <div class="pb-2">
