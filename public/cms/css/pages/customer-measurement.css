@@ -102,6 +102,12 @@
     display: inline-flex;
 }
 
+.center3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .p-td-unset {
     padding: unset !important;
 }

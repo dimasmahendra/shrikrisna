@@ -86,6 +86,53 @@ class MeasurementController extends Controller
         ]);
     }
 
+    public function edit($id) 
+    {
+        $model = Measurement::where('id', $id)->first();
+        $storage = FileMeasurement::where('id_measurement', $id)->get();
+        return view('cms.measurement.edit', [
+            "data" => $model,
+            "storage" => $storage,
+        ]);
+    }
+
+    public function update(Request $request, $id) 
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $model = Measurement::where('id', $id)->first();
+            $model->updated_at = Carbon::createFromFormat('Y-m-d', date("Y-m-d"))
+                                        ->timezone(Config::get('app.timezone'))->format('Y-m-d');
+            $model->save();
+
+            foreach ($request->details as $key => $item) {
+                foreach ($item['value'] as $i => $value) {
+                    $detail = CustomerMeasurement::where('id', $key)->first();
+                    $detail->value = $value;
+                    $detail->option = $item['option'][$i];
+                    $detail->save();
+                }
+            }
+
+            if ($request->storageid != null) {
+                foreach ($request->storageid as $k => $id_storage) {
+                    FileMeasurement::where('id', $id_storage)->
+                            where('id_customer', $model->id_customer)->update(['id_measurement' => $id]);
+                }
+            }
+
+            DB::commit();
+
+            return redirect(route('customer.details', [$model->id_customer]))->with("message", "Saved");
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th->getMessage());
+        }
+    }
+
     public function print(Request $request, $id) 
     {
         ini_set("memory_limit", "-1");

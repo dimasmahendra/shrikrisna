@@ -7,6 +7,7 @@ use Config;
 use Carbon\Carbon;
 use App\Models\Category;
 use App\Models\CategoryDetails;
+use App\Models\Measurement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -63,18 +64,26 @@ class CategoryController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        try {            
-            $model = Category::find($id);
-            $model->forceDelete();
-
-            CategoryDetails::where([
-                ['id_master_category', '=', $id]
-            ])->forceDelete();
-
-            return response()->json([
-                'status' => true,
-                'message' => 'Data Deleted',
-            ]);
+        try {       
+            $model = Measurement::where('id_master_category', $id)->get();
+            if (count($model) > 0) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Category is used. Cannot deleted.',
+                ]);
+            } else {
+                CategoryDetails::where([
+                    ['id_master_category', '=', $id]
+                ])->forceDelete();
+    
+                $model = Category::find($id);
+                $model->forceDelete();
+    
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data Deleted',
+                ]);
+            }
         } catch (Exception $e) {
             return response()->json([
                 'status' => false,
