@@ -20,8 +20,8 @@
         <div class="p-l-10 p-r-10"></div>
         <div class="w-53 section-subitem-end">
             <div class="text-item-end">
-                <a href="{{ route('category.measurement.create', [$data->customer->id]) }}">
-                    <button type="button" class="btn btn-outline-primary fs-14 p-r-unset">Add</button>
+                <a href="{{ route('category.measurement.edit', [$data->id]) }}">
+                    <button type="button" class="btn btn-outline-primary fs-14 p-r-unset">Edit</button>
                 </a>
             </div>
         </div>
@@ -60,17 +60,14 @@
                                     @if ($loop->iteration == 1)
                                         <td rowspan='{{ $subitem->categorydetail->total_rows }}' class="center">{{ $subitem->categorydetail->description }}</td>
                                     @endif
-                                    <td class="p-td-unset">
+                                    <td class="p-td-unset" style="width: 26%">
                                         <div class="col">
-                                            <input type="text" class="form-control" id="details[{{ $subitem->id_master_category_details }}][value]" 
-                                            name="details[{{ $subitem->id_master_category_details }}][value][]" value="{{ $subitem->value }}">
+                                            <div class="h-45 text-center center3">{{ $subitem->value }}</div>
                                         </div>
                                     </td>
-                                    <td class="p-td-unset">
+                                    <td class="p-td-unset" style="width: 26%">
                                         <div class="col">
-                                            <input type="text" class="form-control" id="details[{{ $subitem->id_master_category_details }}][option]" 
-                                            name="details[{{ $subitem->id_master_category_details }}][option][]" 
-                                            value="{{ $subitem->option }}">
+                                            <div class="h-45 text-center center3">{{ $subitem->option }}</div>
                                         </div>
                                     </td>
                                 </tr>

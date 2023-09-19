@@ -452,7 +452,8 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     overflow: hidden;
     -webkit-transition: opacity .15s ease 0s;
     -o-transition: opacity .15s ease 0s;
-    transition: opacity .15s ease 0s
+    transition: opacity .15s ease 0s;
+    touch-action: none;
 }
 
 .lg-outer * {
@@ -581,7 +582,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item:not(.lg-zoomable).lg-co
     vertical-align: middle;
     max-width: 100%;
     max-height: 100%;
-    width: auto;
+    width: 100%;
     height: auto;
     position: relative
 }

@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="container-measure">
-        <div class="gallery-container d-flex align-items-center justify-content-center">
+        <div class="gallery-container align-items-center">
             <div id="gallery-container" class="row p-l-2 p-r-2">
                 @if (count($gallery) > 0)
                     @foreach ($gallery as $item)
@@ -38,14 +38,15 @@
                             data-sub-html="<p> {{ $item->created_at }} - {{ $item->customer->name }}</p>">
                             <img class="img-fluid" src="{{ $item->url_path }}" />
                         </a>
-                    @endforeach
-                @else
-                    <div class="text-center text-data-not-found" style="margin-top: 150px;">
-                        <img src="{{ '/cms/images/logo/data-not-found.png' }}" alt="Data Not Found" class="mx-auto d-block h-99 w-121 m-b-5">
-                        No Data Found
-                    </div>
+                    @endforeach                    
                 @endif
             </div>
+            @if (count($gallery) == 0)
+                <div class="text-center text-data-not-found center" id="text_no_data">
+                    <img src="{{ '/cms/images/logo/data-not-found.png' }}" alt="Data Not Found" class="mx-auto d-block h-99 w-121 m-b-5">
+                    No Data Found
+                </div>
+            @endif
         </div>
     </div>
 </div>
@@ -65,27 +66,16 @@
 <script src="/cms/vendors/lightgallery/lightgallery.min.js"></script>
 <script src="/cms/vendors/lightgallery/lg-thumbnail.min.js"></script>
 <script>
-
-    function createLightGallery()
-    {
-        const lg = lightGallery(document.getElementById("gallery-container"), {
-            plugins: [lgThumbnail],
-            enableDrag: true,
-            enableSwipe: true,
-            mobileSettings: {
-                controls: false,
-                showCloseIcon: true,
-                download: true,
-                rotate: true
-            }
-        });
-    }
-
-    $(document).ready(function() {
-        createLightGallery();
+    const lg = lightGallery(document.getElementById("gallery-container"), {
+        plugins: [lgThumbnail],
+        mobileSettings: {
+            controls: false,
+            download: true,
+            rotate: true
+        }
     });
 
-    $(document).on('change', '#gallery_file_input', function() {
+    $(document).on('change', '#gallery_file_input', function(e) {
         var file = this.files[0];
         var data = new FormData();
         data.append("file", file);
@@ -102,14 +92,16 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (data) {
+                $("#text_no_data").hide();
                 const parentElement = document.getElementById('gallery-container');
                 parentElement.insertAdjacentHTML('afterbegin', data);
-                createLightGallery();
+                lg.refresh();
             },
             error: function (resp) {
                 console.log(resp);
             }
-        });             
+        });
+        e.preventDefault();
     });
 </script>
 @endpush

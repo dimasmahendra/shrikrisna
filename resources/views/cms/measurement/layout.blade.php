@@ -1,6 +1,3 @@
-@php
-    // dd($data->details);
-@endphp
 <table class="table table-bordered">
     <thead>
         <tr>

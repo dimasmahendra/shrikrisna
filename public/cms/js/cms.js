@@ -179,7 +179,7 @@ function deleteData(data) {
             }
         } else {
             Toastify({
-                text: "Failed",
+                text: response.message,
                 duration: 3000,
                 close:true,
                 gravity:"top",
