@@ -20,7 +20,6 @@
             margin-left: 0px;
             padding: 10px;
         }
-
         .col-md-6 {
             float: left;
             width: 35%;
@@ -28,10 +27,12 @@
             padding-left: 65px;
             padding-right: 65px;
         }
+        .fs-14 {font-size: 14px !important;}
         .fs-16 {font-size: 16px !important;}
+        .m-t-10 {margin-top: 10px;}
         .m-t-15 {margin-top: 15px;}
         .m-t-30 {margin-top: 30px;}
-        .m-t-120 {margin-top: 40px;}
+        .m-t-120 {margin-top: 0px;}
         .m-b-120 {margin-bottom: 60px;}
         .fw-600 {
             font-weight: 600 !important;
@@ -40,7 +41,7 @@
             text-align: center;
             border: 1px solid #000;
             padding: 1px;
-            height: 550px;
+            /* height: 100%; */
         }
         table {
             caption-side: bottom;
@@ -94,24 +95,24 @@
     </style>
 </head>
 <body>
-    <div class="row">
+    <div class="section-parent">
         @foreach ($data as $key => $value)
             <div class="col-md-6 m-b-120 m-t-120">
                 @php
                     $measure = App\Models\Measurement::where('id', $key)->first();
                 @endphp
                 <div class="section-item">
-                    <div class="m-t-15">
-                        <strong class="fs-16">{{ $measure->customer->nomor_ktp }}</strong>
+                    <div class="m-t-10">
+                        <strong class="fs-14">{{ $measure->customer->nomor_ktp }}</strong>
                     </div>
-                    <div class="m-t-15">
-                        <strong class="fs-16">{{ $measure->customer->name }}</strong>
+                    <div class="m-t-10">
+                        <strong class="fs-14">{{ $measure->customer->name }}</strong>
                     </div>
-                    <div class="m-t-15">
-                        <strong class="fs-16">{{ $measure->category->name }}</strong>
+                    <div class="m-t-10">
+                        <strong class="fs-14">{{ $measure->category->name }}</strong>
                     </div>
-                    <div class="m-t-15">
-                        <strong class="fs-16">{{ date("d F Y", strtotime($measure->measurement_date)) }}</strong>
+                    <div class="m-t-10">
+                        <strong class="fs-14">{{ date("d F Y", strtotime($measure->measurement_date)) }}</strong>
                     </div>
                     <div class="m-t-30">
                         <div class="table-responsive">
@@ -147,10 +148,31 @@
                     </div>
                 </div>
             </div>
-            @if ($loop->iteration % 4 == 0)
-                <div style = "display:block; clear:both; page-break-after:always;"></div>
+            @if (count($data) > 4)
+                @if ($loop->iteration % 4 == 0)
+                    <div style = "display:block; clear:both; page-break-after:always;"></div>
+                @endif
             @endif
         @endforeach
     </div>
+
+    <script src="{{ env('APP_URL') }}/cms/vendors/jquery/jquery.min.js"></script>
+    <script>
+        function equalheight() {
+            $('.section-parent').each(function (index) {
+                var maxHeight = 0;
+                $(this).find('.section-item').height('auto');
+                $(this).find('.section-item').each(function (index) {
+                    if ($(this).height() > maxHeight)
+                        maxHeight = $(this).height();
+                });
+                console.log(maxHeight);
+                $(this).find('.section-item').height(maxHeight);
+            });
+        }
+        $(document).ready(function () {
+            equalheight();
+        });
+    </script>
 </body>
 </html>
