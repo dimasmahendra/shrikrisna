@@ -8,10 +8,20 @@
 }
 
 .section-subitem-start {
-    padding-left: 10px; padding-right: 10px; flex-direction: column; justify-content: center; align-items: flex-start; display: inline-flex
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    display: inline-flex;
 }
 .section-subitem-end {
-    padding-left: 10px; padding-right: 10px; flex-direction: column; justify-content: center; align-items: flex-end; display: inline-flex
+    /* padding-left: 10px; */
+    padding-right: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    display: inline-flex;
 }
 
 .text-item-end {

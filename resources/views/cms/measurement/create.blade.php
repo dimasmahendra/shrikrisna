@@ -21,7 +21,7 @@
             <div class="p-l-10 p-r-10">
                 <div class="text-item">New Measurement</div>
             </div>
-            <div class="w-53 section-subitem-end">
+            <div class="section-subitem-end">
                 <div class="text-item-end">
                     <button type="submit" class="btn btn-outline-primary fs-14 p-r-unset">Done</button>
                 </div>
