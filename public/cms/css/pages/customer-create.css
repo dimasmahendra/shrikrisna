@@ -87,3 +87,7 @@ form#formcreate {
 .border-invalid {
     border: 2px solid #dc3545 !important;
 }
+
+.row {
+    --bs-gutter-x: unset;
+}
