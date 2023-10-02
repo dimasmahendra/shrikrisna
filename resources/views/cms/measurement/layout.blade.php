@@ -1,8 +1,8 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th class="text-PRIMARY90 fw-600 col-6">Description</th>
-            <th class="text-PRIMARY90 fw-600 col-6" colspan="2">Value</th>
+            <th class="text-PRIMARY90 fw-600 col-5">Description</th>
+            <th class="text-PRIMARY90 fw-600 col-7" colspan="2">Value</th>
         </tr>
     </thead>
     <tbody>
@@ -12,7 +12,7 @@
                     @if ($i == 0)
                         <td rowspan='{{ $item->total_rows }}' class="center">{{ $item->description }}</td>
                     @endif
-                    <td class="p-td-unset">
+                    <td class="p-td-unset" width="15%">
                         <div class="col">
                             <input type="text" class="form-control" id="details[{{ $item->id }}][value]" 
                             name="details[{{ $item->id }}][value][]" value="">

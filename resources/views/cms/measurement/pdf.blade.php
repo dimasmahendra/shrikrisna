@@ -69,6 +69,14 @@
         .table>thead {
             vertical-align: bottom;
         }
+        .col-5 {
+            flex: 0 0 auto;
+            width: 41.6666666667%;
+        }
+        .col-7 {
+            flex: 0 0 auto;
+            width: 58.3333333333%;
+        }
         .col-6 {
             flex: 0 0 auto;
             width: 50%;
@@ -119,8 +127,8 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-PRIMARY90 fw-600 col-6 b-t-unset b-r-unset">Description</th>
-                                        <th class="text-PRIMARY90 fw-600 col-6 b-t-unset b-l-unset" colspan="2">Value</th>
+                                        <th class="text-PRIMARY90 fw-600 col-5 b-t-unset b-r-unset">Description</th>
+                                        <th class="text-PRIMARY90 fw-600 col-7 b-t-unset b-l-unset" colspan="2">Value</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -133,10 +141,10 @@
                                                 @if ($loop->iteration == 1)
                                                     <td rowspan='{{ $subitem->categorydetail->total_rows }}'>{{ $subitem->categorydetail->description }}</td>
                                                 @endif
-                                                <td class="td-col-6">
+                                                <td class="td-col-4" width="15%">
                                                     {{ ($subitem->value == null) ? "-" : $subitem->value }}
                                                 </td>
-                                                <td class="td-col-6">
+                                                <td class="td-col-8">
                                                     {{ ($subitem->option == null) ? "-" : $subitem->option }}
                                                 </td>
                                             </tr>
