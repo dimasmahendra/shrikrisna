@@ -47,6 +47,7 @@ class MeasurementController extends Controller
             $model->id_master_category = $request->id_category;
             $model->measurement_date = Carbon::createFromFormat('Y-m-d', date("Y-m-d", strtotime($request->measurement_date)))
                                         ->timezone(Config::get('app.timezone'))->format('Y-m-d');
+            $model->notes = $request->notes;
             $model->status = 1;
             $model->save();
 
@@ -105,6 +106,7 @@ class MeasurementController extends Controller
             $model = Measurement::where('id', $id)->first();
             $model->updated_at = Carbon::createFromFormat('Y-m-d', date("Y-m-d"))
                                         ->timezone(Config::get('app.timezone'))->format('Y-m-d');
+            $model->notes = $request->notes;
             $model->save();
 
             foreach ($request->details as $key => $item) {

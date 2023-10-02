@@ -77,6 +77,13 @@
                 </table>
             </div>
         </div>
+        @if ($data->notes != null)
+            <div class="col-md-6 p-r-unset">
+                <div class="card m-b-30 p-l-20 p-r-20 p-b-20 p-t-20">
+                    {{ $data->notes }}
+                </div>
+            </div>
+        @endif
         <div class="card bg-SECONDARY60">
             @include('components.uppy', ['storage' => $data->storages, 'button_show' => false])
         </div>
