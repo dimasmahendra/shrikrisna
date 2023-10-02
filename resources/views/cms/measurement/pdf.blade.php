@@ -31,7 +31,7 @@
         .fs-16 {font-size: 16px !important;}
         .m-t-10 {margin-top: 10px;}
         .m-t-15 {margin-top: 15px;}
-        .m-t-30 {margin-top: 30px;}
+        .m-t-30 {margin-top: 20px;}
         .m-t-120 {margin-top: 0px;}
         .m-b-120 {margin-bottom: 60px;}
         .fw-600 {
@@ -41,7 +41,6 @@
             text-align: center;
             border: 1px solid #000;
             padding: 1px;
-            /* height: 100%; */
         }
         table {
             caption-side: bottom;
@@ -69,6 +68,10 @@
         .table>thead {
             vertical-align: bottom;
         }
+        .col-2 {
+            flex: 0 0 auto;
+            width: 16.6666666667%;
+        }
         .col-5 {
             flex: 0 0 auto;
             width: 41.6666666667%;
@@ -80,6 +83,10 @@
         .col-6 {
             flex: 0 0 auto;
             width: 50%;
+        }
+        .col-10 {
+            flex: 0 0 auto;
+            width: 83.3333333333%;
         }
         td.td-col-6 {
             width: 40px;
@@ -127,8 +134,8 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-PRIMARY90 fw-600 col-5 b-t-unset b-r-unset">Description</th>
-                                        <th class="text-PRIMARY90 fw-600 col-7 b-t-unset b-l-unset" colspan="2">Value</th>
+                                        <th class="text-PRIMARY90 fw-600 col-2 b-t-unset b-r-unset">Description</th>
+                                        <th class="text-PRIMARY90 fw-600 col-10 b-t-unset b-l-unset" colspan="2">Value</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -141,7 +148,7 @@
                                                 @if ($loop->iteration == 1)
                                                     <td rowspan='{{ $subitem->categorydetail->total_rows }}'>{{ $subitem->categorydetail->description }}</td>
                                                 @endif
-                                                <td class="td-col-4" width="15%">
+                                                <td class="td-col-4" width="25%">
                                                     {{ ($subitem->value == null) ? "-" : $subitem->value }}
                                                 </td>
                                                 <td class="td-col-8">
@@ -172,7 +179,7 @@
                 $(this).find('.section-item').height('auto');
                 $(this).find('.section-item').each(function (index) {
                     if ($(this).height() > maxHeight)
-                        maxHeight = $(this).height();
+                        maxHeight = $(this).height() - 140;
                 });
                 console.log(maxHeight);
                 $(this).find('.section-item').height(maxHeight);

@@ -46,8 +46,8 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th class="text-PRIMARY90 fw-600 col-5">Description</th>
-                            <th class="text-PRIMARY90 fw-600 col-7" colspan="2">Value</th>
+                            <th class="text-PRIMARY90 fw-600 col-2">Description</th>
+                            <th class="text-PRIMARY90 fw-600 col-10" colspan="2">Value</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +60,7 @@
                                     @if ($loop->iteration == 1)
                                         <td rowspan='{{ $subitem->categorydetail->total_rows }}' class="center">{{ $subitem->categorydetail->description }}</td>
                                     @endif
-                                    <td class="p-td-unset" width="15%">
+                                    <td class="p-td-unset" width="25%">
                                         <div class="col">
                                             <div class="h-45 text-center center3">{{ $subitem->value }}</div>
                                         </div>
