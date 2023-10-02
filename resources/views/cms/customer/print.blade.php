@@ -12,7 +12,7 @@
                         <div class="pb-2">
                             <div class="form-check border1 m-t-15">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="form-check-input form-check-primary" name="ids_measurement[{{ $item->id }}]" id="customColorCheck_{{ $item->id }}">
+                                    <input type="checkbox" class="form-check-input form-check-primary view_checkbox" name="ids_measurement[{{ $item->id }}]" id="customColorCheck_{{ $item->id }}">
                                     <label class="form-check-label d-flex section-btn fs-12" for="customColorCheck_{{ $item->id }}">
                                         <p class="text-PRIMARY60 m-b-0">{{ ($item->category != null) ? ucwords($item->category->name) : "-" }}</p>
                                         <p class="text-SECONDARY60 m-b-0">{{ date("d F Y", strtotime($item->measurement_date)) }}</p>
@@ -23,7 +23,7 @@
                     @endforeach
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-NEUTRAL100 h-45 fs-14 fw-600 w-100persen">
+                    <button type="submit" class="btn btn-outline-NEUTRAL100 h-45 fs-14 fw-600 w-100persen" id="button-submit">
                         <i class="icon-printer fs-20"></i>
                         Download
                     </button>

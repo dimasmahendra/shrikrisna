@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Helpers\ImageHelper;
 use App\Models\Customer;
 use App\Models\Category;
 use App\Models\FileMeasurement;
@@ -151,5 +152,37 @@ class MeasurementController extends Controller
 
         // return $pdf->stream();
         return $pdf->download();
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        try {
+            CustomerMeasurement::where([
+                ['id_measurement', '=', $id]
+            ])->delete();
+
+            $storage = FileMeasurement::where('id_measurement', $id)->where('status', 1)->get();
+            foreach ($storage as $key => $value) {
+                ImageHelper::removeFilesFromDirectories($value->path);
+                $value->delete();
+            }
+
+            $find = Measurement::where([
+                ['id', '=', $id]
+            ])->first();
+            $find->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data Deleted',
+                'url' => route('customer.details', [$find->id_customer])
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 }

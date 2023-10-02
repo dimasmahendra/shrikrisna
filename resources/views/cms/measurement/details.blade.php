@@ -87,6 +87,14 @@
         <div class="card bg-SECONDARY60">
             @include('components.uppy', ['storage' => $data->storages, 'button_show' => false])
         </div>
+        @if (Auth::user()->id_role == 1)
+            <div class="col-md-12 p-r-unset">
+                <button type="button" class="btn btn-WHITE100-red h-40 button-destroy w-100persen text-left"
+                    data-url="{{ route('category.measurement.destroy',[$data->id]) }}">
+                    Delete
+                </button>
+            </div>
+        @endif
     </div>
 </div>
 @endsection
