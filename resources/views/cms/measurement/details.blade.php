@@ -84,7 +84,7 @@
                 </div>
             </div>
         @endif
-        <div class="card bg-SECONDARY60">
+        <div class="card bg-SECONDARY60" style="margin-bottom: 10px;">
             @include('components.uppy', ['storage' => $data->storages, 'button_show' => false])
         </div>
         @if (Auth::user()->id_role == 1)
