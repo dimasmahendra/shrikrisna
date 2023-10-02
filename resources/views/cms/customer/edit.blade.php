@@ -78,14 +78,16 @@
             </div>
         </div>
     </form>
-    <div class="row">
-        <div class="col-md-12 p-r-unset">
-            <button type="button" class="btn btn-WHITE100-red h-40 button-destroy w-100persen text-left"
-                data-url="{{ route('customer.destroy',[$data->id]) }}">
-                Delete
-            </button>
+    @if (Auth::user()->id_role == 1)
+        <div class="row">
+            <div class="col-md-12 p-r-unset">
+                <button type="button" class="btn btn-WHITE100-red h-40 button-destroy w-100persen text-left"
+                    data-url="{{ route('customer.destroy',[$data->id]) }}">
+                    Delete
+                </button>
+            </div>
         </div>
-    </div>
+    @endif
 </div>
 @endsection
 

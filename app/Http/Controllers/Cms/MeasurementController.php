@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Helpers\ImageHelper;
 use App\Models\Customer;
 use App\Models\Category;
 use App\Models\FileMeasurement;
@@ -47,6 +48,7 @@ class MeasurementController extends Controller
             $model->id_master_category = $request->id_category;
             $model->measurement_date = Carbon::createFromFormat('Y-m-d', date("Y-m-d", strtotime($request->measurement_date)))
                                         ->timezone(Config::get('app.timezone'))->format('Y-m-d');
+            $model->notes = $request->notes;
             $model->status = 1;
             $model->save();
 
@@ -105,6 +107,7 @@ class MeasurementController extends Controller
             $model = Measurement::where('id', $id)->first();
             $model->updated_at = Carbon::createFromFormat('Y-m-d', date("Y-m-d"))
                                         ->timezone(Config::get('app.timezone'))->format('Y-m-d');
+            $model->notes = $request->notes;
             $model->save();
 
             foreach ($request->details as $key => $item) {
@@ -149,5 +152,37 @@ class MeasurementController extends Controller
 
         // return $pdf->stream();
         return $pdf->download();
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        try {
+            CustomerMeasurement::where([
+                ['id_measurement', '=', $id]
+            ])->delete();
+
+            $storage = FileMeasurement::where('id_measurement', $id)->where('status', 1)->get();
+            foreach ($storage as $key => $value) {
+                ImageHelper::removeFilesFromDirectories($value->path);
+                $value->delete();
+            }
+
+            $find = Measurement::where([
+                ['id', '=', $id]
+            ])->first();
+            $find->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data Deleted',
+                'url' => route('customer.details', [$find->id_customer])
+            ]);
+
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 }

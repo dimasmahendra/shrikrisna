@@ -47,8 +47,8 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-PRIMARY90 fw-600 col-6">Description</th>
-                                <th class="text-PRIMARY90 fw-600 col-6" colspan="2">Value</th>
+                                <th class="text-PRIMARY90 fw-600 col-2">Description</th>
+                                <th class="text-PRIMARY90 fw-600 col-10" colspan="2">Value</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,9 +59,9 @@
                                 @foreach ($item as $subitem)
                                     <tr>
                                         @if ($loop->iteration == 1)
-                                            <td rowspan='{{ $subitem->categorydetail->total_rows }}'>{{ $subitem->categorydetail->description }}</td>
+                                            <td rowspan='{{ $subitem->categorydetail->total_rows }}' class="center">{{ $subitem->categorydetail->description }}</td>
                                         @endif
-                                        <td class="p-td-unset">
+                                        <td class="p-td-unset" width="25%">
                                             <div class="col">
                                                 <input type="text" class="form-control" id="details[{{ $subitem->id }}][value]" 
                                                 name="details[{{ $subitem->id }}][value][]" value="{{ ($subitem->value == null) ? "" : $subitem->value }}">
@@ -78,6 +78,12 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div class="col-md-6 p-r-unset">
+                <div class="m-b-30">
+                    <textarea id="notes" class="form-textarea" 
+                    placeholder="Notes" rows="4" name="notes">{{ $data->notes }}</textarea>
                 </div>
             </div>
             <div class="card bg-SECONDARY60">

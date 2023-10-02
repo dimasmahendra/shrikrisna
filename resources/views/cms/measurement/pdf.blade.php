@@ -27,10 +27,13 @@
             padding-left: 65px;
             padding-right: 65px;
         }
+        .fs-12 {font-size: 12px !important;}
         .fs-14 {font-size: 14px !important;}
         .fs-16 {font-size: 16px !important;}
+        .m-t-5 {margin-top: 5px;}
         .m-t-10 {margin-top: 10px;}
         .m-t-15 {margin-top: 15px;}
+        .m-t-20 {margin-top: 20px;}
         .m-t-30 {margin-top: 30px;}
         .m-t-120 {margin-top: 0px;}
         .m-b-120 {margin-bottom: 60px;}
@@ -41,7 +44,6 @@
             text-align: center;
             border: 1px solid #000;
             padding: 1px;
-            /* height: 100%; */
         }
         table {
             caption-side: bottom;
@@ -69,9 +71,25 @@
         .table>thead {
             vertical-align: bottom;
         }
+        .col-2 {
+            flex: 0 0 auto;
+            width: 16.6666666667%;
+        }
+        .col-5 {
+            flex: 0 0 auto;
+            width: 41.6666666667%;
+        }
+        .col-7 {
+            flex: 0 0 auto;
+            width: 58.3333333333%;
+        }
         .col-6 {
             flex: 0 0 auto;
             width: 50%;
+        }
+        .col-10 {
+            flex: 0 0 auto;
+            width: 83.3333333333%;
         }
         td.td-col-6 {
             width: 40px;
@@ -92,6 +110,10 @@
         .b-l-unset {
             border-left: 0px solid #ffffff !important;
         }
+        .center {
+            text-align: center;
+            margin: auto;
+        }
     </style>
 </head>
 <body>
@@ -102,25 +124,25 @@
                     $measure = App\Models\Measurement::where('id', $key)->first();
                 @endphp
                 <div class="section-item">
-                    <div class="m-t-10">
-                        <strong class="fs-14">{{ $measure->customer->nomor_ktp }}</strong>
+                    <div class="m-t-5">
+                        <strong class="fs-12">{{ $measure->customer->nomor_ktp }}</strong>
+                    </div>
+                    <div class="m-t-5">
+                        <strong class="fs-12">{{ $measure->customer->name }}</strong>
+                    </div>
+                    <div class="m-t-5">
+                        <strong class="fs-12">{{ $measure->category->name }}</strong>
+                    </div>
+                    <div class="m-t-5">
+                        <strong class="fs-12">{{ date("d F Y", strtotime($measure->measurement_date)) }}</strong>
                     </div>
                     <div class="m-t-10">
-                        <strong class="fs-14">{{ $measure->customer->name }}</strong>
-                    </div>
-                    <div class="m-t-10">
-                        <strong class="fs-14">{{ $measure->category->name }}</strong>
-                    </div>
-                    <div class="m-t-10">
-                        <strong class="fs-14">{{ date("d F Y", strtotime($measure->measurement_date)) }}</strong>
-                    </div>
-                    <div class="m-t-30">
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-PRIMARY90 fw-600 col-6 b-t-unset b-r-unset">Description</th>
-                                        <th class="text-PRIMARY90 fw-600 col-6 b-t-unset b-l-unset" colspan="2">Value</th>
+                                        <th class="text-PRIMARY90 fw-600 col-2 b-t-unset b-r-unset fs-12">Description</th>
+                                        <th class="text-PRIMARY90 fw-600 col-10 b-t-unset b-l-unset fs-12" colspan="2">Value</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,12 +153,12 @@
                                         @foreach ($item as $subitem)
                                             <tr>
                                                 @if ($loop->iteration == 1)
-                                                    <td rowspan='{{ $subitem->categorydetail->total_rows }}'>{{ $subitem->categorydetail->description }}</td>
+                                                    <td rowspan='{{ $subitem->categorydetail->total_rows }}' class="center fs-12">{{ $subitem->categorydetail->description }}</td>
                                                 @endif
-                                                <td class="td-col-6">
+                                                <td class="td-col-4 fs-12" width="25%">
                                                     {{ ($subitem->value == null) ? "-" : $subitem->value }}
                                                 </td>
-                                                <td class="td-col-6">
+                                                <td class="td-col-8 fs-12">
                                                     {{ ($subitem->option == null) ? "-" : $subitem->option }}
                                                 </td>
                                             </tr>
@@ -164,9 +186,8 @@
                 $(this).find('.section-item').height('auto');
                 $(this).find('.section-item').each(function (index) {
                     if ($(this).height() > maxHeight)
-                        maxHeight = $(this).height();
+                        maxHeight = $(this).height() + 30;
                 });
-                console.log(maxHeight);
                 $(this).find('.section-item').height(maxHeight);
             });
         }

@@ -60,6 +60,12 @@
                 <div class="table-responsive" id="layout-measurement">
                 </div>
             </div>
+            <div class="col-md-6 p-r-unset">
+                <div class="m-b-15">
+                    <textarea id="notes" class="form-textarea" 
+                    placeholder="Notes" rows="4" name="notes">{{ old('notes') }}</textarea>
+                </div>
+            </div>
             <div class="card bg-SECONDARY60">
                 @include('components.uppy', ['storage' => $storage, 'button_show' => true])
             </div>

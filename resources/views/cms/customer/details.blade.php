@@ -162,6 +162,26 @@
 <script src="/cms/vendors/swiper/swiper-bundle.min.js"></script>
 <script>
 
+    $(document).ready(function() {
+        countCheckbox();
+    });
+
+    $(document).on('change', '.view_checkbox', function() {
+        countCheckbox();
+    });
+
+    function countCheckbox() {
+        var numberOfChecked = $('input:checkbox:checked').length;
+        if (numberOfChecked > 0) {
+            $("#button-submit").prop('disabled', false);
+        } else {
+            $("#button-submit").prop('disabled', true);
+        }
+
+        console.log(numberOfChecked);
+        return numberOfChecked;
+    }
+
     $(document).on('click', '.open-modal', function (ev) {
         ev.preventDefault();
         $('#modalprint').modal('show');

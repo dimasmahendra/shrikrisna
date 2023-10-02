@@ -46,8 +46,8 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th class="text-PRIMARY90 fw-600 col-6">Description</th>
-                            <th class="text-PRIMARY90 fw-600 col-6" colspan="2">Value</th>
+                            <th class="text-PRIMARY90 fw-600 col-2">Description</th>
+                            <th class="text-PRIMARY90 fw-600 col-10" colspan="2">Value</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,12 +60,12 @@
                                     @if ($loop->iteration == 1)
                                         <td rowspan='{{ $subitem->categorydetail->total_rows }}' class="center">{{ $subitem->categorydetail->description }}</td>
                                     @endif
-                                    <td class="p-td-unset" style="width: 26%">
+                                    <td class="p-td-unset" width="25%">
                                         <div class="col">
                                             <div class="h-45 text-center center3">{{ $subitem->value }}</div>
                                         </div>
                                     </td>
-                                    <td class="p-td-unset" style="width: 26%">
+                                    <td class="p-td-unset">
                                         <div class="col">
                                             <div class="h-45 text-center center3">{{ $subitem->option }}</div>
                                         </div>
@@ -77,9 +77,24 @@
                 </table>
             </div>
         </div>
+        @if ($data->notes != null)
+            <div class="col-md-6 p-r-unset">
+                <div class="card m-b-30 p-l-20 p-r-20 p-b-20 p-t-20">
+                    {{ $data->notes }}
+                </div>
+            </div>
+        @endif
         <div class="card bg-SECONDARY60">
             @include('components.uppy', ['storage' => $data->storages, 'button_show' => false])
         </div>
+        @if (Auth::user()->id_role == 1)
+            <div class="col-md-12 p-r-unset">
+                <button type="button" class="btn btn-WHITE100-red h-40 button-destroy w-100persen text-left"
+                    data-url="{{ route('category.measurement.destroy',[$data->id]) }}">
+                    Delete
+                </button>
+            </div>
+        @endif
     </div>
 </div>
 @endsection
