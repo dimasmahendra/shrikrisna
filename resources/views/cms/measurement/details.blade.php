@@ -78,7 +78,7 @@
             </div>
         </div>
         @if ($data->notes != null)
-            <div class="col-md-6 p-r-unset">
+            <div class="col-md-12 p-r-unset">
                 <div class="card m-b-30 p-l-20 p-r-20 p-b-20 p-t-20">
                     {{ $data->notes }}
                 </div>
