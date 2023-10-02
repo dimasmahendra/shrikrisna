@@ -80,7 +80,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-md-6 p-r-unset">
+            <div class="col-md-12 p-r-unset">
                 <div class="m-b-30">
                     <textarea id="notes" class="form-textarea" 
                     placeholder="Notes" rows="4" name="notes">{{ $data->notes }}</textarea>
