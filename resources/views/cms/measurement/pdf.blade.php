@@ -57,17 +57,15 @@
             border-color: #E5E5E5
         }
         .table>:not(caption)>*>* {
-            padding: 5px;
+            padding: 2px;
             background-color: var(--bs-table-bg);
             background-image: linear-gradient(var(--bs-table-accent-bg), var(--bs-table-accent-bg));
             border-bottom-width: 1px
         }
-
         .table>tbody {
             vertical-align: inherit;
             font-size: 12px;
         }
-
         .table>thead {
             vertical-align: bottom;
         }
@@ -167,6 +165,12 @@
                                 </tbody>
                             </table>
                         </div>
+                        @if ($measure->notes != null)
+                            <div class="text-PRIMARY90" style="text-align: left; padding-left: 20px; font-size: 12px;">
+                                <div> Notes :</div>
+                                <div>{{ $measure->notes }}</div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -186,7 +190,7 @@
                 $(this).find('.section-item').height('auto');
                 $(this).find('.section-item').each(function (index) {
                     if ($(this).height() > maxHeight)
-                        maxHeight = $(this).height() + 30;
+                        maxHeight = $(this).height();
                 });
                 $(this).find('.section-item').height(maxHeight);
             });
