@@ -35,22 +35,26 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('version', Str::random(5) );
 
-        if (Schema::hasTable('about')) {
-            $checkdata = About::where("option", "setting-company")->get();
-            if (count($checkdata) > 0) {
-                $company = About::getCompany();
-                View::share('logocompany', isset($company->company_logo) ? Storage::url($company->company_logo) : '/cms/images/samples/no-image.svg' );
-                View::share('logolightcompany', isset($company->company_light_logo) ? Storage::url($company->company_light_logo) : '/cms/images/samples/no-image.svg' );
-                View::share('faviconcompany', isset($company->company_favicon) ? Storage::url($company->company_favicon) : '/cms/images/samples/no-image.svg' );
-            } else {
-                View::share('logocompany', '/cms/images/samples/no-image.svg' );
-                View::share('logolightcompany', '/cms/images/samples/no-image.svg' );
-                View::share('faviconcompany', '/cms/images/samples/no-image.svg' );
-            }
-        } else {
-            View::share('logocompany', '/cms/images/samples/no-image.svg' );
-            View::share('logolightcompany', '/cms/images/samples/no-image.svg' );
-            View::share('faviconcompany', '/cms/images/samples/no-image.svg' );
-        }
+        View::share('logocompany', '/cms/images/samples/no-image.svg' );
+        View::share('logolightcompany', '/cms/images/samples/no-image.svg' );
+        View::share('faviconcompany', '/cms/images/samples/no-image.svg' );
+
+        // if (Schema::hasTable('about')) {
+        //     $checkdata = About::where("option", "setting-company")->get();
+        //     if (count($checkdata) > 0) {
+        //         $company = About::getCompany();
+        //         View::share('logocompany', isset($company->company_logo) ? Storage::url($company->company_logo) : '/cms/images/samples/no-image.svg' );
+        //         View::share('logolightcompany', isset($company->company_light_logo) ? Storage::url($company->company_light_logo) : '/cms/images/samples/no-image.svg' );
+        //         View::share('faviconcompany', isset($company->company_favicon) ? Storage::url($company->company_favicon) : '/cms/images/samples/no-image.svg' );
+        //     } else {
+        //         View::share('logocompany', '/cms/images/samples/no-image.svg' );
+        //         View::share('logolightcompany', '/cms/images/samples/no-image.svg' );
+        //         View::share('faviconcompany', '/cms/images/samples/no-image.svg' );
+        //     }
+        // } else {
+        //     View::share('logocompany', '/cms/images/samples/no-image.svg' );
+        //     View::share('logolightcompany', '/cms/images/samples/no-image.svg' );
+        //     View::share('faviconcompany', '/cms/images/samples/no-image.svg' );
+        // }
     }
 }
