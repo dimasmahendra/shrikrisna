@@ -27,18 +27,15 @@
             </div>
         </div>
     </div>
-    <script src="/cms/vendors/jquery/jquery.min.js"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/jquery.dataTables.min.js"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/dataTables.bootstrap.min.js"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/dataTables.fixedHeader.min.js"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/dataTables.responsive.min.js"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/responsive.bootstrap.min.js"></script>
-    <script src="/cms/js/bootstrap.bundle.min.js"></script>
-    <script src="/cms/vendors/jquery-validate/jquery-validate.min.js"></script>
-    <script src="/cms/vendors/toastify/toastify.js"></script>
+    <script src="/cms/vendors/jquery/jquery.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/vendors/bootstrap-datatable/js/jquery.dataTables.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/vendors/bootstrap-datatable/js/dataTables.bootstrap.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/js/bootstrap.bundle.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/vendors/jquery-validate/jquery-validate.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/vendors/toastify/toastify.js?v={{ Str::random(7) }}"></script>
     @stack('js-plugins')
-    <script src="/cms/js/change-password.min.js"></script>
-    <script src="/cms/js/cms.min.js?v={{ $version }}"></script>
+    <script src="/cms/js/change-password.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/js/cms.min.js?v={{ Str::random(7) }}"></script>
     @if(Session::has('message'))
         <script>
             Toastify({

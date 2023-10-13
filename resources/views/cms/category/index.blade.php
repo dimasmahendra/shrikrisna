@@ -122,9 +122,7 @@
 
 @push('js-plugins')
 <script>
-
     let baseUrl = "{{ route('category.index') }}";
-
     $(document).ready(function () {
         $("#filterTable").dataTable({
             "ordering": true,
