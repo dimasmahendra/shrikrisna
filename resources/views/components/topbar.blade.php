@@ -1,3 +1,13 @@
+@php
+    // dd(strpos($page, "customer") !== false);
+    $page = \Request::route()->getName();
+    if (strpos($page, "customer") !== false) {
+        $aktif = false;
+    } else {
+        $aktif = true;
+    }
+@endphp
+@if ($aktif)
 <header>
     <nav class="navbar navbar-expand">
         <div class="container-fluid">
@@ -55,3 +65,4 @@
         </div>
     </nav>
 </header>
+@endif
