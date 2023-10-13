@@ -16,7 +16,7 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-        $model = Customer::select('name', 'nomor_ktp', 'phone_number')->get();
+        $model = Customer::select('id', 'name', 'nomor_ktp', 'phone_number')->get();
         return view('cms.customer.index', [
             "data" => $model
         ]);
