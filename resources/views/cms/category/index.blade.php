@@ -91,6 +91,9 @@
 @endsection
 
 @push('css-plugins')
+<link rel="stylesheet" href="/cms/vendors/bootstrap-datatable/css/dataTables.bootstrap.min.css">
+<link rel="stylesheet" href="/cms/vendors/bootstrap-datatable/css/fixedHeader.bootstrap.min.css">
+<link rel="stylesheet" href="/cms/vendors/bootstrap-datatable/css/responsive.bootstrap.min.css">
 <style>
     .section-btn {
         justify-content: space-between;
@@ -119,9 +122,7 @@
 
 @push('js-plugins')
 <script>
-
     let baseUrl = "{{ route('category.index') }}";
-
     $(document).ready(function () {
         $("#filterTable").dataTable({
             "ordering": true,

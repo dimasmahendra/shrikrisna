@@ -60,12 +60,15 @@ window.addEventListener('resize', (event) => {
     }
 });
 
-document.querySelector('.burger-btn').addEventListener('click', () => {
-    var w = window.innerWidth;
-    if(w < 1200) {
-        document.getElementById('sidebar').classList.toggle('active');
-    }
-})
+if ($(".burger-btn").length > 0) {
+    document.querySelector('.burger-btn').addEventListener('click', () => {
+        var w = window.innerWidth;
+        if(w < 1200) {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+    })
+}
+
 document.getElementById('main-content').addEventListener('click', () => {
     var w = window.innerWidth;
     if(w < 1200) {

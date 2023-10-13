@@ -60,62 +60,48 @@
 @endsection
 
 @push('css-plugins')
-    <link href="/cms/css/pages/customer.css?v={{ $version }}" rel="stylesheet">
-    <style>
-        a {
-            color: #006EE9;
-            text-decoration: none;
-        }
-
-        td:hover {
-            background-color: #F1F1F1;
-            cursor: pointer;
-        }
-
-        table.dataTable {
-            margin-bottom: 0px !important;
-        }
-
-        @media (min-width: 1199px) {
-            .d-md-none-custom {
-                display: none !important;
-            }
-        }
-    </style>
+<link rel="preload" href="/cms/css/pages/customer.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/css/pages/customer.css?v={{ $version }}">
+</noscript>
 @endpush
 
 @push('js-plugins')
 <script src="/cms/vendors/bootstrap-datatable/js/dataTables.rowGroup.min.js"></script>
-<script>
-    $(document).ready(function() {
-        var editUrl = "{{ route('customer.details', ':id') }}";
-        var table = $("#filterTable").DataTable({
-            "ordering": true,
-            "bPaginate": false,
-            "searching": true,
-            "lengthChange": false,
-            "info": false,
-            "dom": "<'row'<'col-sm-12 col-md-12'f>>" +
-                "<'row'<'col-sm-12 m-t-0'tr>>" +
-                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            "rowGroup": {
-                "dataSrc": 0
-            },
-            "language": {
-                "info": "",
-                "searchPlaceholder": "Search",
-                "search": "",
-            },
-            "order": [[ 1, "asc" ]],
-        });
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', function() {
+        (function($) {
+            $(document).ready(function() {
+            var editUrl = "{{ route('customer.details', ':id') }}";
+            var table = $("#filterTable").DataTable({
+                "ordering": true,
+                "bPaginate": false,
+                "searching": true,
+                "lengthChange": false,
+                "info": false,
+                "dom": "<'row'<'col-sm-12 col-md-12'f>>" +
+                    "<'row'<'col-sm-12 m-t-0'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                "rowGroup": {
+                    "dataSrc": 0
+                },
+                "language": {
+                    "info": "",
+                    "searchPlaceholder": "Search",
+                    "search": "",
+                },
+                "order": [[ 1, "asc" ]],
+            });
 
-        $('div.dataTables_filter input', table.table().container()).focus();
+            $('div.dataTables_filter input', table.table().container()).focus();
 
-        table.on('click', 'tbody td', function(item) {
-            var id = $(this.parentNode).data('id');
-            url = editUrl.replace(':id', id);
-            window.location.href = url;
+            table.on('click', 'tbody td', function(item) {
+                var id = $(this.parentNode).data('id');
+                url = editUrl.replace(':id', id);
+                window.location.href = url;
+            })
         })
+        })(jQuery);
     });
 </script>
 @endpush

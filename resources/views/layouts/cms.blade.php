@@ -9,39 +9,9 @@
     
     <title>{{isset($title) ? $title : ""}} | Shrikrisna</title>
     <link rel="shortcut icon" href="{{ $faviconcompany }}" type="image/x-icon">
-
-    <link rel="stylesheet" href="/cms/css/google-font.css">
-    <link rel="stylesheet" href="/cms/css/bootstrap.css">
-    <link rel="stylesheet" href="/cms/vendors/bootstrap-datatable/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="/cms/vendors/bootstrap-datatable/css/fixedHeader.bootstrap.min.css">
-    <link rel="stylesheet" href="/cms/vendors/bootstrap-datatable/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="/cms/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="/cms/vendors/toastify/toastify.css">
-    <link rel="stylesheet" href="/cms/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="/cms/css/app.css?v={{ $version }}">
-    <link rel="stylesheet" href="/cms/css/util.css?v={{ $version }}">
-    <link rel="stylesheet" href="/cms/css/cms.css?v={{ $version }}">
-    <link rel="stylesheet" href="/fontello/css/fontello.css?v={{ $version }}">
+    @include("layouts.head")
     @stack('css-plugins')
-    @php
-        $page = URL::current();
-    @endphp
-    @if (strpos($page, 'users') == false && strpos($page, 'category') == false)
-        <style>
-            @media screen and (max-width: 1199px) {
-                .navbar {
-                    position: absolute;
-                    top: -300px;
-                }
-
-                .sidebar-wrapper {
-                    display: none;
-                }
-            }
-        </style>
-    @endif
 </head>
-
 <body>
     <div id="app">
         @include('components.sidebar')
@@ -57,20 +27,15 @@
             </div>
         </div>
     </div>
-    <script src="/cms/vendors/jquery/jquery.min.js"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/jquery.dataTables.min.js"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/dataTables.bootstrap.min.js"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/dataTables.fixedHeader.min.js"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/dataTables.responsive.min.js"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/responsive.bootstrap.min.js"></script>
-    <script src="/cms/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="/cms/vendors/alertify/js/alertify.js"></script>
-    <script src="/cms/vendors/toastify/toastify.js"></script>
-    <script src="/cms/js/bootstrap.bundle.min.js"></script>
-    <script src="/cms/vendors/jquery-validate/jquery-validate.min.js"></script>
+    <script src="/cms/vendors/jquery/jquery.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/vendors/bootstrap-datatable/js/jquery.dataTables.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/vendors/bootstrap-datatable/js/dataTables.bootstrap.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/js/bootstrap.bundle.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/vendors/jquery-validate/jquery-validate.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/vendors/toastify/toastify.js?v={{ Str::random(7) }}"></script>
     @stack('js-plugins')
-    <script src="/cms/js/change-password.js"></script>
-    <script src="/cms/js/cms.js?v={{ $version }}"></script>
+    <script src="/cms/js/change-password.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/js/cms.min.js?v={{ Str::random(7) }}"></script>
     @if(Session::has('message'))
         <script>
             Toastify({

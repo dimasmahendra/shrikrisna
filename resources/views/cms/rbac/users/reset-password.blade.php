@@ -10,7 +10,7 @@
                 <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Password</label>
             </div>
             <div class="form-group icon-div">
-                <span class="btn-show-pass-2">
+                <span class="btn-show-pass">
                     <i class="bi bi-eye-slash"></i>
                 </span>
                 <input type="password" id="mainpasswordedit" class="form-control" name="password">

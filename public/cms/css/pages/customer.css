@@ -1,3 +1,23 @@
+a {
+    color: #006EE9;
+    text-decoration: none;
+}
+
+td:hover {
+    background-color: #F1F1F1;
+    cursor: pointer;
+}
+
+table.dataTable {
+    margin-bottom: 0px !important;
+}
+
+@media (min-width: 1199px) {
+    .d-md-none-custom {
+        display: none !important;
+    }
+}
+
 .section-header {
     height: 55px; background: #F1F1F1; justify-content: space-between; align-items: center; display: inline-flex;
 }
