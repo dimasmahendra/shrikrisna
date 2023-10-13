@@ -1,6 +1,6 @@
-<link rel="preload" href="/cms/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/cms/css/bootstrap.min.css?v={{ Str::random(7) }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-    <link rel="stylesheet" type="text/css" href="/cms/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/cms/css/bootstrap.min.css?v={{ Str::random(7) }}">
 </noscript>
 
 <link rel="preload" href="/cms/vendors/toastify/toastify.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
