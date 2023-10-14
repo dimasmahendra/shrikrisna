@@ -23,12 +23,12 @@ class Customer extends Model
     public function getImageUrlAttribute()
     {
         if (empty($this->photo)) {
-            return url('cms/images/samples/no_user.png');
+            return url('cms/images/samples/no_user_60.png');
         } else {
             if(file_exists(storage_path('/app/public/') . $this->photo)){
                 return Storage::url($this->photo);
             } else {
-                return url('cms/images/samples/no_user.png');
+                return url('cms/images/samples/no_user_60.png');
             }
         }
     }

@@ -35,7 +35,7 @@
     <div>
         <div class="section-image-user">
             <div class="section-image m-b-6">
-                <img src="{{ $data->image_url }}" alt="profile_user" class="h-180 w-180 image-user">
+                <img src="{{ $data->image_url }}" alt="profile_user" class="h-212 w-212 image-user">
             </div>
             <strong class="fs-16 m-t-10 text-SECONDARY60 no-formating">{{ $data->nomor_ktp }}</strong>
             <strong class="fs-16 m-t-10 text-SECONDARY60">{{ $data->name }}</strong>
@@ -154,80 +154,89 @@
 @endpush
 
 @push('css-plugins')
-<link href="/cms/css/pages/customer-details.css?v={{ $version }}" rel="stylesheet">
-<link rel="stylesheet" href="/cms/vendors/swiper/swiper-bundle.min.css" />
+<link rel="preload" href="/cms/css/pages/customer-details.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/css/pages/customer-details.css?v={{ $version }}">
+</noscript>
+<link rel="preload" href="/cms/vendors/swiper/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/vendors/swiper/swiper-bundle.min.css">
+</noscript>
 @endpush
 
 @push('js-plugins')
 <script src="/cms/vendors/swiper/swiper-bundle.min.js"></script>
 <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        (function($) {
+            $(document).ready(function() {
+                countCheckbox();
+            });
 
-    $(document).ready(function() {
-        countCheckbox();
-    });
+            $(document).on('change', '.view_checkbox', function() {
+                countCheckbox();
+            });
 
-    $(document).on('change', '.view_checkbox', function() {
-        countCheckbox();
-    });
+            function countCheckbox() {
+                var numberOfChecked = $('input:checkbox:checked').length;
+                if (numberOfChecked > 0) {
+                    $("#button-submit").prop('disabled', false);
+                } else {
+                    $("#button-submit").prop('disabled', true);
+                }
 
-    function countCheckbox() {
-        var numberOfChecked = $('input:checkbox:checked').length;
-        if (numberOfChecked > 0) {
-            $("#button-submit").prop('disabled', false);
-        } else {
-            $("#button-submit").prop('disabled', true);
-        }
+                console.log(numberOfChecked);
+                return numberOfChecked;
+            }
 
-        console.log(numberOfChecked);
-        return numberOfChecked;
-    }
+            $(document).on('click', '.open-modal', function (ev) {
+                ev.preventDefault();
+                $('#modalprint').modal('show');
+            });
 
-    $(document).on('click', '.open-modal', function (ev) {
-        ev.preventDefault();
-        $('#modalprint').modal('show');
-    });
-
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 3,
-        spaceBetween: 10,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-            500: {
-                slidesPerView: 4,
+            var swiper = new Swiper(".mySwiper", {
+                slidesPerView: 3,
                 spaceBetween: 10,
-            },
-            590: {
-                slidesPerView: 4,
-                spaceBetween: 10,
-            },
-            640: {
-                slidesPerView: 5,
-                spaceBetween: 10,
-            },
-            768: {
-                slidesPerView: 6,
-                spaceBetween: 10,
-            },
-            1024: {
-                slidesPerView: 7,
-                spaceBetween: 10,
-            },
-            1280: {
-                slidesPerView: 8,
-                spaceBetween: 10,
-            },
-            1360: {
-                slidesPerView: 9,
-                spaceBetween: 10,
-            },
-            1920: {
-                slidesPerView: 11,
-                spaceBetween: 10,
-            },
-        },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    500: {
+                        slidesPerView: 4,
+                        spaceBetween: 10,
+                    },
+                    590: {
+                        slidesPerView: 4,
+                        spaceBetween: 10,
+                    },
+                    640: {
+                        slidesPerView: 5,
+                        spaceBetween: 10,
+                    },
+                    768: {
+                        slidesPerView: 6,
+                        spaceBetween: 10,
+                    },
+                    1024: {
+                        slidesPerView: 7,
+                        spaceBetween: 10,
+                    },
+                    1280: {
+                        slidesPerView: 8,
+                        spaceBetween: 10,
+                    },
+                    1360: {
+                        slidesPerView: 9,
+                        spaceBetween: 10,
+                    },
+                    1920: {
+                        slidesPerView: 11,
+                        spaceBetween: 10,
+                    },
+                },
+            });
+        })(jQuery);
     });
 </script>
 @endpush

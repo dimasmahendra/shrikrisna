@@ -13,6 +13,7 @@
     @stack('css-plugins')
 </head>
 <body>
+    <div class="overlay"></div>
     <div id="app">
         @include('components.sidebar')
         <div id="main" class='layout-navbar'>
@@ -27,15 +28,15 @@
             </div>
         </div>
     </div>
-    <script src="/cms/vendors/jquery/jquery.min.js?v={{ Str::random(7) }}"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/jquery.dataTables.min.js?v={{ Str::random(7) }}"></script>
-    <script src="/cms/vendors/bootstrap-datatable/js/dataTables.bootstrap.min.js?v={{ Str::random(7) }}"></script>
-    <script src="/cms/js/bootstrap.bundle.min.js?v={{ Str::random(7) }}"></script>
-    <script src="/cms/vendors/jquery-validate/jquery-validate.min.js?v={{ Str::random(7) }}"></script>
-    <script src="/cms/vendors/toastify/toastify.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/vendors/jquery/jquery.min.js?v={{ $version }}"></script>
+    <script src="/cms/vendors/bootstrap-datatable/js/jquery.dataTables.min.js?v={{ $version }}"></script>
+    <script src="/cms/vendors/bootstrap-datatable/js/dataTables.bootstrap.min.js?v={{ $version }}"></script>
+    <script src="/cms/js/bootstrap.bundle.min.js?v={{ $version }}"></script>
+    <script src="/cms/vendors/jquery-validate/jquery-validate.min.js?v={{ $version }}"></script>
+    <script src="/cms/vendors/toastify/toastify.js?v={{ $version }}"></script>
     @stack('js-plugins')
-    <script src="/cms/js/change-password.min.js?v={{ Str::random(7) }}"></script>
-    <script src="/cms/js/cms.min.js?v={{ Str::random(7) }}"></script>
+    <script src="/cms/js/change-password.min.js?v={{ $version }}"></script>
+    <script src="/cms/js/cms.min.js?v={{ $version }}"></script>
     @if(Session::has('message'))
         <script>
             Toastify({

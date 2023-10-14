@@ -30,11 +30,11 @@
         <div>
             <div class="section-image-user">
                 <div class="section-image m-b-6">
-                    <input type="file" name="photo" accept="image/*" class="dropify" data-show-remove="false" data-max-file-size="2M" id="profile_image" data-height="175"
+                    <input type="file" name="photo" accept="image/*" class="dropify" data-show-remove="false" data-max-file-size="50M" id="profile_image" data-height="200"
                     data-default-file="{{ $data->image_url }}" />
                     <div class="invalid-feedback invalid-image"></div>          
                 </div>
-                <button type="button" class="btn btn-outline-secondary w-150 h-45" id="buttonupload">Edit Photo</button>
+                <button type="button" class="btn btn-outline-primary w-150 h-45" id="buttonupload">Edit Photo</button>
             </div>
         </div>
         <div class="bg-NEUTRAL10 p-t-20">        
@@ -92,74 +92,55 @@
 @endsection
 
 @push('css-plugins')
-<link href="/cms/css/pages/customer-create.css?v={{ $version }}" rel="stylesheet">
-<link href="/cms/vendors/dropify/dist/css/dropify.css?v={{ $version }}" rel="stylesheet">
+<link rel="preload" href="/cms/css/pages/customer-create.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/css/pages/customer-create.css?v={{ $version }}">
+</noscript>
+<link rel="preload" href="/cms/vendors/dropify/dist/css/dropify.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/vendors/dropify/dist/css/dropify.css?v={{ $version }}">
+</noscript>
 @endpush
 
 @push('js-plugins')
 <script src="/cms/vendors/dropify/dist/js/dropify.min.js?v={{ $version }}"></script>
 <script>
-    $(document).ready(function() {
-        $('#profile_image').dropify({
-            tpl: {
-                wrap: '<div class="dropify-wrapper" id="profile_wrapper"></div>',
-            }
-        });
+    window.addEventListener('DOMContentLoaded', function() {
+        (function($) {
+            $(document).ready(function() {
+                $('#profile_image').dropify({
+                    tpl: {
+                        wrap: '<div class="dropify-wrapper" id="profile_wrapper"></div>',
+                    }
+                });
 
-        $("#formcreate").validate({
-            errorClass: 'was-validated',
-            rules : {
-                nomor_ktp : {
-                    required: true,
-                },
-                name : {
-                    required: true,
-                },
-                phone_number : {
-                    required: true,
-                },
-                institution : {
-                    required: true,
-                },
-                address : {
-                    required: true,
-                },
-                notes : {
-                    required: true,
-                },
-            },
-            messages: {
-                nomor_ktp: {
-                    required: "This field is Required",
-                },
-                name: {
-                    required: "This field is Required",
-                },
-                phone_number: {
-                    required: "This field is Required",
-                },
-                institution: {
-                    required: "This field is Required",
-                },
-                address: {
-                    required: "This field is Required",
-                },
-                notes: {
-                    required: "This field is Required",
-                },
-            },
-            success: function (error) {
-                error.remove();
-            },
-            submitHandler: function (form) {
-                let myForm = $('#formcreate')[0];
-                myForm.submit();
-            }
-        });
-    });
+                $("#formcreate").validate({
+                    errorClass: 'was-validated',
+                    rules : {
+                        name : {
+                            required: true,
+                        },
+                    },
+                    messages: {
+                        name: {
+                            required: "This field is Required",
+                        },
+                    },
+                    success: function (error) {
+                        error.remove();
+                    },
+                    submitHandler: function (form) {
+                        $("body").addClass("loading");
+                        let myForm = $('#formcreate')[0];
+                        myForm.submit();
+                    }
+                });
+            });
 
-    $(document).on('click', '#buttonupload', function() {
-        $("#profile_image").click();
+            $(document).on('click', '#buttonupload', function() {
+                $("#profile_image").click();
+            });
+        })(jQuery);
     });
 </script>
 @endpush
