@@ -1,6 +1,6 @@
-<link rel="preload" href="/cms/css/bootstrap.min.css?v={{ Str::random(7) }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/cms/css/bootstrap.min.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
-    <link rel="stylesheet" type="text/css" href="/cms/css/bootstrap.min.css?v={{ Str::random(7) }}">
+    <link rel="stylesheet" type="text/css" href="/cms/css/bootstrap.min.css?v={{ $version }}">
 </noscript>
 
 <link rel="preload" href="/cms/vendors/toastify/toastify.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/cms/vendors/toastify/toastify.css">
 </noscript>
 
-<link rel="preload" href="/cms/vendors/bootstrap-icons/bootstrap-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" as="font" href="/cms/vendors/bootstrap-icons/bootstrap-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
     <link rel="stylesheet" type="text/css" href="/cms/vendors/bootstrap-icons/bootstrap-icons.css">
 </noscript>

@@ -38,8 +38,10 @@ class CustomerController extends Controller
             if($request->hasFile('photo'))
             {
                 $photo = $request->file('photo');
-                $path_photo = ImageHelper::uploadFile($photo, 'customer');
+                $path_photo = $path = ImageHelper::uploadAndResize($photo, 'customer', 250);
                 $model->photo = $path_photo;
+            } else {
+                $model->photo = "no-image.svg";
             }
 
             $model->nomor_ktp = $request->nomor_ktp;
@@ -92,7 +94,7 @@ class CustomerController extends Controller
             if($request->hasFile('photo'))
             {
                 $photo = $request->file('photo');
-                $path_photo = ImageHelper::uploadFile($photo, 'customer');
+                $path_photo = $path = ImageHelper::uploadAndResize($photo, 'customer', 250);
                 ImageHelper::removeFilesFromDirectories($model->photo);
                 $model->photo = $path_photo;
             }
