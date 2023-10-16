@@ -147,20 +147,28 @@
                                     @php
                                         $details = $measure->items->groupBy('id_master_category_details');
                                     @endphp
-                                    @foreach ($details as $item)
-                                        @foreach ($item as $subitem)
+                                    @foreach ($measure->category->details as $item)
+                                        @for ($i = 0; $i < $item->total_rows; $i++)
                                             <tr>
-                                                @if ($loop->iteration == 1)
-                                                    <td rowspan='{{ $subitem->categorydetail->total_rows }}' class="center fs-12">{{ $subitem->categorydetail->description }}</td>
+                                                @if ($i == 0)
+                                                    <td rowspan='{{ $item->total_rows }}' class="center">{{ $item->description }}</td>
                                                 @endif
-                                                <td class="td-col-4 fs-12" width="25%">
-                                                    {{ ($subitem->value == null) ? "-" : $subitem->value }}
+                                                <td class="p-td-unset" width="25%">
+                                                    <div class="col">
+                                                        <div class="h-45 text-center center3">
+                                                            {{ isset($details[$item->id][$i]["value"]) ? $details[$item->id][$i]["value"] : '-' }}
+                                                        </div>
+                                                    </div>
                                                 </td>
-                                                <td class="td-col-8 fs-12">
-                                                    {{ ($subitem->option == null) ? "-" : $subitem->option }}
+                                                <td class="p-td-unset">
+                                                    <div class="col">
+                                                        <div class="h-45 text-center center3">
+                                                            {{ isset($details[$item->id][$i]["option"]) ? $details[$item->id][$i]["option"] : '-' }}
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endfor
                                     @endforeach
                                 </tbody>
                             </table>
@@ -190,7 +198,7 @@
                 $(this).find('.section-item').height('auto');
                 $(this).find('.section-item').each(function (index) {
                     if ($(this).height() > maxHeight)
-                        maxHeight = $(this).height();
+                        maxHeight = $(this).height() + 10;
                 });
                 $(this).find('.section-item').height(maxHeight);
             });

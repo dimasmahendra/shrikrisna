@@ -41,28 +41,36 @@
             <strong class="fs-16 m-t-10 text-SECONDARY60">{{ $data->name }}</strong>
         </div>
     </div>
-    <div class="m-t-10 p-l-20 p-r-50 d-flex" style="height: 100px;">
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                @foreach ($gallery as $item_gallery)
-                    <div class="swiper-slide">
-                        <img src="{{ $item_gallery->url_path }}" alt="{{ $item_gallery->id }}">
-                    </div>
-                @endforeach
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-        <div class="button-link-custom">
-            <a href="{{ route('customer.gallery', [$data->id]) }}">
-                <div
-                    style="width: 20px; height: 20px; position: relative; border-radius: 50px; overflow: hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.29289 14.7071C6.90237 14.3166 6.90237 13.6834 7.29289 13.2929L10.5858 10L7.29289 6.70711C6.90237 6.31658 6.90237 5.68342 7.29289 5.29289C7.68342 4.90237 8.31658 4.90237 8.70711 5.29289L12.7071 9.29289C13.0976 9.68342 13.0976 10.3166 12.7071 10.7071L8.70711 14.7071C8.31658 15.0976 7.68342 15.0976 7.29289 14.7071Z" fill="#006EE9"/>
-                    </svg>
+    @if (count($gallery) > 0)
+        <div class="m-t-10 p-l-20 p-r-50 d-flex" style="height: 100px;">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    @foreach ($gallery as $item_gallery)
+                        <div class="swiper-slide">
+                            <img src="{{ $item_gallery->url_path }}" alt="{{ $item_gallery->id }}">
+                        </div>
+                    @endforeach
                 </div>
-            </a>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="button-link-custom">
+                <a href="{{ route('customer.gallery', [$data->id]) }}">
+                    <div
+                        style="width: 20px; height: 20px; position: relative; border-radius: 50px; overflow: hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.29289 14.7071C6.90237 14.3166 6.90237 13.6834 7.29289 13.2929L10.5858 10L7.29289 6.70711C6.90237 6.31658 6.90237 5.68342 7.29289 5.29289C7.68342 4.90237 8.31658 4.90237 8.70711 5.29289L12.7071 9.29289C13.0976 9.68342 13.0976 10.3166 12.7071 10.7071L8.70711 14.7071C8.31658 15.0976 7.68342 15.0976 7.29289 14.7071Z" fill="#006EE9"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
+    @else
+        <div class="p-l-20 p-r-20 col-md-12">
+            <a href="{{ route('customer.gallery', [$data->id]) }}">
+                <button type="button" class="btn btn-PRIMARY60 h-45 fs-16 fw-600 w-100persen">Add Gallery</button>
+            </a>                
+        </div>
+    @endif
     <div class="bg-NEUTRAL10 p-t-20 p-l-20 p-r-20 p-b-20">        
         <div class="row">
             <div class="col-md-6 p-b-10">

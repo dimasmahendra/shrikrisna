@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('logocompany', '/cms/images/samples/no-image.svg' );
         View::share('logolightcompany', '/cms/images/samples/no-image.svg' );
-        View::share('faviconcompany', '/cms/images/samples/no-image.svg' );
+        View::share('faviconcompany', '/auth/img/favicon.ico' );
 
         // if (Schema::hasTable('about')) {
         //     $checkdata = About::where("option", "setting-company")->get();
