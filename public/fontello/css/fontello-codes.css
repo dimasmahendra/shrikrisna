@@ -9,3 +9,5 @@
 .icon-message:before { content: '\e807'; } /* '' */
 .icon-user:before { content: '\e808'; } /* '' */
 .icon-printer:before { content: '\e809'; } /* '' */
+.icon-bin:before { content: '\e80a'; } /* '' */
+.icon-pencil:before { content: '\e80b'; } /* '' */

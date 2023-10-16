@@ -60,7 +60,7 @@
                 <div class="table-responsive" id="layout-measurement">
                 </div>
             </div>
-            <div class="col-md-6 p-r-unset">
+            <div class="col-md-12 p-r-unset">
                 <div class="m-b-15">
                     <textarea id="notes" class="form-textarea" 
                     placeholder="Notes" rows="4" name="notes">{{ old('notes') }}</textarea>
@@ -79,59 +79,74 @@
 @endpush
 
 @push('css-plugins')
-<link href="/cms/css/pages/customer-measurement.css?v={{ $version }}" rel="stylesheet">
-<link href="/cms/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
-<link href="/cms/vendors/uppy/uppy.min.css?v={{ $version }}" rel="stylesheet">
+<link rel="preload" href="/cms/css/pages/customer-measurement.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/css/pages/customer-measurement.css?v={{ $version }}">
+</noscript>
+<link rel="preload" href="/cms/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+</noscript>
+<link rel="preload" href="/cms/vendors/uppy/uppy.min.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/vendors/uppy/uppy.min.css?v={{ $version }}">
+</noscript>
 @endpush
 
 @push('js-plugins')
 <script src="/cms/vendors/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script src="/cms/vendors/uppy/uppy.min.js"></script>
-<script src="/cms/js/uppyuploadfiles.js?v={{ $version }}"></script>
+<script defer src="/cms/vendors/uppy/uppy.min.js"></script>
+<script defer src="/cms/js/uppyuploadfiles.js?v={{ $version }}"></script>
 <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        (function($) {
+            $('#formcreate').submit(function() {
+                $("body").addClass("loading");
+            });
 
-    $("#measurement_date").datepicker({
-        format: "dd MM yyyy",
-        autoclose: true,
-        todayHighlight: true,
-    }).datepicker("setDate",'now');
+            $("#measurement_date").datepicker({
+                format: "dd MM yyyy",
+                autoclose: true,
+                todayHighlight: true,
+            }).datepicker("setDate",'now');
 
-    const params = {
-        fileinput: "#my-file-input", 
-        progressbar: ".UppyProgressBar", 
-        urlxhr: "/admin/upload-image",
-        folder: "customer-measurement/{{ $data->id }}",
-        urldelete: "/admin/delete-image/"
-    };
-    uppyUploadFiles(params);
+            const params = {
+                fileinput: "#my-file-input", 
+                progressbar: ".UppyProgressBar", 
+                urlxhr: "/admin/upload-image",
+                folder: "customer-measurement/{{ $data->id }}",
+                urldelete: "/admin/delete-image/"
+            };
+            uppyUploadFiles(params);
 
-    $(document).ready(function() {
-        $("#layout-measurement").empty();
-        initLayout();
-    });
+            $(document).ready(function() {
+                $("#layout-measurement").empty();
+                initLayout();
+            });
 
-    $(document).on('change', '#id_category', function (ev) {
-        $("#layout-measurement").empty();
-        initLayout();
-    });
+            $(document).on('change', '#id_category', function (ev) {
+                $("#layout-measurement").empty();
+                initLayout();
+            });
 
-    function initLayout() {
-        var datamaster = $("#id_category").val();
-        $.ajax({
-            url: '/admin/customer/measurement/category/' + datamaster,
-            method: 'GET',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            beforeSend: function() {
-                $("#loader-container").show();
-            },
-            success: function (data) {
-                $("#loader-container").hide();
-                $("#layout-measurement").html(data);
+            function initLayout() {
+                var datamaster = $("#id_category").val();
+                $.ajax({
+                    url: '/admin/customer/measurement/category/' + datamaster,
+                    method: 'GET',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function() {
+                        $("#loader-container").show();
+                    },
+                    success: function (data) {
+                        $("#loader-container").hide();
+                        $("#layout-measurement").html(data);
+                    }
+                });
             }
-        });
-    }
-
+        })(jQuery);
+    });
 </script>
 @endpush

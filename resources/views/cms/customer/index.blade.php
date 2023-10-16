@@ -37,12 +37,25 @@
                     </thead>
                     <tbody>
                         @foreach ($data as $key => $item)
-                            <tr data-id="{{ $item->id }}">
+                            <tr>
                                 <td class="d-none">{{ mb_substr(ucfirst($item->name), 0, 1); }}</td>
                                 <td>
-                                    <div class="m-b-5">{{ $item->name }}</div>
-                                    <div class="m-b-5 text-SECONDARY60 fs-12">{{ $item->nomor_ktp }}</div>
-                                    <p class="m-b-5 text-PRIMARY60 fs-12">{{ $item->phone_number }}</p>
+                                    <div class="d-flex justify-content-between" data-id="{{ $item->id }}">
+                                        <div class="col-md-8 customer_info" style="flex: 1 0 auto;">
+                                            <div class="m-b-5">{{ $item->name }}</div>
+                                            <div class="m-b-5 text-SECONDARY60 fs-12">{{ $item->nomor_ktp }}</div>
+                                            <p class="m-b-5 text-PRIMARY60 fs-12">{{ $item->phone_number }}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="{{ route('customer.edit', [$item->id]) }}">
+                                                <i class="icon-pencil fs-17"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-WHITE100-red button-destroy"
+                                                data-url="{{ route('customer.destroy',[$item->id]) }}">
+                                                <i class="icon-bin fs-20" style="color: #E82623;"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -95,7 +108,7 @@
 
             $('div.dataTables_filter input', table.table().container()).focus();
 
-            table.on('click', 'tbody td', function(item) {
+            table.on('click', 'tbody td div > .customer_info', function(item) {
                 var id = $(this.parentNode).data('id');
                 url = editUrl.replace(':id', id);
                 window.location.href = url;

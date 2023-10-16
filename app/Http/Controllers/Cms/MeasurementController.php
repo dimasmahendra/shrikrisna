@@ -119,6 +119,19 @@ class MeasurementController extends Controller
                 }
             }
 
+            if (isset($request->newdetails) && count($request->newdetails) > 0) {
+                foreach ($request->newdetails as $key => $item) {
+                    foreach ($item['value'] as $i => $value) {
+                        $detail = new CustomerMeasurement;
+                        $detail->id_measurement = $model->id;
+                        $detail->id_master_category_details = $key;
+                        $detail->value = $value;
+                        $detail->option = $item['option'][$i];
+                        $detail->save();
+                    }
+                }
+            }
+
             if ($request->storageid != null) {
                 foreach ($request->storageid as $k => $id_storage) {
                     FileMeasurement::where('id', $id_storage)->

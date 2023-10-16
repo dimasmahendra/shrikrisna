@@ -54,24 +54,28 @@
                         @php
                             $details = $data->items->groupBy('id_master_category_details');
                         @endphp
-                        @foreach ($details as $item)
-                            @foreach ($item as $subitem)
+                        @foreach ($data->category->details as $item)
+                            @for ($i = 0; $i < $item->total_rows; $i++)
                                 <tr>
-                                    @if ($loop->iteration == 1)
-                                        <td rowspan='{{ $subitem->categorydetail->total_rows }}' class="center">{{ $subitem->categorydetail->description }}</td>
+                                    @if ($i == 0)
+                                        <td rowspan='{{ $item->total_rows }}' class="center">{{ $item->description }}</td>
                                     @endif
                                     <td class="p-td-unset" width="25%">
                                         <div class="col">
-                                            <div class="h-45 text-center center3">{{ $subitem->value }}</div>
+                                            <div class="h-45 text-center center3">
+                                                {{ isset($details[$item->id][$i]["value"]) ? $details[$item->id][$i]["value"] : '-' }}
+                                            </div>
                                         </div>
                                     </td>
                                     <td class="p-td-unset">
                                         <div class="col">
-                                            <div class="h-45 text-center center3">{{ $subitem->option }}</div>
+                                            <div class="h-45 text-center center3">
+                                                {{ isset($details[$item->id][$i]["option"]) ? $details[$item->id][$i]["option"] : '-' }}
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endfor
                         @endforeach
                     </tbody>
                 </table>
@@ -104,7 +108,10 @@
 @endpush
 
 @push('css-plugins')
-<link href="/cms/css/pages/customer-measurement.css?v={{ $version }}" rel="stylesheet">
+<link rel="preload" href="/cms/css/pages/customer-measurement.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/css/pages/customer-measurement.css?v={{ $version }}">
+</noscript>
 @endpush
 
 @push('js-plugins')

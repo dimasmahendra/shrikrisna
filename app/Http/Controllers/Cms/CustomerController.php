@@ -38,7 +38,7 @@ class CustomerController extends Controller
             if($request->hasFile('photo'))
             {
                 $photo = $request->file('photo');
-                $path_photo = $path = ImageHelper::uploadAndResize($photo, 'customer', 250);
+                $path_photo = ImageHelper::uploadAndResize($photo, 'customer', 250);
                 $model->photo = $path_photo;
             } else {
                 $model->photo = "no-image.svg";
@@ -94,7 +94,7 @@ class CustomerController extends Controller
             if($request->hasFile('photo'))
             {
                 $photo = $request->file('photo');
-                $path_photo = $path = ImageHelper::uploadAndResize($photo, 'customer', 250);
+                $path_photo = ImageHelper::uploadAndResize($photo, 'customer', 250);
                 ImageHelper::removeFilesFromDirectories($model->photo);
                 $model->photo = $path_photo;
             }
@@ -134,7 +134,7 @@ class CustomerController extends Controller
         {
             list($directory, $id_customer) = explode("/", $request->folder);
             $file = $request->file('file');
-            $path = ImageHelper::uploadFile($file, $request->folder);
+            $path = ImageHelper::uploadAndResize($file, $request->folder, 640);
             $urlFile = env('APP_URL') . Storage::url($path);
 
             if ($request->savestorage == "true") {

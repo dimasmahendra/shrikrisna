@@ -55,26 +55,45 @@
                             @php
                                 $details = $data->items->groupBy('id_master_category_details');
                             @endphp
-                            @foreach ($details as $item)
-                                @foreach ($item as $subitem)
+                            @foreach ($data->category->details as $item)
+                                @for ($i = 0; $i < $item->total_rows; $i++)
                                     <tr>
-                                        @if ($loop->iteration == 1)
-                                            <td rowspan='{{ $subitem->categorydetail->total_rows }}' class="center">{{ $subitem->categorydetail->description }}</td>
+                                        @if ($i == 0)
+                                            <td rowspan='{{ $item->total_rows }}' class="center">{{ $item->description }}</td>
                                         @endif
-                                        <td class="p-td-unset" width="25%">
-                                            <div class="col">
-                                                <input type="text" class="form-control" id="details[{{ $subitem->id }}][value]" 
-                                                name="details[{{ $subitem->id }}][value][]" value="{{ ($subitem->value == null) ? "" : $subitem->value }}">
-                                            </div>
-                                        </td>
-                                        <td class="p-td-unset">
-                                            <div class="col">
-                                                <input type="text" class="form-control" id="details[{{ $subitem->id }}][option]" 
-                                                name="details[{{ $subitem->id }}][option][]" value="{{ ($subitem->option == null) ? "" : $subitem->option }}">
-                                            </div>
-                                        </td>
+                                        @if (isset($details[$item->id][$i]["id"]))
+                                            <td class="p-td-unset" width="25%">
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="details[{{ $details[$item->id][$i]["id"] }}][value]" 
+                                                    name="details[{{ $details[$item->id][$i]["id"] }}][value][]" 
+                                                    value="{{ isset($details[$item->id][$i]["value"]) ? $details[$item->id][$i]["value"] : '' }}">
+                                                </div>
+                                            </td>
+                                            <td class="p-td-unset">
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="details[{{ $details[$item->id][$i]["id"] }}][option]" 
+                                                    name="details[{{ $details[$item->id][$i]["id"] }}][option][]" 
+                                                    value="{{ isset($details[$item->id][$i]["option"]) ? $details[$item->id][$i]["option"] : '' }}">
+                                                </div>
+                                            </td>
+                                        @else
+                                            <td class="p-td-unset" width="25%">
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="newdetails[{{ $item->id }}][value]" 
+                                                    name="newdetails[{{ $item->id }}][value][]" 
+                                                    value="{{ isset($details[$item->id][$i]["value"]) ? $details[$item->id][$i]["value"] : '' }}">
+                                                </div>
+                                            </td>
+                                            <td class="p-td-unset">
+                                                <div class="col">
+                                                    <input type="text" class="form-control" id="newdetails[{{ $item->id }}][option]" 
+                                                    name="newdetails[{{ $item->id }}][option][]" 
+                                                    value="{{ isset($details[$item->id][$i]["option"]) ? $details[$item->id][$i]["option"] : '' }}">
+                                                </div>
+                                            </td>
+                                        @endif
                                     </tr>
-                                @endforeach
+                                @endfor
                             @endforeach
                         </tbody>
                     </table>
@@ -99,23 +118,35 @@
 @endpush
 
 @push('css-plugins')
-<link href="/cms/css/pages/customer-measurement.css?v={{ $version }}" rel="stylesheet">
-<link href="/cms/vendors/uppy/uppy.min.css?v={{ $version }}" rel="stylesheet">
+<link rel="preload" href="/cms/css/pages/customer-measurement.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/css/pages/customer-measurement.css?v={{ $version }}">
+</noscript>
+<link rel="preload" href="/cms/vendors/uppy/uppy.min.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link rel="stylesheet" type="text/css" href="/cms/vendors/uppy/uppy.min.css?v={{ $version }}">
+</noscript>
 @endpush
 
 @push('js-plugins')
-<script src="/cms/vendors/uppy/uppy.min.js"></script>
-<script src="/cms/js/uppyuploadfiles.js?v={{ $version }}"></script>
+<script defer src="/cms/vendors/uppy/uppy.min.js"></script>
+<script defer src="/cms/js/uppyuploadfiles.js?v={{ $version }}"></script>
 <script>
-
-    const params = {
-        fileinput: "#my-file-input", 
-        progressbar: ".UppyProgressBar", 
-        urlxhr: "/admin/upload-image",
-        folder: "customer-measurement/{{ $data->id_customer }}",
-        urldelete: "/admin/delete-image/"
-    };
-    uppyUploadFiles(params);
-
+    window.addEventListener('DOMContentLoaded', function() {
+        (function($) {
+            $('#formcreate').submit(function() {
+                $("body").addClass("loading");
+            });
+            
+            const params = {
+                fileinput: "#my-file-input", 
+                progressbar: ".UppyProgressBar", 
+                urlxhr: "/admin/upload-image",
+                folder: "customer-measurement/{{ $data->id_customer }}",
+                urldelete: "/admin/delete-image/"
+            };
+            uppyUploadFiles(params);
+        })(jQuery);
+    });
 </script>
 @endpush
