@@ -13,7 +13,7 @@
     @stack('css-plugins')
 </head>
 <body>
-    <div class="overlay"></div>
+    <div class="overlay" style="background-image: url('{{ url('cms/images/samples/item-loader.svg') }}')"></div>
     <div id="app">
         @include('components.sidebar')
         <div id="main" class='layout-navbar'>
