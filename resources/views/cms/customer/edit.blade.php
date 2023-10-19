@@ -30,7 +30,8 @@
         <div>
             <div class="section-image-user">
                 <div class="section-image m-b-6">
-                    <input type="file" name="photo" accept="image/*" class="dropify" data-show-remove="false" data-max-file-size="50M" id="profile_image" data-height="200"
+                    <input type="file" name="photo" accept="image/*" class="dropify" 
+                    data-show-remove="false" data-max-file-size="50M" id="profile_image" data-height="200"
                     data-default-file="{{ $data->image_url }}" />
                     <div class="invalid-feedback invalid-image"></div>          
                 </div>
@@ -103,7 +104,7 @@
 @endpush
 
 @push('js-plugins')
-<script src="/cms/vendors/dropify/dist/js/dropify.min.js?v={{ $version }}"></script>
+<script src="/cms/vendors/dropify/dist/js/dropify.js?v={{ $version }}"></script>
 <script>
     window.addEventListener('DOMContentLoaded', function() {
         (function($) {
