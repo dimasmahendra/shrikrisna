@@ -93,7 +93,7 @@
 @endpush
 
 @push('js-plugins')
-<script src="/cms/vendors/dropify/dist/js/dropify.min.js?v={{ $version }}"></script>
+<script src="/cms/vendors/dropify/dist/js/dropify.js?v={{ $version }}"></script>
 <script>
     window.addEventListener('DOMContentLoaded', function() {
         (function($) {

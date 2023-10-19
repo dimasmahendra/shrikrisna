@@ -41,8 +41,8 @@ function Dropify(element, options) {
         showErrors: true,
         errorTimeout: 3000,
         errorsPosition: 'overlay',
-        imgFileExtensions: ['png', 'jpg', 'jpeg', 'gif', 'bmp'],
-        maxFileSizePreview: "5M",
+        imgFileExtensions: ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp'],
+        maxFileSizePreview: "50M",
         allowedFormats: ['portrait', 'square', 'landscape'],
         allowedFileExtensions: ['*'],
         messages: {
@@ -190,6 +190,7 @@ Dropify.prototype.readFile = function(input)
         var srcBase64      = null;
         var _this          = this;
         var eventFileReady = $.Event("dropify.fileReady");
+        var form = document.getElementById('formcreate');
 
         this.clearErrors();
         this.showLoader();
@@ -203,11 +204,19 @@ Dropify.prototype.readFile = function(input)
             reader.readAsDataURL(file);
             reader.onload = function(_file) {
                 srcBase64 = _file.target.result;
-                image.src = _file.target.result;
+                image.src = _file.target.result;                
+                image.type = file.type;
                 image.onload = function() {
-                    _this.setFileDimensions(this.width, this.height);
+                    var resized = resizeMe(image); // send it to canvas
+                    _this.setFileDimensions(640, 640);
                     _this.validateImage();
-                    _this.input.trigger(eventFileReady, [true, srcBase64]);
+                    _this.input.trigger(eventFileReady, [true, resized]);
+
+                    var newinput = document.createElement("input");
+                    newinput.type = 'hidden';
+                    newinput.name = 'file_compressed';
+                    newinput.value = resized; // put result from canvas into new hidden input
+                    form.appendChild(newinput);
                 };
 
             }.bind(this);
@@ -216,6 +225,40 @@ Dropify.prototype.readFile = function(input)
         }
     }
 };
+
+function resizeMe(img) {
+    var canvas = document.createElement('canvas');
+
+    var width = img.width;
+    var height = img.height;
+    var max_width = 640;
+    var max_height = 640;
+
+    // calculate the width and height, constraining the proportions
+    if (width > height) {
+        if (width > max_width) {
+            //height *= max_width / width;
+            height = Math.round(height *= max_width / width);
+            width = max_width;
+        }
+    } else {
+        if (height > max_height) {
+            //width *= max_height / height;
+            width = Math.round(width *= max_height / height);
+            height = max_height;
+        }
+    }
+
+    // resize the canvas and draw the image data into it
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, width, height);
+
+    // preview.appendChild(canvas); // do the actual resized preview
+
+    return canvas.toDataURL(img.type, 0.7); // get the data from canvas as 70% JPG (can be also PNG, etc.)
+}
 
 /**
  * On file ready to show
