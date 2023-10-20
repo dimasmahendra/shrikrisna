@@ -131,11 +131,14 @@ class CustomerController extends Controller
 
     public function uploadgallery(Request $request)
     {
+        // $imageSize = $request->file('file')->getSize();
+        // dd(number_format($imageSize / 1048576,2));
+
         if($request->hasFile('file') && !empty($request->folder))
         {
             list($directory, $id_customer) = explode("/", $request->folder);
             $file = $request->file('file');
-            $path = ImageHelper::uploadAndResize($file, $request->folder, 640);
+            $path = ImageHelper::uploadFile($file, $request->folder);
             $urlFile = env('APP_URL') . Storage::url($path);
 
             if ($request->savestorage == "true") {

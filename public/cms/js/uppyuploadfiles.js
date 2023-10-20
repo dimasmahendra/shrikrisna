@@ -1,6 +1,6 @@
 function uppyUploadFiles(params) {
 
-    console.log(params);
+    // console.log(params);
 
     const { XHRUpload, FileInput, ProgressBar } = Uppy
     const fileInput = document.querySelector(params.fileinput)
@@ -35,18 +35,17 @@ function uppyUploadFiles(params) {
 
         files.forEach((file) => {
             try {
-                uppy.addFile({
-                    source: 'file input',
-                    name: file.name,
-                    type: file.type,
-                    data: file,
-                })
+                reduceFileSize(file, 2*1024*1024, 1200, 1200, 0.9, blob => {
+                    uppy.addFile({
+                        source: 'blob input',
+                        name: blob.name,
+                        type: blob.type,
+                        data: blob,
+                    })
+                });
             } catch (err) {
                 msgtext = "File : " + file.name + " <br /> " + err;
-                console.log(msgtext);
                 if (err.isRestriction) {
-                    // console.log('Filename:', file.name)
-                    // console.log('Restriction error:', err)
                     Toastify({
                         text: msgtext,
                         duration: 8000,

@@ -15,7 +15,7 @@ class InternalController extends Controller
         {
             list($directory, $id_customer) = explode("/", $request->folder);
             $file = $request->file('file');
-            $path = ImageHelper::uploadAndResize($file, $request->folder, 640);
+            $path = ImageHelper::uploadFile($file, $request->folder); 
             $urlFile = env('APP_URL') . Storage::url($path);
 
             if ($request->savestorage == "true") {
