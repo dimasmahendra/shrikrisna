@@ -65,43 +65,53 @@
 @push('js-plugins')
 <script src="/cms/vendors/lightgallery/lightgallery.min.js"></script>
 <script src="/cms/vendors/lightgallery/lg-thumbnail.min.js"></script>
+<script src="/cms/vendors/resizeimage/resizeme.js"></script>
 <script>
-    const lg = lightGallery(document.getElementById("gallery-container"), {
-        plugins: [lgThumbnail],
-        mobileSettings: {
-            controls: false,
-            download: true,
-            rotate: true
-        }
-    });
+    window.addEventListener('DOMContentLoaded', function() {
+        (function($) {
+            const lg = lightGallery(document.getElementById("gallery-container"), {
+                plugins: [lgThumbnail],
+                mobileSettings: {
+                    controls: false,
+                    download: true,
+                    rotate: true
+                }
+            });
 
-    $(document).on('change', '#gallery_file_input', function(e) {
-        var file = this.files[0];
-        var data = new FormData();
-        data.append("file", file);
-        data.append("folder", "customer-measurement/{{ $data->id }}");
-        data.append("savestorage", true);
-        
-        $.ajax({
-            url: '/admin/customer/gallery/upload',
-            data: data,
-            contentType: false,
-            processData: false,
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (data) {
-                $("#text_no_data").hide();
-                const parentElement = document.getElementById('gallery-container');
-                parentElement.insertAdjacentHTML('afterbegin', data);
-                lg.refresh();
-            },
-            error: function (resp) {
-                console.log(resp);
-            }
-        });
-        e.preventDefault();
+            $(document).on('change', '#gallery_file_input', function(e) {
+
+                /* 
+                    2*1024*1024 = 2MB
+                */
+                reduceFileSize(this.files[0], 2*1024*1024, 1200, 1200, 0.9, blob => {
+                    var data = new FormData();
+                    data.append("file", blob);
+                    data.append("folder", "customer-measurement/{{ $data->id }}");
+                    data.append("savestorage", true);
+
+                    $.ajax({
+                        url: '/admin/customer/gallery/upload',
+                        data: data,
+                        contentType: false,
+                        processData: false,
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            $("#text_no_data").hide();
+                            const parentElement = document.getElementById('gallery-container');
+                            parentElement.insertAdjacentHTML('afterbegin', data);
+                            lg.refresh();
+                        },
+                        error: function (resp) {
+                            console.log(resp);
+                        }
+                    });
+                });                
+                e.preventDefault();
+            });
+        })(jQuery);
     });
 </script>
 @endpush

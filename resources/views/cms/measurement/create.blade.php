@@ -95,6 +95,7 @@
 
 @push('js-plugins')
 <script src="/cms/vendors/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/cms/vendors/resizeimage/resizeme.js"></script>
 <script defer src="/cms/vendors/uppy/uppy.min.js"></script>
 <script defer src="/cms/js/uppyuploadfiles.js?v={{ $version }}"></script>
 <script>
