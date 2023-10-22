@@ -162,6 +162,26 @@ class CustomerController extends Controller
         }
     }
 
+    public function destroyGallery(Request $request, $id, $id_customer)
+    {
+        try {
+            $storage = FileMeasurement::where('id', $id)->first();
+            ImageHelper::removeFilesFromDirectories($storage->path);
+            $storage->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data Deleted',
+                'url' => route('customer.gallery', [$id_customer])
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
     public function destroy(Request $request, $id)
     {
         try {
