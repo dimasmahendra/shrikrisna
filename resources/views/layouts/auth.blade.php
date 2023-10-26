@@ -5,7 +5,7 @@
     <title>Login | Shrikrisna</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="shortcut icon" href="{{ $faviconcompany }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url('/auth/img/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/cms/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="/cms/vendors/toastify/toastify.css">
     <link rel="stylesheet" type="text/css" href="/auth/css/bootstrap.min.css">

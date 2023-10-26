@@ -5,7 +5,7 @@ APP_DEBUG="true"
 APP_URL="https://sktailor.id"
 ASSET_URL="https://sktailor.id"
 FE_URL="https://sktailor.id"
-APP_ASSETS_VERSION=1.1
+APP_ASSETS_VERSION=1.2
 
 LOG_CHANNEL="stack"
 LOG_LEVEL="debug"

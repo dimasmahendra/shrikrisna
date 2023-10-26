@@ -8,7 +8,7 @@
     @stack('meta-custom')
     
     <title>{{isset($title) ? $title : ""}} | Shrikrisna</title>
-    <link rel="shortcut icon" href="{{ $faviconcompany }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url('/auth/img/favicon.ico') }}" type="image/x-icon">
     @include("layouts.head")
     @stack('css-plugins')
 </head>

@@ -6,7 +6,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($data->details as $item)
+        @foreach ($data as $item)
             @for ($i = 0; $i < $item->total_rows; $i++)
                 <tr>
                     @if ($i == 0)
@@ -14,13 +14,14 @@
                     @endif
                     <td class="p-td-unset" width="25%">
                         <div class="col">
-                            <input type="text" class="form-control" id="details[{{ $item->id }}][value]" 
+                            <input type="text" class="form-control" id="details[{{ $item->id }}][{{ $i }}][value]" 
                             name="details[{{ $item->id }}][value][]" value="">
                         </div>
                     </td>
                     <td class="p-td-unset">
                         <div class="col">
-                            <input type="text" class="form-control" id="details[{{ $item->id }}][option]" name="details[{{ $item->id }}][option][]" value="">
+                            <input type="text" class="form-control" id="details[{{ $item->id }}][{{ $i }}][option]"
+                            name="details[{{ $item->id }}][option][]" value="">
                         </div>
                     </td>
                 </tr>

@@ -113,7 +113,3 @@
     <link rel="stylesheet" type="text/css" href="/cms/css/pages/customer-measurement.css?v={{ $version }}">
 </noscript>
 @endpush
-
-@push('js-plugins')
-
-@endpush
