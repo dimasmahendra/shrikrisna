@@ -19,7 +19,6 @@ URL::forceRootUrl(env('APP_URL'));
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('front.home');
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(["auth:web"])->group(function () {
     Route::prefix("admin")->group(function () {
@@ -29,7 +28,7 @@ Route::middleware(["auth:web"])->group(function () {
         Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('admin.change-password');
 
         // Customer
-        Route::prefix("customer")->group(function () {
+        Route::group(['prefix' => 'customer', 'middleware' => ['htmlMinifier']], function() {
             Route::get('', [App\Http\Controllers\Cms\CustomerController::class, 'index'])->name('customer.index');
             Route::get('/create', [App\Http\Controllers\Cms\CustomerController::class, 'create'])->name('customer.create');
             Route::post('/store', [App\Http\Controllers\Cms\CustomerController::class, 'store'])->name('customer.store');
