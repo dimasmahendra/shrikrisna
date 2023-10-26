@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Helpers\ImageHelper;
 use App\Models\Customer;
 use App\Models\Category;
+use App\Models\CategoryDetails;
 use App\Models\FileMeasurement;
 use App\Models\Measurement;
 use App\Models\CustomerMeasurement;
@@ -20,7 +21,8 @@ class MeasurementController extends Controller
 {
     public function category($id)
     {
-        $model = Category::where('id', $id)->active()->first();
+        // $model = Category::select("id")->where('id', $id)->active()->first();
+        $model = CategoryDetails::where('id_master_category', $id)->get();
         return view('cms.measurement.layout', [
             "data" => $model
         ]);
@@ -40,8 +42,6 @@ class MeasurementController extends Controller
     public function store(Request $request, $id) 
     {
         try {
-
-            DB::beginTransaction();
 
             $model = new Measurement;
             $model->id_customer = $id;
@@ -64,13 +64,10 @@ class MeasurementController extends Controller
             }
 
             if ($request->storageid != null) {
-                foreach ($request->storageid as $k => $id_storage) {
-                    FileMeasurement::where('id', $id_storage)->
-                            where('id_customer', $id)->update(['id_measurement' => $model->id]);
-                }
+                FileMeasurement::where('id_customer', $id)
+                            ->whereIn('id', $request->storageid)
+                            ->update(['id_measurement' => $model->id]);
             }
-
-            DB::commit();
 
             return redirect(route('customer.details', [$id]))->with("message", "Saved");
 
@@ -133,10 +130,9 @@ class MeasurementController extends Controller
             }
 
             if ($request->storageid != null) {
-                foreach ($request->storageid as $k => $id_storage) {
-                    FileMeasurement::where('id', $id_storage)->
-                            where('id_customer', $model->id_customer)->update(['id_measurement' => $id]);
-                }
+                FileMeasurement::where('id_customer', $model->id_customer)
+                            ->whereIn('id', $request->storageid)
+                            ->update(['id_measurement' => $id]);
             }
 
             DB::commit();

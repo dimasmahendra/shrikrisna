@@ -8,11 +8,6 @@
     <link rel="stylesheet" type="text/css" href="/cms/vendors/toastify/toastify.css">
 </noscript>
 
-<link rel="preload" as="font" href="/cms/vendors/bootstrap-icons/bootstrap-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-    <link rel="stylesheet" type="text/css" href="/cms/vendors/bootstrap-icons/bootstrap-icons.css">
-</noscript>
-
 <link rel="preload" href="/cms/css/app.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
     <link rel="stylesheet" type="text/css" href="/cms/css/app.css?v={{ $version }}">
@@ -34,9 +29,19 @@
 </noscript>
 
 @php
-    $page = URL::current();
+    $page = \Request::route()->getName();
+    if (strpos($page, "customer") !== false) {
+        $aktif = false;
+    } else {
+        $aktif = true;
+    }
 @endphp
-@if (strpos($page, 'users') == false && strpos($page, 'category') == false)
+@if ($aktif)
+    <link rel="preload" as="font" href="/cms/vendors/bootstrap-icons/bootstrap-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" type="text/css" href="/cms/vendors/bootstrap-icons/bootstrap-icons.css">
+    </noscript>
+
     <link rel="preload" href="/cms/css/pages/customer-header.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
         <link rel="stylesheet" type="text/css" href="/cms/css/pages/customer-header.css?v={{ $version }}">

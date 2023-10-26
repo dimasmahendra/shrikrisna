@@ -129,6 +129,7 @@
 @endpush
 
 @push('js-plugins')
+<script defer src="/cms/vendors/resizeimage/resizeme.js?v={{ $version }}"></script>
 <script defer src="/cms/vendors/uppy/uppy.min.js"></script>
 <script defer src="/cms/js/uppyuploadfiles.js?v={{ $version }}"></script>
 <script>

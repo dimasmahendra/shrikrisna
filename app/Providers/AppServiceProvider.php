@@ -33,11 +33,11 @@ class AppServiceProvider extends ServiceProvider
 
         Paginator::defaultView('pagination::bootstrap-4');
 
-        View::share('version', env("APP_ASSETS_VERSION") );
+        View::share('version', '1.5');
 
-        View::share('logocompany', '/cms/images/samples/no-image.svg' );
-        View::share('logolightcompany', '/cms/images/samples/no-image.svg' );
-        View::share('faviconcompany', '/auth/img/favicon.ico' );
+        // View::share('logocompany', '/cms/images/samples/no-image.svg' );
+        // View::share('logolightcompany', '/cms/images/samples/no-image.svg' );
+        // View::share('faviconcompany', '/auth/img/favicon.ico' );
 
         // if (Schema::hasTable('about')) {
         //     $checkdata = About::where("option", "setting-company")->get();

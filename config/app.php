@@ -162,7 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Lakshmaji\Thumbnail\ThumbnailServiceProvider::class,
+        // Lakshmaji\Thumbnail\ThumbnailServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -177,8 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\MailConfigServiceProvider::class,
-        Barryvdh\Snappy\ServiceProvider::class,
-        Stevebauman\Location\LocationServiceProvider::class,
+        // Barryvdh\Snappy\ServiceProvider::class,
+        // Stevebauman\Location\LocationServiceProvider::class,
     ],
 
     /*
@@ -232,11 +232,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Thumbnail' => Lakshmaji\Thumbnail\Facade\Thumbnail::class,
-        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-        'Location' => 'Stevebauman\Location\Facades\Location',
+        // 'Thumbnail' => Lakshmaji\Thumbnail\Facade\Thumbnail::class,
+        // 'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        // 'Location' => 'Stevebauman\Location\Facades\Location',
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
-        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        // 'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
 ];

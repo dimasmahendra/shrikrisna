@@ -35,7 +35,7 @@ function uppyUploadFiles(params) {
 
         files.forEach((file) => {
             try {
-                reduceFileSize(file, 2*1024*1024, 1200, 1200, 0.9, blob => {
+                reduceFileSize(file, 1*1024*1024, 1200, 1200, 0.9, blob => {
                     uppy.addFile({
                         source: 'blob input',
                         name: blob.name,
