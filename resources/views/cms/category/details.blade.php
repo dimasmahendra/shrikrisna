@@ -47,6 +47,7 @@
                                     <button type="button" class="btn btn-PRIMARY60 me-2 m-b-5 w-125 h-40 master-edit fw-600" 
                                         data-master="{{ json_encode([
                                         'id' => $item->id, 
+                                        'id_category' => $id_category, 
                                         'order' => $item->order,
                                         'description' => $item->description,
                                         'total_rows' => $item->total_rows,

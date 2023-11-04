@@ -118,6 +118,7 @@ class CategoryController extends Controller
         $usedorder = array_column($details->get()->toArray(), 'order');
         
         return view('cms.category.details', [
+            "id_category" => $id,
             "data" => $model,
             "details" => $details->paginate(10),
             "lastorder" => $lastorder,
@@ -140,8 +141,15 @@ class CategoryController extends Controller
 
     public function detailsEdit(Request $request)
     {
+        $id = $request->datamaster['id'];
+        $id_category = $request->datamaster['id_category'];
+        $details = CategoryDetails::where('id', '<>', $request->datamaster['id'])
+                    ->where('id_master_category', $id_category);
+        $usedorder = array_column($details->get()->toArray(), 'order');
+        
         return view('cms.category.details.edit', [
-            "model" => $request->datamaster
+            "model" => $request->datamaster,
+            "usedorder" => $usedorder
         ]);
     }
 
