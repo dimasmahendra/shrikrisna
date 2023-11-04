@@ -5,6 +5,7 @@
 <form id="update-item" action="{{ route('category.details.update', [$model['id']]) }}" method="POST">
     {{ csrf_field() }}
     <div class="modal-body">
+        <input type="hidden" id="editusedtopicupdate" value="{{ json_encode($usedorder) }}">
         <div class="pb-2">
             <div class="col-md-4">
                 <label class="text-label pb-2 fw-600"><span class="text-danger">*</span> Order</label>
@@ -37,11 +38,26 @@
 
 <script>
     $(document).ready(function () {
+        jQuery.validator.addMethod("notEqual", function(value, element, param) {
+            var result = true;
+            var defaultdata = $(param).val();
+            const obj = JSON.parse(defaultdata);
+
+            $.each(obj, function(i, v) {
+                if (v == value) {
+                    result = false;
+                    return false;
+                }
+            });
+            return result; // Value harus false
+        });
+
         $("#update-item").validate({
             errorClass: 'was-validated',
             rules : {
                 order : {
                     required: true,
+                    notEqual: "#editusedtopicupdate"
                 },
                 description : {
                     required: true,
@@ -53,6 +69,7 @@
             messages: {
                 order: {
                     required: "This field is Required",
+                    notEqual: "This field must be unique.",
                 },
                 description: {
                     required: "This field is Required",

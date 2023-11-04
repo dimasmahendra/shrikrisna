@@ -22,7 +22,7 @@ class MeasurementController extends Controller
     public function category($id)
     {
         // $model = Category::select("id")->where('id', $id)->active()->first();
-        $model = CategoryDetails::where('id_master_category', $id)->get();
+        $model = CategoryDetails::where('id_master_category', $id)->orderBy('order', 'ASC')->get();
         return view('cms.measurement.layout', [
             "data" => $model
         ]);
