@@ -54,7 +54,7 @@ class CustomerController extends Controller
 
             DB::commit();
 
-            return redirect(route('customer.index'))->with("message", "Saved");
+            return redirect(route('category.measurement.create', [$model->id]))->with("message", "Saved");
 
         } catch (\Throwable $th) {
             DB::rollBack();
