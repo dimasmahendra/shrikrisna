@@ -59,7 +59,7 @@
     
     function take_snapshot() {
         Webcam.snap( function(data_uri) {
-            resetOrientation(data_uri, 5, function(resetBase64Image) {
+            resetOrientation(data_uri, 7, function(resetBase64Image) {
                 console.log(resetBase64Image);
                 $(".image-tag").val(resetBase64Image);
                 document.getElementById('results').innerHTML = '<img src="'+resetBase64Image+'"/>';
