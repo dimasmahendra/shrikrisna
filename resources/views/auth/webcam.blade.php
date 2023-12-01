@@ -71,6 +71,7 @@
     <h1 class="text-center">FOTO FOTO</h1>
      
     <form method="POST" action="{{ route('webcam.capture') }}">
+        @csrf
         <div class="col-md-12">
             <div id="results">
                 <center><img id="fotoImg" style="visibility: hidden;"></center>
