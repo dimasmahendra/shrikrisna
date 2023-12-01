@@ -28,7 +28,7 @@
             </div>
             <div class="col-md-12 text-center">
                 <br/>
-                <button class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
             </div>
         </div>
     </form>
@@ -36,10 +36,14 @@
     
 <script language="JavaScript">
     Webcam.set({
-        width: 490,
-        height: 350,
+        width: 1080,
+        height: 1920,
+        dest_width: 1080,
+        dest_height: 1920,
+        flip_horiz: false,
+        force_flash: false,
         image_format: 'jpeg',
-        jpeg_quality: 90
+        jpeg_quality: 100
     });
     
     Webcam.attach( '#my_camera' );
