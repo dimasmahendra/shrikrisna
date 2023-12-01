@@ -59,18 +59,83 @@
     
     function take_snapshot() {
         Webcam.snap( function(data_uri) {
-            $(".image-tag").val(data_uri);
-            document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+            resetOrientation(data_uri, 5, function(resetBase64Image) {
+                console.log(resetBase64Image);
+                $(".image-tag").val(resetBase64Image);
+                document.getElementById('results').innerHTML = '<img src="'+resetBase64Image+'"/>';
+            });
         } );
 
         // rotateImage(data_uri, 180, (url) => {
         //     $(".image-tag").val(url);
         //     document.getElementById('results').innerHTML = '<img src="'+url+'"/>';
         // });
+
+        // resetOrientation(database64, 5, function(resetBase64Image) {
+        //     console.log(resetBase64Image);
+        //     $(".image-tag").val(resetBase64Image);
+        //     document.getElementById('results').innerHTML = '<img src="'+resetBase64Image+'"/>';
+        // });
+
         // rotateImage(database64, 180, (url) => {
         //     $(".image-tag").val(url);
         //     document.getElementById('results').innerHTML = '<img src="'+url+'"/>';
         // });
+    }
+
+    function resetOrientation(srcBase64, srcOrientation, callback) {
+        var img = new Image();
+
+        img.onload = function () {
+            var width = img.width,
+                height = img.height,
+                canvas = document.createElement('canvas'),
+                ctx = canvas.getContext("2d");
+
+            // set proper canvas dimensions before transform & export
+            if (4 < srcOrientation && srcOrientation < 9) {
+                canvas.width = height;
+                canvas.height = width;
+            } else {
+                canvas.width = width;
+                canvas.height = height;
+            }
+
+            // transform context before drawing image
+            switch (srcOrientation) {
+                case 2:
+                    ctx.transform(-1, 0, 0, 1, width, 0);
+                    break;
+                case 3:
+                    ctx.transform(-1, 0, 0, -1, width, height);
+                    break;
+                case 4:
+                    ctx.transform(1, 0, 0, -1, 0, height);
+                    break;
+                case 5:
+                    ctx.transform(0, 1, 1, 0, 0, 0);
+                    break;
+                case 6:
+                    ctx.transform(0, 1, -1, 0, height, 0);
+                    break;
+                case 7:
+                    ctx.transform(0, -1, -1, 0, height, width);
+                    break;
+                case 8:
+                    ctx.transform(0, -1, 1, 0, 0, width);
+                    break;
+                default:
+                    break;
+            }
+
+            // draw image
+            ctx.drawImage(img, 0, 0);
+
+            // export base64
+            callback(canvas.toDataURL());
+        };
+
+        img.src = srcBase64;
     }
 
     // rotateImage = (imageBase64, rotation, cb) => {
