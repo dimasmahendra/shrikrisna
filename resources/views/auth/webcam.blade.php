@@ -42,13 +42,11 @@
     // jpeg_quality: 90
 
     Webcam.set({
-        width: 1080,
-        height: 1920,
-        dest_width: 1080,
-        dest_height: 1920,
+        width: 490,
+        height: 350,
         flip_horiz: false,
         image_format: 'jpeg',
-        jpeg_quality: 100
+        jpeg_quality: 90
     });
     
     Webcam.attach( '#my_camera' );
