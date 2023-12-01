@@ -70,7 +70,7 @@
 <div class="container">
     <h1 class="text-center">FOTO FOTO</h1>
      
-    <form method="POST" action="{{ route('webcam.capture') }}">
+    <form method="POST" action="{{ route('webcam.capture') }}" enctype="multipart/form-data">
         @csrf
         <div class="col-md-12">
             <div id="results">
