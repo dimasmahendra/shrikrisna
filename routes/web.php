@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('front.home');
 
 Route::get('/webcam', [App\Http\Controllers\InternalController::class, 'index']);
-Route::post('/webcam/store', [App\Http\Controllers\InternalController::class, 'index'])->name('webcam.capture');
+Route::post('/webcam/store', [App\Http\Controllers\InternalController::class, 'store'])->name('webcam.capture');
 
 Route::middleware(["auth:web"])->group(function () {
     Route::prefix("admin")->group(function () {
