@@ -81,7 +81,7 @@
             <br/>
             <div class="image-input">
                 <input type=file id="imageInput" name="image" accept="image/*" capture>
-                <label for="imageInput" class="image-button"><i class="far fa-image"></i> Choose image</label>
+                <label for="imageInput" class="image-button"><i class="far fa-image"></i> Take A Selfie </label>
             </div>
         </div>        
         <div class="col-md-12 text-center">
