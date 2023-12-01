@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <style type="text/css">
         #results { padding:20px; border:1px solid; background:#ccc; }
+
+        /* 
+        CADANGAN ROTATE BY CSS
+        #results {
+            -webkit-transform: rotate(90deg); 
+            -webkit-transform-origin: 50% 50%;
+            transform: rotate(90deg); 
+            transform-origin: 50% 50%;
+        } */
     </style>
 </head>
 <body>
@@ -36,11 +45,6 @@
     
 <script language="JavaScript">
 
-    // width: 490,
-    // height: 350,
-    // image_format: 'jpeg',
-    // jpeg_quality: 90
-
     Webcam.set({
         width: 490,
         height: 350,
@@ -53,10 +57,27 @@
     
     function take_snapshot() {
         Webcam.snap( function(data_uri) {
-            $(".image-tag").val(data_uri);
-            document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+            rotateImage(data_uri, 180, (url) => {
+                $(".image-tag").val(url);
+                document.getElementById('results').innerHTML = '<img src="'+url+'"/>';
+            });
         } );
     }
+
+    rotateImage = (imageBase64, rotation, cb) => {
+        var img = new Image();
+        img.src = imageBase64;
+        img.onload = () => {
+            var canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            var ctx = canvas.getContext("2d");
+            ctx.setTransform(1, 0, 0, 1, img.width / 2, img.height / 2);
+            ctx.rotate(rotation * (Math.PI / 180));
+            ctx.drawImage(img, -img.width / 2, -img.height / 2);
+            cb(canvas.toDataURL("image/jpeg", 1))
+        };
+    };
 </script>
    
 </body>
