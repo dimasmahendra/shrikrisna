@@ -35,13 +35,18 @@
 </div>
     
 <script language="JavaScript">
+
+    // width: 490,
+    // height: 350,
+    // image_format: 'jpeg',
+    // jpeg_quality: 90
+
     Webcam.set({
         width: 1080,
         height: 1920,
         dest_width: 1080,
         dest_height: 1920,
         flip_horiz: false,
-        force_flash: false,
         image_format: 'jpeg',
         jpeg_quality: 100
     });
