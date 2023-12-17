@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Cms;
 use App\Models\Customer;
 use App\Helpers\ImageHelper;
 use App\Models\Measurement;
+use App\Models\CustomerMeasurement;
 use App\Models\FileMeasurement;
 
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,7 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-        $model = Customer::select('id', 'name', 'nomor_ktp', 'phone_number')->get();
+        $model = Customer::select('id', 'name', 'nomor_ktp', 'phone_number', 'institution')->get();
         return view('cms.customer.index', [
             "data" => $model
         ]);
@@ -185,29 +186,27 @@ class CustomerController extends Controller
     public function destroy(Request $request, $id)
     {
         try {
-            $model = Measurement::where('id_customer', $id)->get();
-            if (count($model) > 0) {
-                return response()->json([
-                    'status' => true,
-                    'message' => 'Data is used',
-                ]);
-            } else {
-                Customer::where([
-                    ['id', '=', $id]
-                ])->delete();
 
-                $storage = FileMeasurement::where('id_customer', $id)->whereNull('id_measurement')->where('status', 2)->get();
-                foreach ($storage as $key => $value) {
-                    ImageHelper::removeFilesFromDirectories($value->path);
-                    $value->delete();
-                }
+            $measurement = Measurement::where('id_customer', $id)->first();
+            CustomerMeasurement::where('id_measurement', $measurement->id)->delete();      
+            $measurement->delete();
 
-                return response()->json([
-                    'status' => true,
-                    'message' => 'Data Deleted',
-                    'url' => route('customer.index')
-                ]);
+            $storage = FileMeasurement::where('id_customer', $id)->whereNull('id_measurement')->where('status', 2)->get();
+            foreach ($storage as $key => $value) {
+                ImageHelper::removeFilesFromDirectories($value->path);
+                $value->delete();
             }
+
+            Customer::where([
+                ['id', '=', $id]
+            ])->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Data Deleted',
+                'url' => route('customer.index')
+            ]);
+
         } catch (Exception $e) {
             return response()->json([
                 'status' => false,
