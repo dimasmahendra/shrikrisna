@@ -45,6 +45,7 @@
                                             <div class="m-b-5">{{ $item->name }}</div>
                                             <div class="m-b-5 text-SECONDARY60 fs-12">{{ $item->nomor_ktp }}</div>
                                             <p class="m-b-5 text-PRIMARY60 fs-12">{{ $item->phone_number }}</p>
+                                            <p class="m-b-5 text-PRIMARY60 fs-12">{{ $item->institution }}</p>
                                         </div>
                                         <div class="col-md-4">
                                             <a href="{{ route('customer.edit', [$item->id]) }}">
