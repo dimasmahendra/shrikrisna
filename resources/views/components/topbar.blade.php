@@ -55,7 +55,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item p-t-20 p-b-15 text-danger" href="{{ route('logout') }}">
+                            <a class="dropdown-item p-t-20 p-b-15 text-danger" href="{{ route('front.logout') }}">
                                 Sign Out
                             </a>
                         </li>

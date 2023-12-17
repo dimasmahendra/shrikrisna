@@ -49,4 +49,13 @@ class InternalController extends Controller
             'id' => $id,
         ], 200);
     }
+
+    public function index() {
+        return view('auth.webcam');
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }

@@ -20,12 +20,16 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('front.home');
 
+// Route::get('/webcam', [App\Http\Controllers\InternalController::class, 'index']);
+// Route::post('/webcam/store', [App\Http\Controllers\InternalController::class, 'store'])->name('webcam.capture');
+
 Route::middleware(["auth:web"])->group(function () {
     Route::prefix("admin")->group(function () {
 
         Route::post('/upload-image', [App\Http\Controllers\InternalController::class, 'uploadImage'])->name('uploadImage');
         Route::get('/delete-image/{id}', [App\Http\Controllers\InternalController::class, 'deleteImage'])->name('deleteImage');
         Route::post('/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('admin.change-password');
+        Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('front.logout');
 
         // Customer
         Route::group(['prefix' => 'customer', 'middleware' => ['htmlMinifier']], function() {

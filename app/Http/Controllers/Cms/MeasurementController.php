@@ -102,6 +102,8 @@ class MeasurementController extends Controller
             DB::beginTransaction();
 
             $model = Measurement::where('id', $id)->first();
+            $model->measurement_date = Carbon::createFromFormat('Y-m-d', date("Y-m-d"))
+                                        ->timezone(Config::get('app.timezone'))->format('Y-m-d');
             $model->updated_at = Carbon::createFromFormat('Y-m-d', date("Y-m-d"))
                                         ->timezone(Config::get('app.timezone'))->format('Y-m-d');
             $model->notes = $request->notes;
