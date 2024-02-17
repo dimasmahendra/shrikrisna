@@ -188,13 +188,16 @@ class CustomerController extends Controller
         try {
 
             $measurement = Measurement::where('id_customer', $id)->first();
-            CustomerMeasurement::where('id_measurement', $measurement->id)->delete();      
-            $measurement->delete();
+            if (!empty($measurement)) {
 
-            $storage = FileMeasurement::where('id_customer', $id)->whereNull('id_measurement')->where('status', 2)->get();
-            foreach ($storage as $key => $value) {
-                ImageHelper::removeFilesFromDirectories($value->path);
-                $value->delete();
+                CustomerMeasurement::where('id_measurement', $measurement->id)->delete();      
+                $measurement->delete();
+
+                $storage = FileMeasurement::where('id_customer', $id)->whereNull('id_measurement')->where('status', 2)->get();
+                foreach ($storage as $key => $value) {
+                    ImageHelper::removeFilesFromDirectories($value->path);
+                    $value->delete();
+                }
             }
 
             Customer::where([
