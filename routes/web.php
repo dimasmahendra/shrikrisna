@@ -34,6 +34,7 @@ Route::middleware(["auth:web"])->group(function () {
         // Customer
         Route::group(['prefix' => 'customer', 'middleware' => ['htmlMinifier']], function() {
             Route::get('', [App\Http\Controllers\Cms\CustomerController::class, 'index'])->name('customer.index');
+            Route::get('/dt', [App\Http\Controllers\Cms\CustomerController::class, 'dt'])->name('customer.dt');
             Route::get('/create', [App\Http\Controllers\Cms\CustomerController::class, 'create'])->name('customer.create');
             Route::post('/store', [App\Http\Controllers\Cms\CustomerController::class, 'store'])->name('customer.store');
             Route::get('/edit/{id}', [App\Http\Controllers\Cms\CustomerController::class, 'edit'])->name('customer.edit');

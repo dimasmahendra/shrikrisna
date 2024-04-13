@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use App\Models\UserFavorites;
 use App\Models\Provinsi;
 use App\Models\Kabupaten;

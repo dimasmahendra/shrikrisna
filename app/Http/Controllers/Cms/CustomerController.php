@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cms;
 
+use Carbon\Carbon;
 use App\Models\Customer;
 use App\Helpers\ImageHelper;
 use App\Models\Measurement;
@@ -17,10 +18,24 @@ class CustomerController extends Controller
 {
     public function index(Request $request)
     {
-        $model = Customer::select('id', 'name', 'nomor_ktp', 'phone_number', 'institution')->get();
-        return view('cms.customer.index', [
-            "data" => $model
-        ]);
+        return view('cms.customer.index');
+    }
+
+    public function dt(Request $request)
+    {
+        $page = ($request->pageNumber == null) ? 1 : $request->pageNumber;
+        $take = 20;
+        $offset = $take * ($page - 1);
+        $lastsevendays = Carbon::now()->subDays(7)->format('Y-m-d') . " 00:00:00";
+
+        $model = Customer::select('id', 'name', 'nomor_ktp', 'phone_number', 'institution', 'created_at')
+                    ->skip($offset)->take($take)
+                    ->orderByRaw("(CASE WHEN created_at >= '" . $lastsevendays . "' THEN 0 ELSE 1 END) ASC, name ASC")
+                    ->get();
+
+        return [
+            "result" => $model
+        ];
     }
 
     public function create()
@@ -51,6 +66,7 @@ class CustomerController extends Controller
             $model->institution = $request->institution;
             $model->address = $request->address;
             $model->notes = $request->notes;
+            $model->created_at = date("Y-m-d H:i:s");
             $model->save();
 
             DB::commit();

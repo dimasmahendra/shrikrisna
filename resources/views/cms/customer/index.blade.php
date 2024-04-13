@@ -26,49 +26,17 @@
         </div>
     </div>
     <div>
-        @if (count($data) > 0)
-            <div class="table-responsive">
-                <table class="table" id="filterTable" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th class="text-left fw-600 d-none">First Letter</th>
-                            <th class="text-left fw-600 d-none">Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $key => $item)
-                            <tr>
-                                <td class="d-none">{{ mb_substr(ucfirst($item->name), 0, 1); }}</td>
-                                <td>
-                                    <div class="d-flex justify-content-between" data-id="{{ $item->id }}">
-                                        <div class="col-md-8 customer_info" style="flex: 1 0 auto;">
-                                            <div class="m-b-5">{{ $item->name }}</div>
-                                            <div class="m-b-5 text-SECONDARY60 fs-12">{{ $item->nomor_ktp }}</div>
-                                            <p class="m-b-5 text-PRIMARY60 fs-12">{{ $item->phone_number }}</p>
-                                            <p class="m-b-5 text-PRIMARY60 fs-12">{{ $item->institution }}</p>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <a href="{{ route('customer.edit', [$item->id]) }}">
-                                                <i class="icon-pencil fs-17"></i>
-                                            </a>
-                                            <button type="button" class="btn btn-WHITE100-red button-destroy"
-                                                data-url="{{ route('customer.destroy',[$item->id]) }}">
-                                                <i class="icon-bin fs-20" style="color: #E82623;"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @else
-            <div class="text-center text-data-not-found">
-                <img src="{{ '/cms/images/logo/data-not-found.png' }}" alt="Data Not Found" class="mx-auto d-block h-99 w-121 m-b-5">
-                No Data Found
-            </div>
-        @endif
+        <div class="table-responsive">
+            <table class="table" id="filterTable" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="text-left fw-600 d-none">First Letter</th>
+                        <th class="text-left fw-600 d-none">Name</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection
@@ -86,35 +54,90 @@
     window.addEventListener('DOMContentLoaded', function() {
         (function($) {
             $(document).ready(function() {
-            var editUrl = "{{ route('customer.details', ':id') }}";
-            var table = $("#filterTable").DataTable({
-                "ordering": true,
-                "bPaginate": false,
-                "searching": true,
-                "lengthChange": false,
-                "info": false,
-                "dom": "<'row'<'col-sm-12 col-md-12'f>>" +
-                    "<'row'<'col-sm-12 m-t-0'tr>>" +
-                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-                "rowGroup": {
-                    "dataSrc": 0
-                },
-                "language": {
-                    "info": "",
-                    "searchPlaceholder": "Search",
-                    "search": "",
-                },
-                "order": [[ 1, "asc" ]],
-            });
+                var $mytable = $("#filterTable");
+                var count = 1;
+                var max = 50;
+                var $datatable = $mytable.DataTable({
+                    language: {
+                        "info": "",
+                        "searchPlaceholder": "Search",
+                        "search": "",
+                    },
+                    dom: "<'row'<'col-sm-12 col-md-12'f>>" +
+                        "<'row'<'col-sm-12 m-t-0'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                    ordering: false,
+                    searching: true,
+                    bPaginate: false,
+                    info: false,
+                    lengthChange: false,
+                    rowGroup: {
+                        dataSrc: "first_letter"
+                    },
+                    columns: [
+                        {
+                            "className": 'd-none',
+                            "data": "first_letter",
+                            "defaultContent": '1',
+                            "orderable": false,
+                        },
+                        {
+                            "data": function (row, type, val, meta) {
+                                return `<div class="d-flex justify-content-between" data-id="` + row.id +`">
+                                        <div class="col-md-8 customer_info" style="flex: 1 0 auto;">
+                                            <div class="m-b-5">` + row.name +`</div>
+                                            <div class="m-b-5 text-SECONDARY60 fs-12">` + row.nomor_ktp +`</div>
+                                            <p class="m-b-5 text-PRIMARY60 fs-12">` + row.phone_number +`</p>
+                                            <p class="m-b-5 text-PRIMARY60 fs-12">` + row.institution +`</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="/admin/customer/edit/` + row.id +`">
+                                                <i class="icon-pencil fs-17"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-WHITE100-red button-destroy"
+                                                data-url="/admin/customer/destroy/` + row.id +`">
+                                                <i class="icon-bin fs-20" style="color: #E82623;"></i>
+                                            </button>
+                                        </div>
+                                </div>`
+                            }
+                        },
+                    ]
+                });
 
-            $('div.dataTables_filter input', table.table().container()).focus();
+                load_more();
+                
+                $(window).scroll(function() {
+                    var scrolltop = $(window).scrollTop();
+                    var viewportHeight = $(window).height();
+                    var documentHeight = $(document).height();
 
-            table.on('click', 'tbody td div > .customer_info', function(item) {
-                var id = $(this.parentNode).data('id');
-                url = editUrl.replace(':id', id);
-                window.location.href = url;
+                    if(scrolltop + viewportHeight == documentHeight) {
+                        load_more();
+                    }
+                });
+
+                function load_more() {
+                    //fetch more data here
+                    $.ajax({
+                        url: "/admin/customer/dt",
+                        type: "GET",
+                        data: {
+                            pageNumber: count
+                        },
+                        dataType: "json"
+                    }).done(function(response) {
+                        $.each(response.result, function(i, item) {
+                            console.log(item)
+                            $datatable.row.add(item).draw(false);
+                        })
+                    }).fail(function(err){
+                        console.error('error...', err)
+                    });
+
+                    count++;
+                }
             })
-        })
         })(jQuery);
     });
 </script>
