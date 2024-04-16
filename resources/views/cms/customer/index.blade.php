@@ -9,7 +9,7 @@
 ])
 
 @section('content')
-<div class="card" style="margin-bottom: 0px;">
+<div class="card" style="margin-bottom: 0px;" id="cardcustomer">
     <div class="section-header">
         <div class="section-subitem">
             <div class="avatar avatar-mdx d-md-none-custom">
@@ -56,7 +56,6 @@
             $(document).ready(function() {
                 var $mytable = $("#filterTable");
                 var count = 1;
-                var max = 50;
                 var inp;
                 var timer;
                 var $datatable = $mytable.DataTable({
@@ -131,7 +130,7 @@
                     var viewportHeight = $(window).height();
                     var documentHeight = $(document).height();
 
-                    if(scrolltop + viewportHeight == documentHeight) {
+                    if(scrolltop + viewportHeight >= documentHeight - 100) {
                         load_more();
                     }
                 });

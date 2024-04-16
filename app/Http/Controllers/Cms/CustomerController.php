@@ -24,7 +24,7 @@ class CustomerController extends Controller
     public function dt(Request $request)
     {
         $page = ($request->pageNumber == null) ? 1 : $request->pageNumber;
-        $take = 20;
+        $take = 15;
         $offset = $take * ($page - 1);
         $lastsevendays = Carbon::now()->subDays(7)->format('Y-m-d') . " 00:00:00";
 
