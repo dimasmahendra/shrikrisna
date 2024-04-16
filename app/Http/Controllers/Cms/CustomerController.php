@@ -30,11 +30,16 @@ class CustomerController extends Controller
 
         $model = Customer::select('id', 'name', 'nomor_ktp', 'phone_number', 'institution', 'created_at')
                     ->skip($offset)->take($take)
-                    ->orderByRaw("(CASE WHEN created_at >= '" . $lastsevendays . "' THEN 0 ELSE 1 END) ASC, name ASC")
-                    ->get();
+                    ->orderByRaw("(CASE WHEN created_at >= '" . $lastsevendays . "' THEN 0 ELSE 1 END) ASC, name ASC");
+
+        if ($request->search != null) {
+            $model->where('name','ILIKE','%'.$request->search.'%');
+        }
+
+        $result = $model->get();
 
         return [
-            "result" => $model
+            "result" => $result
         ];
     }
 

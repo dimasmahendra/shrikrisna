@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
         Paginator::defaultView('pagination::bootstrap-4');
 
-        View::share('version', '1.7');
+        View::share('version', '1.8');
 
         // View::share('logocompany', '/cms/images/samples/no-image.svg' );
         // View::share('logolightcompany', '/cms/images/samples/no-image.svg' );

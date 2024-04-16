@@ -1547,12 +1547,11 @@
 #main #main-content {
     padding-top: unset;
     padding-right: 0px;
-    padding-bottom: 20px;
     padding-left: 203px;
 }
 
 .page-heading {
-    margin: 0 0 2rem;
+    margin: 0;
 }
 
 .page-heading h3 {

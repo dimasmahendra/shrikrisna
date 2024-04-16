@@ -9,7 +9,7 @@
 ])
 
 @section('content')
-<div class="card">
+<div class="card" style="margin-bottom: 0px;">
     <div class="section-header">
         <div class="section-subitem">
             <div class="avatar avatar-mdx d-md-none-custom">
@@ -57,6 +57,8 @@
                 var $mytable = $("#filterTable");
                 var count = 1;
                 var max = 50;
+                var inp;
+                var timer;
                 var $datatable = $mytable.DataTable({
                     language: {
                         "info": "",
@@ -68,11 +70,15 @@
                         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                     ordering: false,
                     searching: true,
+                    bFilter: false,
                     bPaginate: false,
                     info: false,
                     lengthChange: false,
                     rowGroup: {
                         dataSrc: "first_letter"
+                    },
+                    initComplete: function () {
+                        $('div.dataTables_filter input', this.api().table(). container()).attr('id', 'mysearchbox').off();
                     },
                     columns: [
                         {
@@ -85,10 +91,10 @@
                             "data": function (row, type, val, meta) {
                                 return `<div class="d-flex justify-content-between" data-id="` + row.id +`">
                                         <div class="col-md-8 customer_info" style="flex: 1 0 auto;">
-                                            <div class="m-b-5">` + row.name +`</div>
-                                            <div class="m-b-5 text-SECONDARY60 fs-12">` + row.nomor_ktp +`</div>
-                                            <p class="m-b-5 text-PRIMARY60 fs-12">` + row.phone_number +`</p>
-                                            <p class="m-b-5 text-PRIMARY60 fs-12">` + row.institution +`</p>
+                                            <div class="m-b-5">` + ((row.name == null) ? "" : row.name) +`</div>
+                                            <div class="m-b-5 text-SECONDARY60 fs-12">` + ((row.nomor_ktp == null) ? "" : row.nomor_ktp) +`</div>
+                                            <p class="m-b-5 text-PRIMARY60 fs-12">` + ((row.phone_number == null) ? "" : row.phone_number) +`</p>
+                                            <p class="m-b-5 text-PRIMARY60 fs-12">` + ((row.institution == null) ? "" : row.institution) +`</p>
                                         </div>
                                         <div class="col-md-4">
                                             <a href="/admin/customer/edit/` + row.id +`">
@@ -105,6 +111,19 @@
                     ]
                 });
 
+                $('input#mysearchbox').on('keyup', function () {
+                    clearTimeout(timer);
+
+                    inp = $("input#mysearchbox").val();
+                    count = 1;
+                    $datatable.clear();
+                    timer = setTimeout(load_more, 1000);
+                });
+
+                $('input#mysearchbox').on('keydown', function () {
+                    clearTimeout(timer);
+                });
+
                 load_more();
                 
                 $(window).scroll(function() {
@@ -118,19 +137,18 @@
                 });
 
                 function load_more() {
-                    //fetch more data here
                     $.ajax({
                         url: "/admin/customer/dt",
                         type: "GET",
                         data: {
-                            pageNumber: count
+                            pageNumber: count,
+                            search: inp,
                         },
                         dataType: "json"
                     }).done(function(response) {
                         $.each(response.result, function(i, item) {
-                            console.log(item)
                             $datatable.row.add(item).draw(false);
-                        })
+                        });
                     }).fail(function(err){
                         console.error('error...', err)
                     });
