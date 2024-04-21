@@ -27,8 +27,8 @@
     </div>
     <div>
         <div class="table-responsive" style="margin-bottom: 20px;">
-            <caption></caption>
             <table class="table" id="filterTable" style="width:100%;">
+                <caption></caption>
                 <thead>
                     <tr>
                         <th class="text-left fw-600 d-none">First Letter</th>
