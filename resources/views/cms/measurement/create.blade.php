@@ -10,7 +10,8 @@
 
 @section('content')
 <div>
-    <form action="{{ route('category.measurement.store', [$data->id]) }}" method="POST" enctype="multipart/form-data" id="formcreate">
+    <form action="{{ route('category.measurement.store', [$data->id]) }}" method="POST"
+        enctype="multipart/form-data" id="formcreate">
         {{ csrf_field() }}
         <div class="section-header">
             <div class="w-53 section-subitem-start">
@@ -40,13 +41,13 @@
                         <select class="form-select" id="id_category" name="id_category">
                             @foreach ($category as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endforeach 
+                            @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="m-t-15">
                     <div class="form-group position-relative has-icon-right">
-                        <input type="text" id="measurement_date" class="form-control" name="measurement_date" 
+                        <input type="text" id="measurement_date" class="form-control" name="measurement_date"
                         placeholder="Select Date" value="">
                         <div class="form-control-icon">
                             <i class="icon-calendar fs-25"></i>
@@ -55,14 +56,15 @@
                 </div>
             </div>
             <div class="card m-t-10">
-                <img class="loader-container" id="loader-container" src="{{ url('cms/images/samples/item-loader.svg') }}" 
+                <img class="loader-container" id="loader-container" alt="loader"
+                src="{{ url('cms/images/samples/item-loader.svg') }}"
                 style="display: none; margin: auto; display: block;" />
                 <div class="table-responsive" id="layout-measurement">
                 </div>
             </div>
             <div class="col-md-12 p-r-unset">
                 <div class="m-b-15">
-                    <textarea id="notes" class="form-textarea" 
+                    <textarea id="notes" class="form-textarea"
                     placeholder="Notes" rows="4" name="notes">{{ old('notes') }}</textarea>
                 </div>
             </div>
@@ -79,15 +81,18 @@
 @endpush
 
 @push('css-plugins')
-<link rel="preload" href="/cms/css/pages/customer-measurement.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/cms/css/pages/customer-measurement.css?v={{ $version }}" as="style"
+onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
     <link rel="stylesheet" type="text/css" href="/cms/css/pages/customer-measurement.css?v={{ $version }}">
 </noscript>
-<link rel="preload" href="/cms/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/cms/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css" as="style"
+onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
     <link rel="stylesheet" type="text/css" href="/cms/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
 </noscript>
-<link rel="preload" href="/cms/vendors/uppy/uppy.min.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/cms/vendors/uppy/uppy.min.css?v={{ $version }}" as="style"
+onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
     <link rel="stylesheet" type="text/css" href="/cms/vendors/uppy/uppy.min.css?v={{ $version }}">
 </noscript>
@@ -112,8 +117,8 @@
             }).datepicker("setDate",'now');
 
             const params = {
-                fileinput: "#my-file-input", 
-                progressbar: ".UppyProgressBar", 
+                fileinput: "#my-file-input",
+                progressbar: ".UppyProgressBar",
                 urlxhr: "/admin/upload-image",
                 folder: "customer-measurement/{{ $data->id }}",
                 urldelete: "/admin/delete-image/"
@@ -143,7 +148,6 @@
                     },
                     success: function (data) {
                         $("#loader-container").hide();
-                        $("#layout-measurement").html(data);
                     }
                 });
             }

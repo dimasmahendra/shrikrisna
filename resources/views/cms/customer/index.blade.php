@@ -13,7 +13,7 @@
     <div class="section-header">
         <div class="section-subitem">
             <div class="avatar avatar-mdx d-md-none-custom">
-                <img src="{{ Auth::user()->gambar_url }}" alt="" class="object-fit-cover">                               
+                <img src="{{ Auth::user()->gambar_url }}" alt="" class="object-fit-cover">
             </div>
         </div>
         <div class="p-l-10 p-r-10">
@@ -26,8 +26,9 @@
         </div>
     </div>
     <div>
-        <div class="table-responsive">
-            <table class="table" id="filterTable" style="width:100%">
+        <div class="table-responsive" style="margin-bottom: 20px;">
+            <caption></caption>
+            <table class="table" id="filterTable" style="width:100%;">
                 <thead>
                     <tr>
                         <th class="text-left fw-600 d-none">First Letter</th>
@@ -42,7 +43,8 @@
 @endsection
 
 @push('css-plugins')
-<link rel="preload" href="/cms/css/pages/customer.css?v={{ $version }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="/cms/css/pages/customer.css?v={{ $version }}" as="style"
+onload="this.onload=null;this.rel='stylesheet'">
 <noscript>
     <link rel="stylesheet" type="text/css" href="/cms/css/pages/customer.css?v={{ $version }}">
 </noscript>
@@ -55,7 +57,10 @@
         (function($) {
             $(document).ready(function() {
                 var $mytable = $("#filterTable");
+                var totalrows = {{ $total }};
+                var maxrow = {{ $maxrow }};
                 var count = 1;
+                var maxcount = {{ $maxcount }};
                 var inp;
                 var timer;
                 var $datatable = $mytable.DataTable({
@@ -66,7 +71,7 @@
                     },
                     dom: "<'row'<'col-sm-12 col-md-12'f>>" +
                         "<'row'<'col-sm-12 m-t-0'tr>>" +
-                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                        "<'#toolbar'>",
                     ordering: false,
                     searching: true,
                     bFilter: false,
@@ -77,7 +82,13 @@
                         dataSrc: "first_letter"
                     },
                     initComplete: function () {
-                        $('div.dataTables_filter input', this.api().table(). container()).attr('id', 'mysearchbox').off();
+                        $('div.dataTables_filter input', this.api().table().
+                        container()).
+                        attr('id', 'mysearchbox').
+                        off();
+                        $("#toolbar").append(`<img class="loader-container" alt="loader" id="loader-container"
+                            src="{{ url('cms/images/samples/item-loader.svg') }}"
+                            style="display: none; margin: auto; display: block;" />`);
                     },
                     columns: [
                         {
@@ -88,19 +99,27 @@
                         },
                         {
                             "data": function (row, type, val, meta) {
-                                return `<div class="d-flex justify-content-between" data-id="` + row.id +`">
+                                return `<div class="d-flex justify-content-between" data-id="` + row.id + `">
                                         <div class="col-md-8 customer_info" style="flex: 1 0 auto;">
-                                            <div class="m-b-5">` + ((row.name == null) ? "" : row.name) +`</div>
-                                            <div class="m-b-5 text-SECONDARY60 fs-12">` + ((row.nomor_ktp == null) ? "" : row.nomor_ktp) +`</div>
-                                            <p class="m-b-5 text-PRIMARY60 fs-12">` + ((row.phone_number == null) ? "" : row.phone_number) +`</p>
-                                            <p class="m-b-5 text-PRIMARY60 fs-12">` + ((row.institution == null) ? "" : row.institution) +`</p>
+                                            <a href="/admin/customer/edit/` + row.id + `" style="color: #4A4646;">
+                                                <div class="m-b-5">` + ((row.name == null) ? "" : row.name) + `</div>
+                                            </a>
+                                            <div class="m-b-5 text-SECONDARY60 fs-12">`
+                                                + ((row.nomor_ktp == null) ? "" : row.nomor_ktp) +
+                                            `</div>
+                                            <p class="m-b-5 text-PRIMARY60 fs-12">`
+                                                + ((row.phone_number == null) ? "" : row.phone_number) +
+                                            `</p>
+                                            <p class="m-b-5 text-PRIMARY60 fs-12">`
+                                                + ((row.institution == null) ? "" : row.institution) +
+                                            `</p>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="/admin/customer/edit/` + row.id +`">
+                                            <a href="/admin/customer/edit/` + row.id + `">
                                                 <i class="icon-pencil fs-17"></i>
                                             </a>
                                             <button type="button" class="btn btn-WHITE100-red button-destroy"
-                                                data-url="/admin/customer/destroy/` + row.id +`">
+                                                data-url="/admin/customer/destroy/` + row.id + `">
                                                 <i class="icon-bin fs-20" style="color: #E82623;"></i>
                                             </button>
                                         </div>
@@ -127,11 +146,16 @@
                 
                 $(window).scroll(function() {
                     var scrolltop = $(window).scrollTop();
-                    var viewportHeight = $(window).height();
                     var documentHeight = $(document).height();
+                    var viewportHeight = $(window).height();
 
-                    if(scrolltop + viewportHeight >= documentHeight - 100) {
-                        load_more();
+                    if(scrolltop == documentHeight - viewportHeight) {
+                        if (maxcount >= count) {
+                            $("#loader-container").show();
+                            setTimeout(function() {
+                                load_more();
+                            }, 1000);
+                        }
                     }
                 });
 
@@ -143,13 +167,16 @@
                             pageNumber: count,
                             search: inp,
                         },
-                        dataType: "json"
+                        dataType: "json",
+                        success: function (data) {
+                            $("#loader-container").hide();
+                        },
                     }).done(function(response) {
                         $.each(response.result, function(i, item) {
                             $datatable.row.add(item).draw(false);
                         });
                     }).fail(function(err){
-                        console.error('error...', err)
+                        console.error('error...', err);
                     });
 
                     count++;

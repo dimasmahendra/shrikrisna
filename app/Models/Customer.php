@@ -45,7 +45,7 @@ class Customer extends Model
             if ($created_at >= $lastsevendays) {
                 $str = "New Customer";
             }
-        } 
+        }
         return $str;
     }
 }

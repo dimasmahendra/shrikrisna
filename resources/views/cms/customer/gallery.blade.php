@@ -38,7 +38,7 @@
                             data-sub-html="<p> {{ $item->created_at }} - {{ $item->customer->name }}</p>">
                             <img class="img-fluid" src="{{ $item->url_path }}" data-ids="{{ $item->id }}" data-id_customer="{{ $item->id_customer }}" />
                         </a>
-                    @endforeach                    
+                    @endforeach
                 @endif
             </div>
             @if (count($gallery) == 0)
@@ -115,7 +115,7 @@
 
             $(document).on('change', '#gallery_file_input', function(e) {
 
-                /* 
+                /*
                     2*1024*1024 = 2MB
                 */
                 reduceFileSize(this.files[0], 2*1024*1024, 1200, 1200, 0.9, blob => {
@@ -143,7 +143,7 @@
                             console.log(resp);
                         }
                     });
-                });                
+                });
                 e.preventDefault();
             });
         })(jQuery);

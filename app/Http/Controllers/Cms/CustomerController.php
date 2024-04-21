@@ -16,15 +16,22 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
+    public $maxrow = 25;
+
     public function index(Request $request)
     {
-        return view('cms.customer.index');
+        $count = Customer::count();
+        return view('cms.customer.index', [
+            "total" => $count,
+            "maxrow" => $this->maxrow,
+            "maxcount" => ceil($count / $this->maxrow),
+        ]);
     }
 
     public function dt(Request $request)
     {
         $page = ($request->pageNumber == null) ? 1 : $request->pageNumber;
-        $take = 15;
+        $take = $this->maxrow;
         $offset = $take * ($page - 1);
         $lastsevendays = Carbon::now()->subDays(7)->format('Y-m-d') . " 00:00:00";
 
@@ -48,7 +55,7 @@ class CustomerController extends Controller
         return view('cms.customer.create');
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         try {
 
@@ -84,7 +91,7 @@ class CustomerController extends Controller
         }
     }
 
-    public function details($id) 
+    public function details($id)
     {
         $model = Customer::where('id', $id)->first();
         $measurement = Measurement::where('id_customer', $id)
@@ -99,7 +106,7 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function edit($id) 
+    public function edit($id)
     {
         $model = Customer::where('id', $id)->first();
         return view('cms.customer.edit', [
@@ -107,7 +114,7 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id) 
+    public function update(Request $request, $id)
     {
         try {
 
@@ -153,9 +160,6 @@ class CustomerController extends Controller
 
     public function uploadgallery(Request $request)
     {
-        // $imageSize = $request->file('file')->getSize();
-        // dd(number_format($imageSize / 1048576,2));
-
         if($request->hasFile('file') && !empty($request->folder))
         {
             list($directory, $id_customer) = explode("/", $request->folder);
@@ -164,7 +168,8 @@ class CustomerController extends Controller
             $urlFile = env('APP_URL') . Storage::url($path);
 
             if ($request->savestorage == "true") {
-                $increment = (FileMeasurement::where('id_customer', $id_customer)->max('order') == null) ? 0 : FileMeasurement::where('id_customer', $id_customer)->max('order');
+                $increment = (FileMeasurement::where('id_customer', $id_customer)->max('order') == null) ?
+                0 : FileMeasurement::where('id_customer', $id_customer)->max('order');
 
                 $model = new FileMeasurement;
                 $model->id_customer = $id_customer;
@@ -174,7 +179,8 @@ class CustomerController extends Controller
                 $model->save();
 
                 return view('cms.customer.layout-gallery', [
-                    "item" => $model            
+                    "item" => $model,
+                    "directory" => $directory
                 ]);
             } else {
                 return response()->json([
@@ -211,11 +217,15 @@ class CustomerController extends Controller
             $measurement = Measurement::where('id_customer', $id)->first();
             if (!empty($measurement)) {
 
-                CustomerMeasurement::where('id_measurement', $measurement->id)->delete();      
+                CustomerMeasurement::where('id_measurement', $measurement->id)->delete();
                 $measurement->delete();
 
-                $storage = FileMeasurement::where('id_customer', $id)->whereNull('id_measurement')->where('status', 2)->get();
-                foreach ($storage as $key => $value) {
+                $storage = FileMeasurement::where('id_customer', $id)
+                                ->whereNull('id_measurement')
+                                ->where('status', 2)
+                                ->get();
+
+                foreach ($storage as $value) {
                     ImageHelper::removeFilesFromDirectories($value->path);
                     $value->delete();
                 }
