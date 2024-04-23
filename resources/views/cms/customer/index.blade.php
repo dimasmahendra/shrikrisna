@@ -101,9 +101,10 @@ onload="this.onload=null;this.rel='stylesheet'">
                             "data": function (row, type, val, meta) {
                                 return `<div class="d-flex justify-content-between" data-id="` + row.id + `">
                                         <div class="col-md-8 customer_info" style="flex: 1 0 auto;">
-                                            <a href="/admin/customer/edit/` + row.id + `" style="color: #4A4646;">
-                                                <div class="m-b-5">` + ((row.name == null) ? "" : row.name) + `</div>
-                                            </a>
+                                            <div class="m-b-5">
+                                                <a href="/admin/customer/view/` + row.id + `" style="color: #4A4646;">
+                                                ` + ((row.name == null) ? "" : row.name) + `</a>
+                                            </div>
                                             <div class="m-b-5 text-SECONDARY60 fs-12">`
                                                 + ((row.nomor_ktp == null) ? "" : row.nomor_ktp) +
                                             `</div>
@@ -115,9 +116,11 @@ onload="this.onload=null;this.rel='stylesheet'">
                                             `</p>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="/admin/customer/edit/` + row.id + `">
-                                                <i class="icon-pencil fs-17"></i>
-                                            </a>
+                                            <button type="button" class="btn btn-WHITE100">
+                                                <a href="/admin/customer/edit/` + row.id + `">
+                                                    <i class="icon-pencil fs-17"></i>
+                                                </a>
+                                            </button>
                                             <button type="button" class="btn btn-WHITE100-red button-destroy"
                                                 data-url="/admin/customer/destroy/` + row.id + `">
                                                 <i class="icon-bin fs-20" style="color: #E82623;"></i>
