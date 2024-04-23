@@ -102,7 +102,8 @@ onload="this.onload=null;this.rel='stylesheet'">
                                 return `<div class="d-flex justify-content-between" data-id="` + row.id + `">
                                         <div class="col-md-8 customer_info" style="flex: 1 0 auto;">
                                             <div class="m-b-5">
-                                                <a href="/admin/customer/view/` + row.id + `" style="color: #4A4646;">
+                                                <a href="/admin/customer/details/` + row.id + `"
+                                                style="color: #4A4646;">
                                                 ` + ((row.name == null) ? "" : row.name) + `</a>
                                             </div>
                                             <div class="m-b-5 text-SECONDARY60 fs-12">`
