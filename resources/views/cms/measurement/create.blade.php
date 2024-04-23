@@ -148,6 +148,7 @@ onload="this.onload=null;this.rel='stylesheet'">
                     },
                     success: function (data) {
                         $("#loader-container").hide();
+                        $("#layout-measurement").html(data);
                     }
                 });
             }
