@@ -68,6 +68,7 @@ onload="this.onload=null;this.rel='stylesheet'">
                         "info": "",
                         "searchPlaceholder": "Search",
                         "search": "",
+                        "emptyTable": "No match found",
                     },
                     dom: "<'row'<'col-sm-12 col-md-12'f>>" +
                         "<'row'<'col-sm-12 m-t-0'tr>>" +
@@ -158,7 +159,7 @@ onload="this.onload=null;this.rel='stylesheet'">
                             $("#loader-container").show();
                             setTimeout(function() {
                                 load_more();
-                            }, 1000);
+                            }, 900);
                         }
                     }
                 });
@@ -176,9 +177,14 @@ onload="this.onload=null;this.rel='stylesheet'">
                             $("#loader-container").hide();
                         },
                     }).done(function(response) {
-                        $.each(response.result, function(i, item) {
-                            $datatable.row.add(item).draw(false);
-                        });
+                        console.log(response.result.length);
+                        if (response.result.length > 0) {
+                            $.each(response.result, function(i, item) {
+                                $datatable.row.add(item).draw(false);
+                            });
+                        } else {
+                            $datatable.clear().draw(false);
+                        }
                     }).fail(function(err){
                         console.error('error...', err);
                     });

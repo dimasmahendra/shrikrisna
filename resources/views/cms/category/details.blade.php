@@ -206,7 +206,7 @@
                 },
             },
             submitHandler: function (form) {
-                let myForm = $('#add-item')[0];  
+                let myForm = $('#add-item')[0];
                 myForm.submit();
             }
         });
