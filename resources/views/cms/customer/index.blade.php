@@ -151,15 +151,15 @@ onload="this.onload=null;this.rel='stylesheet'">
                 
                 $(window).scroll(function() {
                     var scrolltop = $(window).scrollTop();
-                    var documentHeight = $(document).height();
                     var viewportHeight = $(window).height();
+                    var documentHeight = $(document).height();
 
-                    if(scrolltop == documentHeight - viewportHeight) {
+                    if(scrolltop + viewportHeight >= documentHeight - 200) {
                         if (maxcount >= count) {
                             $("#loader-container").show();
-                            setTimeout(function() {
-                                load_more();
-                            }, 900);
+                            load_more();
+                            // setTimeout(function() {
+                            // }, 900);
                         }
                     }
                 });

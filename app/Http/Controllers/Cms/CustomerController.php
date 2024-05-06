@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
-    public $maxrow = 25;
+    public $maxrow = 15;
 
     public function index(Request $request)
     {
