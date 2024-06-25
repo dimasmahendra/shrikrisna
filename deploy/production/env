@@ -32,10 +32,10 @@ REDIS_PORT="6379"
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.zoho.com
 MAIL_PORT=587
-MAIL_USERNAME="development@mecteknologi.com"
-MAIL_PASSWORD="M3ctek.dev"
+MAIL_USERNAME=""
+MAIL_PASSWORD=""
 MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS="development@mecteknologi.com"
+MAIL_FROM_ADDRESS=""
 MAIL_FROM_NAME="Website System"
 
 AWS_ACCESS_KEY_ID=""
