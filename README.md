@@ -19,22 +19,22 @@
 
 1. Clone to your directory.
 ```bash
-$ git clone https://gitlab.com/citra-kayon/backend-cms.git
-$ cd backend-cms
+$ git clone https://github.com/dimasmahendra/shrikrisna.git
+$ cd shrikrisna
 ```
 
-2. Setup your Virtual Host and point to ```bash /var/www/backend-cms/public ```
+2. Setup your Virtual Host and point to ```bash /var/www/shrikrisna/public ```
 
 3. Setup your .env file
 
 4. Open terminal
 ```bash
 $ cd ~
-$ cd /var/www/backend-cms
-$ /var/www/backend-cms: composer install
-$ /var/www/backend-cms: php artisan migrate
-$ /var/www/backend-cms: php artisan storage:link
-$ /var/www/backend-cms: php artisan db:seed
+$ cd /var/www/shrikrisna
+$ /var/www/shrikrisna: composer install
+$ /var/www/shrikrisna: php artisan migrate
+$ /var/www/shrikrisna: php artisan storage:link
+$ /var/www/shrikrisna: php artisan db:seed
 ```
 
 5. Open your Virtual Host Url. Enjoy.
