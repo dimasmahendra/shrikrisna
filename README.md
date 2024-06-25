@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# Website CitraKayon
+# Website Shrikrisna
 
 ## Requirement
 1. PHP 7.4 +
