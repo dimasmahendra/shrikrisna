@@ -40,7 +40,13 @@ class CustomerController extends Controller
                     ->orderByRaw("(CASE WHEN created_at >= '" . $lastsevendays . "' THEN 0 ELSE 1 END) ASC, name ASC");
 
         if ($request->search != null) {
-            $model->where('name','ILIKE','%'.$request->search.'%');
+            $search = $request->search;
+            $model->where(function($q) use ($search) {
+                $q->where('name','ILIKE','%'.$search.'%')
+                    ->orWhere('nomor_ktp','ILIKE','%'.$search.'%')
+                    ->orWhere('phone_number','ILIKE','%'.$search.'%')
+                    ->orWhere('institution','ILIKE','%'.$search.'%');
+            });
         }
 
         $result = $model->get();
